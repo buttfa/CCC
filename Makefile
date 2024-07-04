@@ -37,7 +37,7 @@ $(CCC_OBJ_FILES): $(OBJ_PATH)/%.o: $(CCC_SRC_PATH)/%.c
 ###########################################################################
 test:
 	make ccc
-	./build/ccc connect $(TEST_IP):$(TEST_PORT) $(TEST_ACCOUNT)@$(TEST_PASSWORD)
+	./build/ccc ./example/easy/easy.ccc
 
 ###########################################################################
 
