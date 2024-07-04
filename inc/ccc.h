@@ -31,7 +31,7 @@ extern char* header_folder_path;
 extern char* sll_folder_path;
 extern char* dll_folder_path;
 extern char* obj_path;
-extern char* output_file_path;
+extern char* output_path;
 extern char* library_path;
 
 

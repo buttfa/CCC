@@ -10,7 +10,7 @@ char* header_folder_path = NULL;
 char* sll_folder_path = NULL;
 char* dll_folder_path = NULL;
 char* obj_path = NULL;
-char* output_file_path;
+char* output_path;
 char* library_path = NULL;
 int main(int argc, char* argv[]) {
     // 获取运行路径
@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
             parseCCC(ccc_path);
             // 判断是否缺少必要ccc文件信息
             // 必要信息包括，target_type、compiler、linker、
-            // source_folder_path、obj_path、output_file_path。
+            // source_folder_path、obj_path、output_path。
 
             // 获取头文件目录（非必要）
 
@@ -61,6 +61,10 @@ int main(int argc, char* argv[]) {
         printf("Error: Invalid argument\n");
     }
 /****************************************************************************/
+    
+    // 释放内存
+    free(target_type);
+    free(compiler);
     return 0;
 }
 
@@ -84,5 +88,5 @@ void printfHelp() {
     printf("  -h, --help      display this help and exit\n");
     printf("  -v, --version   display version information and exit\n");
     printf("  ccc_file        compile based on ccc_file\n");
-    printf("Report bugs to <https://github.com/buttfa/ccc/issues>\n");
+    printf("Report bugs to <https://github.com/buttfa/CCC/issues>\n");
 }

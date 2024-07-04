@@ -1,7 +1,9 @@
 #ifndef __FILE_H__
 #define __FILE_H__
 
+#include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include <stdbool.h>
 #include <sys/stat.h>
 
@@ -17,4 +19,19 @@
  */
 bool isFileWithSuffix(const char *path, const char *suffix);
 
+/**
+ * @brief 将字符串str拆分成以delimiter为分隔符的数组，返回数组指针。
+ * 
+ * @param str 
+ * @param delimiter 
+ * @return char** 
+ */
+char **splitString(const char *str, char delimiter);
+
+/**
+ * @brief 释放分割字符串的数组。
+ * 
+ * @param splitResult 
+ */
+void freeSplitResult(char **splitResult);
 #endif
