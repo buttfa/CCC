@@ -37,8 +37,9 @@ $(CCC_OBJ_FILES): $(OBJ_PATH)/%.o: $(CCC_SRC_PATH)/%.c
 ###########################################################################
 test:
 	make ccc
-	./build/ccc ./example/easy/easy.ccc
-
+#	./build/ccc ./example/easy/easy.ccc
+#	./build/ccc version
+	./build/ccc 
 ###########################################################################
 
 
