@@ -14,8 +14,10 @@ void parseCCC(char* ccc_path) {
     }
 
     // 依次读取ccc文件中的每一行进行分析
+    int row = 0;
     char buf[1024];
     while (fgets(buf, 1024, ccc_file) != NULL) {
+        row++;
         // 将buf中换行符替换为\0
         int index  = 0; 
         while (buf[index] != '\n') {
@@ -190,6 +192,12 @@ void parseCCC(char* ccc_path) {
                 strcat(library_path, argv[i]);
                 strcat(library_path, " ");
             }  
+        }
+
+        // .ccc文件错误行报错
+        else {
+            printf("Error: Unknown argument: %d row.\n", row);
+            exit(0);
         }
 
 

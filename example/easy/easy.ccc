@@ -1,4 +1,4 @@
-target_type = c
+targettype = c
 compiler = gcc
 compile_flags = -g -Wall  -static
 linker = gcc
