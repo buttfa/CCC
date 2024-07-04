@@ -18,6 +18,12 @@ void parseCCC(char* ccc_path) {
     char buf[1024];
     while (fgets(buf, 1024, ccc_file) != NULL) {
         row++;
+
+        // 如果是单独的一行空内容或注释，则跳过处理
+        if (buf[0] == '\n' || buf[0] == '#') {
+            continue;
+        }
+
         // 将buf中换行符替换为\0
         int index  = 0; 
         while (buf[index] != '\n') {
@@ -197,7 +203,7 @@ void parseCCC(char* ccc_path) {
         // .ccc文件错误行报错
         else {
             printf("Error: Unknown argument: %d row.\n", row);
-            exit(0);
+            // exit(0);
         }
 
 

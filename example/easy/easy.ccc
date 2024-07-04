@@ -1,4 +1,5 @@
-targettype = c
+# 这是注释
+target_type = c
 compiler = gcc
 compile_flags = -g -Wall  -static
 linker = gcc
