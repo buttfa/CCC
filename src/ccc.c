@@ -16,7 +16,6 @@ int main(int argc, char* argv[]) {
     // 获取运行路径
     char run_path[128];
     getcwd(run_path, sizeof(run_path));
-    printf("%s\n",run_path);
 /****************************************************************************/
     // 解析参数，打印对应信息，或依据.ccc文件组织编译
     if (argc == 1) {
@@ -34,12 +33,12 @@ int main(int argc, char* argv[]) {
         strcat(ccc_path,argv[1]);
         // 判断文件是否存在以及是否为.ccc文件
         if (isFileWithSuffix(ccc_path,".ccc")) {
-            printf("%s\n",ccc_path);
             // 解析.ccc文件
             parseCCC(ccc_path);
             // 判断是否缺少必要ccc文件信息
             // 必要信息包括，target_type、compiler、linker、
             // source_folder_path、obj_path、output_path。
+            checkCCC();
 
             // 获取头文件目录（非必要）
 

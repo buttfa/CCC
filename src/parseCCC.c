@@ -26,7 +26,7 @@ void parseCCC(char* ccc_path) {
 
         // 将buf中换行符替换为\0
         int index  = 0; 
-        while (buf[index] != '\n') {
+        while (buf[index] != '\n' && buf[index] != '\0') {
             index++;
         } buf[index] = '\0';
 

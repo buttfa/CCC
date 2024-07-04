@@ -16,6 +16,7 @@
 #include <string.h>
 #include <file.h>
 #include <parseCCC.h>
+#include <checkCCC.h>
 #include <unistd.h>
 
 #define CCC_VERSION "0.0.1"
