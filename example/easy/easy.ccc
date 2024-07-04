@@ -6,7 +6,7 @@ linker = gcc
 link_flags = -l  -a -m
 
 source_folder_path = sfd a k   s
-header_folder_path = asdf sa
+header_folder_path = asdf  sa
 sll_folder_path = 123 1
 dll_folder_path = 1a 2b
 
