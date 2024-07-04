@@ -37,6 +37,23 @@ int main(int argc, char* argv[]) {
             printf("%s\n",ccc_path);
             // 解析.ccc文件
             parseCCC(ccc_path);
+            // 判断是否缺少必要ccc文件信息
+            // 必要信息包括，target_type、compiler、linker、
+            // source_folder_path、obj_path、output_file_path。
+
+            // 获取头文件目录（非必要）
+
+            // 计算中间文件依赖关系
+
+            // 计算目标依赖关系
+
+            // 获取中间文件组
+
+            // 载入静态链接库文件（非必要）
+
+            // 载入动态链接库文件（非必要）
+
+            // 检查依赖
         } else {
             printf("The target file does not exist or does not have a. ccc suffix\n");
         }
