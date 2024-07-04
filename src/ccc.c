@@ -33,14 +33,38 @@ int main(int argc, char* argv[]) {
         strcat(ccc_path,argv[1]);
         // 判断文件是否存在以及是否为.ccc文件
         if (isFileWithSuffix(ccc_path,".ccc")) {
+/****************************************************************************/            
             // 解析.ccc文件
             parseCCC(ccc_path);
+/****************************************************************************/
             // 判断是否缺少必要ccc文件信息
             // 必要信息包括，target_type、compiler、linker、
             // source_folder_path、obj_path、output_path。
             checkCCC();
-
+/****************************************************************************/
             // 获取头文件目录（非必要）
+            // 将header_folder_path和library_path合并，以便操作
+            char* header_folder_path_temp = (char*)malloc(strlen(header_folder_path)+strlen(library_path)+2);
+            memset(header_folder_path_temp,0,strlen(header_folder_path)+strlen(library_path)+2);
+            strcat(header_folder_path_temp,header_folder_path);
+            strcat(header_folder_path_temp," ");
+            strcat(header_folder_path_temp,library_path);
+
+            // 将header_folder_path_temp以空格分割
+            char** header_folder_path_split = splitString(header_folder_path_temp, ' ');
+            // 将header_folder_path_split[i]中包含.h文件的文件夹及子文件夹
+            // 添加到header_folder_list中。（每次添加前会检查，避免重复添加）
+            for (int i = 0; header_folder_path_split[i] != NULL; i++) {
+                if (strlen(header_folder_path_split[i]) != 0) {
+                    addHeaderFolderList(header_folder_path_split[i]);
+                }
+            }
+            // 根据header_folder_list创建header_folders
+            createHeaderFolders();
+
+            // 释放header_folder_path_temp的内存
+            free(header_folder_path_temp);
+/****************************************************************************/
 
             // 计算中间文件依赖关系
 

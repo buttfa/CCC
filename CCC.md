@@ -30,8 +30,8 @@ library_path=
 |linker||链接器链接选项|
 |source_folder_path||源文件文件夹路径|
 |header_folder_path||头文件文件夹路径|
-|static_library_path||静态链接库的路径|
-|dynamic_library_path||动态链接库的路径|
+|sll_folder_path||静态链接库的路径|
+|dll_folder_path||动态链接库的路径|
 |obj_path||中间文件存放路径|
 |output_path||输出文件存放路径|
 |library_path||外部库文件路径|
