@@ -2,6 +2,7 @@
 
 int main(int argc, char* argv[]) {
 /****************************************************************************/
+    // 解析参数，打印对应信息，或依据.ccc文件组织编译
     if (argc == 1) {
         printfVersion();
         printfHelp();
@@ -9,13 +10,16 @@ int main(int argc, char* argv[]) {
         printfHelp();
     } else if (argc == 2 && (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "version") == 0)) {
         printfVersion();
-    } else if (argc == 2 && checkFilePath(argv[1]) == 1) {
-
+    } else if (argc == 2) {
+        if (isFileWithSuffix(argv[1],".ccc")) {
+            printf("%s\n",argv[1]);
+        } else {
+            printf("The target file does not exist or does not have a. ccc suffix\n");
+        }
     } else {
         printf("Error: Invalid argument\n");
     }
 /****************************************************************************/
-
     return 0;
 }
 

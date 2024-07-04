@@ -13,6 +13,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <file.h>
 
 #define CCC_VERSION "0.0.1"
 
