@@ -17,7 +17,7 @@ dll_folder_path=
 obj_path=
 output_file_path=
 
-extern_library_path=
+library_path=
 ```
 
 ## 解释说明
@@ -34,4 +34,4 @@ extern_library_path=
 |dynamic_library_path||动态链接库的路径|
 |obj_path||中间文件存放路径|
 |output_file_path||输出文件存放路径|
-|extern_library_path||外部库文件路径|
+|library_path||外部库文件路径|
