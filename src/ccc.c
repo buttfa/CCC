@@ -65,6 +65,16 @@ int main(int argc, char* argv[]) {
     // 释放内存
     free(target_type);
     free(compiler);
+    free(compiler_flags);
+    free(linker);
+    free(linker_flags);
+    free(source_folder_path);
+    free(header_folder_path);
+    free(sll_folder_path);
+    free(dll_folder_path);
+    free(obj_path);
+    free(output_path);
+    free(library_path);
     return 0;
 }
 
