@@ -205,7 +205,7 @@ void createHeaderFolders() {
     while (current != NULL) {
         strcat(header_folders, current->folder_path);
         
-        // 可以根据需要添加分隔符，这里以逗号为例
+        // 可以根据需要添加分隔符
         if (current->next != NULL) {
             strcat(header_folders, " ");
         }
