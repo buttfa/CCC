@@ -7,6 +7,14 @@
 #include <stdbool.h>
 #include <sys/stat.h>
 
+/**
+ * @brief 文件链表节点
+ * 
+ */
+struct file_node {
+    char* file_path;
+    struct file_node* next;
+};
 
 /**
  * @brief 接受一个文件路径path和一个后缀字符串suffix作为

@@ -68,6 +68,39 @@ int main(int argc, char* argv[]) {
             freeSplitResult(header_folder_path_split);
             freeHeaderFolderList(header_folder_list);
 /****************************************************************************/
+            // 载入静态链接库文件（非必要）
+            
+            // 判断是否需要载入静态链接库文件
+            if (sll_folder_path != NULL || library_path != NULL) {
+                // 将sll_folder_path和library_path合并，以便操作
+                char* sll_folder_path_temp = (char*)malloc(strlen(sll_folder_path)+strlen(library_path)+2);
+                memset(sll_folder_path_temp,0,strlen(sll_folder_path)+strlen(library_path)+2);
+                strcat(sll_folder_path_temp,sll_folder_path);
+                strcat(sll_folder_path_temp," ");
+                strcat(sll_folder_path_temp,library_path);
+
+                // 将sll_folder_path以空格分割
+                char** sll_folder_path_split = splitString(sll_folder_path_temp, ' ');
+                // 将sll_folder_path_split[i]中包含.a文件的文件夹及子文件夹
+                // 添加到sll_list中。（每次添加前会检查，避免重复添加）
+                for (int i = 0; sll_folder_path_split[i] != NULL; i++) {
+                    if (strlen(sll_folder_path_split[i]) != 0) {
+                        addSlllist(sll_folder_path_split[i]);
+                    }
+                }
+                // printfSllist();
+                // 根据sll_list创建sll_files
+                createSllFiles();
+
+                free(sll_folder_path_temp);
+                freeSplitResult(sll_folder_path_split);
+
+            } 
+/****************************************************************************/
+
+            // 载入动态链接库文件（非必要）
+/****************************************************************************/
+
 
             // 计算中间文件依赖关系
 
@@ -75,9 +108,7 @@ int main(int argc, char* argv[]) {
 
             // 获取中间文件组
 
-            // 载入静态链接库文件（非必要）
 
-            // 载入动态链接库文件（非必要）
 
             // 检查依赖
         } else {
@@ -103,6 +134,8 @@ int main(int argc, char* argv[]) {
     free(library_path);
 
     free(header_folders);
+
+    // freeSllist(sll_list);
     return 0;
 }
 
