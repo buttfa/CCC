@@ -88,13 +88,12 @@ int main(int argc, char* argv[]) {
                         addSlllist(sll_folder_path_split[i]);
                     }
                 }
-                // printfSllist();
+                // printfSlllist();
                 // 根据sll_list创建sll_files
                 createSllFiles();
 
                 free(sll_folder_path_temp);
                 freeSplitResult(sll_folder_path_split);
-
             } 
 /****************************************************************************/
 
@@ -135,7 +134,7 @@ int main(int argc, char* argv[]) {
 
     free(header_folders);
 
-    // freeSllist(sll_list);
+    freeSlllist(sll_list);
     return 0;
 }
 

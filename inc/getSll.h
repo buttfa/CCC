@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <file.h>
-
+#include <dirent.h>
 /**
  * @brief sll文件链表
  * 
@@ -26,6 +26,18 @@ extern char* sll_files;
  * @param sll_folder_path 
  */
 void addSlllist(const char* sll_folder_path);
+
+/**
+ * @brief 打印sll_list
+ * 
+ */
+void printfSlllist();
+
+/**
+ * @brief 释放sll_list
+ * 
+ */
+void freeSlllist();
 
 /**
  * @brief 根据sll_list创建sll_files
