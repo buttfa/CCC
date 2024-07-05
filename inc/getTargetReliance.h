@@ -1,6 +1,7 @@
 #ifndef __GETTARGETRELIANCE_H__
 #define __GETTARGETRELIANCE_H__
 
+#include <ccc.h>
 #include <reliance.h>
 
 /**

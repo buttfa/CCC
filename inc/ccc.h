@@ -22,6 +22,7 @@
 #include <getDll.h>
 #include <getSource.h>
 #include <getObjReliance.h>
+#include <getTargetReliance.h>
 #include <unistd.h>
 
 #define CCC_VERSION "0.0.1"
@@ -40,7 +41,7 @@ extern char* obj_path;
 extern char* output_path;
 extern char* library_path;
 
-
+extern char ccc_file_name[128];
 /**
  * @brief 打印版本信息
  * 

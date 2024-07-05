@@ -12,4 +12,4 @@ dll_folder_path =
 obj_path = ../build/obj
 output_path = ../build
 
-library_path = 
+library_path = ../src

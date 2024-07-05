@@ -14,6 +14,7 @@ char* output_path = NULL;
 char* library_path = NULL;
 
 char run_path[128];
+char ccc_file_name[128];
 int main(int argc, char* argv[]) {
     // 获取运行路径
     getcwd(run_path, sizeof(run_path));
@@ -34,6 +35,8 @@ int main(int argc, char* argv[]) {
         strcat(ccc_path,argv[1]);
         // 判断文件是否存在以及是否为.ccc文件
         if (isFileWithSuffix(ccc_path,".ccc")) {
+            // 获取文件名（不包含路径和后缀名）
+            strcat(ccc_file_name,getFileName(ccc_path));
 /****************************************************************************/            
             // 解析.ccc文件
             parseCCC(ccc_path);
