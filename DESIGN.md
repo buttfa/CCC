@@ -23,6 +23,8 @@ struct reliance {
 
     struct reliance* next;
 };
+
+struct file_node* source_list;
 struct reliance* reliance_list;
 struct reliance* tartget_reliance;
 
@@ -55,8 +57,8 @@ char* dll_files;
 
 #### （四）计算依赖关系
 ##### 中间文件的依赖关系
-##### 1. 遍历$(source_folder_path)和$(library_path)，找到.c/.cpp文件。
-##### 2. 确保.c/.cpp路径不重复后，为.c/.cpp文件创建一个reliance并添加到reliance_list。（为了确保路径不重复，每次添加前都需要从头遍历reliance_list链表，确认该路径不存在后才添加节点）
+##### 1. 遍历$(source_folder_path)和$(library_path)，找到.c/.cpp文件，添加至sources_list列表（为了确保路径不重复，每次添加前都需要从头遍历sources_list链表，确认该路径不存在后才添加节点）
+##### 2. 为.c/.cpp文件创建一个reliance并添加到reliance_list。
 ##### 2.1 将.c/.cpp文件名前的路径替换为$(obj_path)，将后缀名替换为.o，将其写入file_path中。
 ##### 2.2 使用```gcc -M .c/.cpp -I header_folders```获得.c/.cpp依赖的头文件路径，计算这些头文件路径的个数，将该值+1写入reliance_num中。
 ##### 2.3 计算出char** reliant_file需要分配的空间（为reliance_num）。
