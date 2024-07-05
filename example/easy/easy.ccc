@@ -3,14 +3,14 @@ target_type = c
 compiler = gcc
 compile_flags = -g -Wall  -static
 linker = gcc
-link_flags = -l  -a -m
+link_flags = 
 
 source_folder_path = ../example/easy/src
 header_folder_path = ../example/easy/inc
 sll_folder_path = 
 dll_folder_path = 
 
-obj_path = obj
-output_path = build
+obj_path = ../example/easy/build/obj
+output_path = ../example/easy/build
 
 library_path = ../example/easy/lib

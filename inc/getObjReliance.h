@@ -1,7 +1,11 @@
 #ifndef __GETOBJRELIANCE_H__
 #define __GETOBJRELIANCE_H__
 
+#include <ccc.h>
+#include <file.h>
 #include <reliance.h>
+
+extern char run_path[128];
 
 /**
  * @brief 中间文件依赖列表

@@ -12,9 +12,10 @@ char* dll_folder_path = NULL;
 char* obj_path = NULL;
 char* output_path = NULL;
 char* library_path = NULL;
+
+char run_path[128];
 int main(int argc, char* argv[]) {
     // 获取运行路径
-    char run_path[128];
     getcwd(run_path, sizeof(run_path));
 /****************************************************************************/
     // 解析参数，打印对应信息，或依据.ccc文件组织编译

@@ -42,4 +42,12 @@ char **splitString(const char *str, char delimiter);
  * @param splitResult 
  */
 void freeSplitResult(char **splitResult);
+
+/**
+ * @brief 获取到filePath去除路径和后缀的文件名
+ * 
+ * @param filePath 
+ * @return char* 
+ */
+char* getFileName(char* filePath);
 #endif

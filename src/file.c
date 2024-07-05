@@ -86,3 +86,38 @@ void freeSplitResult(char **splitResult) {
     }
 }
 
+/**
+ * @brief 获取到filePath去除路径和后缀的文件名
+ * 
+ * @param filePath 
+ * @return char* 
+ */
+char* getFileName(char* filePath) {
+    if (filePath == NULL) return NULL;
+    
+    
+    // 获得.的位置
+    int point = strlen(filePath)-1;
+    while (point >= 0 && filePath[point] != '.') {
+        point--;
+    }
+    
+    // 获得最后一个/的位置
+    int index = strlen(filePath)-1;
+    while (index >= 0 && filePath[index] != '/') {
+        index--;
+    }
+    
+    if (point == -1) {
+        char* fileName = (char*)malloc(strlen(filePath+index+1)+1); 
+        memset(fileName, 0, strlen(filePath+index+1)+1);
+        strncat(fileName, filePath+index+1, strlen(filePath+index+1));
+        return fileName;
+    } else {
+        char* fileName = (char*)malloc(point-index);
+        memset(fileName, 0, point-index);
+        strncat(fileName, filePath+index+1, point-index-1);
+        return fileName;
+    }
+
+}
