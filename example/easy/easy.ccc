@@ -8,7 +8,7 @@ link_flags = -l  -a -m
 source_folder_path = sfd a k   s
 header_folder_path = ../example/easy/inc
 sll_folder_path = 
-dll_folder_path = 1a 2b
+dll_folder_path = 
 
 obj_path = obj
 output_path = build
