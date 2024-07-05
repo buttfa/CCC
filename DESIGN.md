@@ -26,7 +26,7 @@ struct reliance {
 
 struct file_node* source_list;
 struct reliance* reliance_list;
-struct reliance* tartget_reliance;
+struct reliance* target_reliance;
 
 char* obj_files;
 
@@ -80,4 +80,4 @@ char* dll_files;
 #### （六）检查依赖
 ##### 1. 遍历reliance_list链表，检查每个reliance中的file是否需要更新。
 ##### 2. 如果reliance中的file需要更新，则执行```$(compiler) reliance.reliant_file[0] -o reliance.file_path -I header_folders $(compile_flags)```，其中reliance.reliant_file[0]为.o文件对应的.c/.cpp文件
-##### 3. 遍历完整个reliance_list链表后，检查tartget_reliance是否需要更新，如果需要更新，则执行```$(linker) obj_files sll_files dll_files -o target_reliance->file_path $(link_flags)```
+##### 3. 遍历完整个reliance_list链表后，检查target_reliance是否需要更新，如果需要更新，则执行```$(linker) obj_files sll_files dll_files -o target_reliance->file_path $(link_flags)```

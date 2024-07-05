@@ -168,6 +168,10 @@ int main(int argc, char* argv[]) {
 /****************************************************************************/
 
             // 计算目标依赖关系
+            createTargetReliance();
+            printfTargetReliance();
+
+/****************************************************************************/
 
             // 获取中间文件组
 
@@ -203,7 +207,9 @@ int main(int argc, char* argv[]) {
     freeSlllist();
     freeDlllist();
     freeSourcelist();
+
     freeRelianceList();
+    freeTargetReliance();
     return 0;
 }
 

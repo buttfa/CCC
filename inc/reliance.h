@@ -18,6 +18,6 @@ struct reliance {
  * @brief 目标依赖
  * 
  */
-extern struct reliance* tartget_reliance;
+extern struct reliance* target_reliance;
 
 #endif
