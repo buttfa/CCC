@@ -164,7 +164,7 @@ int main(int argc, char* argv[]) {
                 source_file = source_file->next;
             }
 
-            printfRelianceList();
+            // printfRelianceList();
 /****************************************************************************/
 
             // 计算目标依赖关系

@@ -18,7 +18,7 @@ extern struct reliance* reliance_list;
  * 
  * @param source_file_path 
  */
-void addRelianceList(const char* source_file_path);
+void addRelianceList(char* source_file_path);
 
 /**
  * @brief 打印依赖列表
