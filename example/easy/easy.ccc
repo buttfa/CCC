@@ -1,11 +1,11 @@
 # 这是注释
-target_type = c
+target_type = c++
 compiler = gcc
 compile_flags = -g -Wall  -static
 linker = gcc
 link_flags = -l  -a -m
 
-source_folder_path = sfd a k   s
+source_folder_path = ../example/easy/src
 header_folder_path = ../example/easy/inc
 sll_folder_path = 
 dll_folder_path = 
