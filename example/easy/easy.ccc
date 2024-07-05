@@ -6,11 +6,11 @@ linker = gcc
 link_flags = -l  -a -m
 
 source_folder_path = sfd a k   s
-header_folder_path = asdf  sa
+header_folder_path = ../example/easy/inc
 sll_folder_path = 123 1
 dll_folder_path = 1a 2b
 
 obj_path = obj
 output_path = build
 
-library_path = lib lbc
+library_path = ../example/easy/lib

@@ -10,7 +10,7 @@ char* header_folder_path = NULL;
 char* sll_folder_path = NULL;
 char* dll_folder_path = NULL;
 char* obj_path = NULL;
-char* output_path;
+char* output_path = NULL;
 char* library_path = NULL;
 int main(int argc, char* argv[]) {
     // 获取运行路径
@@ -59,11 +59,14 @@ int main(int argc, char* argv[]) {
                     addHeaderFolderList(header_folder_path_split[i]);
                 }
             }
+            // printfHeaderFolderList();
             // 根据header_folder_list创建header_folders
             createHeaderFolders();
 
-            // 释放header_folder_path_temp的内存
+            // 释放该步骤所需的临时内存
             free(header_folder_path_temp);
+            freeSplitResult(header_folder_path_split);
+            freeHeaderFolderList(header_folder_list);
 /****************************************************************************/
 
             // 计算中间文件依赖关系
@@ -98,6 +101,8 @@ int main(int argc, char* argv[]) {
     free(obj_path);
     free(output_path);
     free(library_path);
+
+    free(header_folders);
     return 0;
 }
 

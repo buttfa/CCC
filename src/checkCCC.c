@@ -15,11 +15,13 @@ void checkCCC() {
     // 检查是否设置compiler
     if (compiler == NULL) {
         printf("Error: compiler is not set.\n");
+        flag = 0;
     }
 
     // 检查是否设置linker
     if (linker == NULL) {
         printf("Error: linker is not set.\n");
+        flag = 0;
     }
 
     // 检查是否设置source_folder_path
