@@ -190,7 +190,7 @@ void createHeaderFolders() {
 
     // 遍历链表，计算总长度
     while (current != NULL) {
-        total_size += strlen(current->folder_path) + 1; // +1是为了添加分隔符（如逗号或换行符）
+        total_size += 3 + strlen(current->folder_path) + 1; // +1是为了添加分隔符（如逗号或换行符）
         current = current->next;
     }
 
@@ -203,6 +203,7 @@ void createHeaderFolders() {
     // 再次遍历链表，拼接路径到字符串
     current = header_folder_list;
     while (current != NULL) {
+        strcat(header_folders, "-I ");
         strcat(header_folders, current->folder_path);
         
         // 可以根据需要添加分隔符
