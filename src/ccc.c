@@ -157,6 +157,13 @@ int main(int argc, char* argv[]) {
             freeSplitResult(source_folder_path_split);
 /****************************************************************************/
             // 计算中间文件依赖关系
+            struct file_node* source_file = source_list;
+            while (source_file != NULL) {
+                addRelianceList(source_file->file_path);
+                source_file = source_file->next;
+            }
+
+            printfRelianceList();
 /****************************************************************************/
 
             // 计算目标依赖关系
@@ -195,7 +202,7 @@ int main(int argc, char* argv[]) {
     freeSlllist();
     freeDlllist();
     freeSourcelist();
-    // freeRelianceList();
+    freeRelianceList();
     return 0;
 }
 

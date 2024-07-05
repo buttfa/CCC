@@ -15,12 +15,6 @@ struct reliance {
 };
 
 /**
- * @brief 中间文件依赖列表
- * 
- */
-extern struct reliance* reliance_list;
-
-/**
  * @brief 目标依赖
  * 
  */

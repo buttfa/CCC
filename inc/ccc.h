@@ -21,6 +21,7 @@
 #include <getSll.h>
 #include <getDll.h>
 #include <getSource.h>
+#include <getObjReliance.h>
 #include <unistd.h>
 
 #define CCC_VERSION "0.0.1"
