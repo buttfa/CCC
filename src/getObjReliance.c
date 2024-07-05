@@ -36,11 +36,18 @@ void appendToRelianceList(struct reliance* reliance) {
  */
 void addRelianceList(char* source_file_path) {
     // 获取对应的.o文件及路径
+    // char* file_name = getFileName(source_file_path);
+    // char* obj_file = (char*)malloc(strlen(run_path)+1+strlen(obj_path)+1+strlen(file_name)+1+strlen(".o\0")+1);
+    // memset(obj_file, 0, strlen(run_path)+1+strlen(obj_path)+1+strlen(file_name)+1+strlen(".o\0")+1);
+    // strcat(obj_file, run_path);
+    // strcat(obj_file, "/");
+    // strcat(obj_file, obj_path);
+    // strcat(obj_file, "/");
+    // strcat(obj_file, file_name);
+    // strcat(obj_file, ".o\0");
     char* file_name = getFileName(source_file_path);
-    char* obj_file = (char*)malloc(strlen(run_path)+1+strlen(obj_path)+1+strlen(file_name)+1+strlen(".o\0")+1);
-    memset(obj_file, 0, strlen(run_path)+1+strlen(obj_path)+1+strlen(file_name)+1+strlen(".o\0")+1);
-    strcat(obj_file, run_path);
-    strcat(obj_file, "/");
+    char* obj_file = (char*)malloc(strlen(obj_path)+1+strlen(file_name)+1+strlen(".o\0")+1);
+    memset(obj_file, 0, strlen(obj_path)+1+strlen(file_name)+1+strlen(".o\0")+1);
     strcat(obj_file, obj_path);
     strcat(obj_file, "/");
     strcat(obj_file, file_name);

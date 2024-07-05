@@ -172,7 +172,7 @@ int main(int argc, char* argv[]) {
 
             // 计算目标依赖关系
             createTargetReliance();
-            printfTargetReliance();
+            // printfTargetReliance();
 
 /****************************************************************************/
 
