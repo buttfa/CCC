@@ -177,7 +177,8 @@ int main(int argc, char* argv[]) {
 /****************************************************************************/
 
             // 获取中间文件组
-
+            createObjFiles();
+/****************************************************************************/
 
 
             // 检查依赖
@@ -212,6 +213,7 @@ int main(int argc, char* argv[]) {
     freeSourcelist();
 
     freeRelianceList();
+    free(obj_path);
     freeTargetReliance();
     return 0;
 }

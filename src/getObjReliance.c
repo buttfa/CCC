@@ -7,6 +7,12 @@
 struct reliance* reliance_list;
 
 /**
+ * @brief 中间文件组
+ * 
+ */
+char* obj_files;
+
+/**
  * @brief 将reliance节点追加到reliance_list中
  * 
  * @param reliance 
@@ -132,4 +138,27 @@ void freeRelianceList() {
         current = next;
     }
     reliance_list = NULL;
+}
+
+/**
+ * @brief 根据reliance_list创建中间文件组
+ * 
+ */
+void createObjFiles() {
+    struct reliance* temp = reliance_list;
+    // 第一次遍历统计所需长度
+    int length = 0;
+    while (temp != NULL) {
+        length += strlen(temp->file_path)+1;
+        temp = temp->next;
+    }
+    // 第二次遍历读取中间文件路径
+    obj_files = (char*)malloc(length+1);
+    memset(obj_files, 0, length+1);
+    temp = reliance_list;
+    while (temp != NULL) {
+        strcat(obj_files, temp->file_path);
+        strcat(obj_files, " ");
+        temp = temp->next;
+    }
 }

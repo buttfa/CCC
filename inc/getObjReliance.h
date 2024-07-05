@@ -8,6 +8,12 @@
 extern char run_path[128];
 
 /**
+ * @brief 中间文件组
+ * 
+ */
+extern char* obj_files;
+
+/**
  * @brief 中间文件依赖列表
  * 
  */
@@ -31,5 +37,11 @@ void printfRelianceList();
  * 
  */
 void freeRelianceList();
+
+/**
+ * @brief 根据reliance_list创建中间文件组
+ * 
+ */
+void createObjFiles();
 
 #endif
