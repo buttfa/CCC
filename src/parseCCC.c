@@ -31,31 +31,33 @@ void parseCCC(char* ccc_path) {
         } buf[index] = '\0';
 
         // 将buf转化为arg参数
-        char **argv = splitString(buf, ' ');
-        int argc = 0;
-        while (argv[argc] != NULL) {
-            argc++;
-        }
+        // char **argv = splitString(buf, ' ');
+        // int argc = 0;
+        // while (argv[argc] != NULL) {
+        //     argc++;
+        // }
+        int* argc = (int*)malloc(sizeof(int));
+        char** argv = split_string_by_space(buf,argc);
 
         // 获取target_type的数据
-        if (argc == 3 && strcmp(argv[0], "target_type") == 0 && strcmp(argv[1], "=")==0 && (strcmp(argv[2], "c") == 0 || strcmp(argv[2], "c++") == 0)) {
+        if (*argc == 3 && strcmp(argv[0], "target_type") == 0 && strcmp(argv[1], "=")==0 && (strcmp(argv[2], "c") == 0 || strcmp(argv[2], "c++") == 0)) {
             target_type = (char*)malloc(strlen(argv[2]) + 1);
             memset(target_type, 0, strlen(argv[2]) + 1);
             strcat(target_type, argv[2]);
         }
 
         // 获取compiler的数据
-        else if (argc == 3 && strcmp(argv[0], "compiler") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc == 3 && strcmp(argv[0], "compiler") == 0 && strcmp(argv[1], "=")==0) {
             compiler = (char*)malloc(strlen(argv[2]) + 1);
             memset(compiler, 0, strlen(argv[2]) + 1);
             strcat(compiler, argv[2]);
         }
 
         // 获取compiler_flags的数据
-        else if (argc >= 3 && strcmp(argv[0], "compile_flags") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc >= 3 && strcmp(argv[0], "compile_flags") == 0 && strcmp(argv[1], "=")==0) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 malloc_size += strlen(argv[i]) + 1;
             }
 
@@ -63,24 +65,24 @@ void parseCCC(char* ccc_path) {
             compiler_flags = (char*)malloc(malloc_size + 1);
             // 拼接字符串
             memset(compiler_flags, 0, malloc_size + 1);
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 strcat(compiler_flags, argv[i]);
                 strcat(compiler_flags, " ");
             }
         }
 
         // 获取linker的数据
-        else if (argc == 3 && strcmp(argv[0], "linker") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc == 3 && strcmp(argv[0], "linker") == 0 && strcmp(argv[1], "=")==0) {
             linker = (char*)malloc(strlen(argv[2]) + 1);
             memset(linker, 0, strlen(argv[2]) + 1);
             strcat(linker, argv[2]);
         }
 
         // 获取linker_flags的数据
-        else if (argc >= 3 && strcmp(argv[0], "link_flags") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc >= 3 && strcmp(argv[0], "link_flags") == 0 && strcmp(argv[1], "=")==0) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 malloc_size += strlen(argv[i]) + 1;
             }
 
@@ -88,17 +90,17 @@ void parseCCC(char* ccc_path) {
             linker_flags = (char*)malloc(malloc_size + 1);
             // 拼接字符串
             memset(linker_flags, 0, malloc_size + 1);
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 strcat(linker_flags, argv[i]);
                 strcat(linker_flags, " ");
             }            
         }
 
         // 获取source_folder_path的数据
-        else if (argc >= 3 && strcmp(argv[0], "source_folder_path") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc >= 3 && strcmp(argv[0], "source_folder_path") == 0 && strcmp(argv[1], "=")==0) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 malloc_size += strlen(argv[i]) + 1;
             }
 
@@ -106,7 +108,7 @@ void parseCCC(char* ccc_path) {
             source_folder_path = (char*)malloc(malloc_size + 1);
             // 拼接字符串
             memset(source_folder_path, 0, malloc_size + 1);
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 strcat(source_folder_path, argv[i]);
                 strcat(source_folder_path, " ");
             }   
@@ -114,10 +116,10 @@ void parseCCC(char* ccc_path) {
 
 
         // 获取header_folder_path的数据
-        else if (argc >= 3 && strcmp(argv[0], "header_folder_path") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc >= 3 && strcmp(argv[0], "header_folder_path") == 0 && strcmp(argv[1], "=")==0) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 malloc_size += strlen(argv[i]) + 1;
             }
 
@@ -125,17 +127,17 @@ void parseCCC(char* ccc_path) {
             header_folder_path = (char*)malloc(malloc_size + 1);
             // 拼接字符串
             memset(header_folder_path, 0, malloc_size + 1);
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 strcat(header_folder_path, argv[i]);
                 strcat(header_folder_path, " ");
             }   
         }
 
         // 获取sll_folder_path的数据
-        else if (argc >= 3 && strcmp(argv[0], "sll_folder_path") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc >= 3 && strcmp(argv[0], "sll_folder_path") == 0 && strcmp(argv[1], "=")==0) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 malloc_size += strlen(argv[i]) + 1;
             }
 
@@ -143,17 +145,17 @@ void parseCCC(char* ccc_path) {
             sll_folder_path = (char*)malloc(malloc_size + 1);
             // 拼接字符串
             memset(sll_folder_path, 0, malloc_size + 1);
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 strcat(sll_folder_path, argv[i]);
                 strcat(sll_folder_path, " ");
             }   
         }
 
         // 获取dll_folder_path的数据
-        else if (argc >= 3 && strcmp(argv[0], "dll_folder_path") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc >= 3 && strcmp(argv[0], "dll_folder_path") == 0 && strcmp(argv[1], "=")==0) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 malloc_size += strlen(argv[i]) + 1;
             }
 
@@ -161,21 +163,21 @@ void parseCCC(char* ccc_path) {
             dll_folder_path = (char*)malloc(malloc_size + 1);
             // 拼接字符串
             memset(dll_folder_path, 0, malloc_size + 1);
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 strcat(dll_folder_path, argv[i]);
                 strcat(dll_folder_path, " ");
             }   
        }
 
         // 获取obj_path的数据
-        else if (argc == 3 && strcmp(argv[0], "obj_path") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc == 3 && strcmp(argv[0], "obj_path") == 0 && strcmp(argv[1], "=")==0) {
             obj_path = (char*)malloc(strlen(argv[2]) + 1);
             memset(obj_path, 0, strlen(argv[2]) + 1);
             strcat(obj_path, argv[2]);
         }
 
         // 获取output_path的数据
-        else if (argc == 3 && strcmp(argv[0], "output_path") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc == 3 && strcmp(argv[0], "output_path") == 0 && strcmp(argv[1], "=")==0) {
             output_path = (char*)malloc(strlen(argv[2]) + 1);
             memset(output_path, 0, strlen(argv[2]) + 1);
             strcat(output_path, argv[2]);
@@ -183,10 +185,10 @@ void parseCCC(char* ccc_path) {
 
 
         // 获取library_path的数据
-        else if (argc >= 3 && strcmp(argv[0], "library_path") == 0 && strcmp(argv[1], "=")==0) {
+        else if (*argc >= 3 && strcmp(argv[0], "library_path") == 0 && strcmp(argv[1], "=")==0) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 malloc_size += strlen(argv[i]) + 1;
             }
 
@@ -194,7 +196,7 @@ void parseCCC(char* ccc_path) {
             library_path = (char*)malloc(malloc_size + 1);
             // 拼接字符串
             memset(library_path, 0, malloc_size + 1);
-            for (int i = 2; i < argc; i++) {
+            for (int i = 2; i < *argc; i++) {
                 strcat(library_path, argv[i]);
                 strcat(library_path, " ");
             }  
@@ -208,7 +210,12 @@ void parseCCC(char* ccc_path) {
 
 
         // 释放分配的内存
-        freeSplitResult(argv);
+        // freeSplitResult(argv);
+        for (int i = 0; i < *argc; i++) {
+            free(argv[i]);
+        }
+        free(argv);
+        free(argc);
     }
     // 关闭ccc文件
     fclose(ccc_file);

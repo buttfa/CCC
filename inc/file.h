@@ -50,4 +50,14 @@ void freeSplitResult(char **splitResult);
  * @return char* 
  */
 char* getFileName(char* filePath);
+
+
+/**
+ * @brief 提取input_str中的子字符串，以空格为分隔符
+ * 
+ * @param input_str 
+ * @param out_num_tokens 
+ * @return char** 
+ */
+char** split_string_by_space(const char* input_str, int* out_num_tokens);
 #endif
