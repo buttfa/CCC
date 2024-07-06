@@ -187,7 +187,7 @@ int main(int argc, char* argv[]) {
             handleReliance();
 /****************************************************************************/
         } else {
-            printf("The target file does not exist or does not have a. ccc suffix\n");
+            printf("[CCC]The target file does not exist or does not have a. ccc suffix\n");
         }
     } else {
         printf("[CCC]Error: Invalid argument\n");
