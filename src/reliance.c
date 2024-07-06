@@ -27,11 +27,13 @@ bool checkReliance(char* target_path, char* reliant_path){
  * 
  */
 void handleReliance() {
+    int flag = 1;
     // 处理中间依赖组
     struct reliance* reliance = reliance_list;
     while (reliance != NULL) {
         for (int i = 0; i < reliance->reliance_num; i++) {
             if (checkReliance(reliance->file_path,reliance->reliant_file[i])) {
+                flag = 0;
                 char* cmd = (char*)malloc(hotfix_strlen(compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(header_folders)+1+hotfix_strlen(compiler_flags)+1);
                 memset(cmd,0,hotfix_strlen(compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(header_folders)+1+hotfix_strlen(compiler_flags)+1);
                 hotfix_strcat(cmd,compiler);
@@ -57,6 +59,7 @@ void handleReliance() {
     struct reliance* target = target_reliance;
     for (int i = 0; i < target->reliance_num; i++) {
         if (checkReliance(target->file_path,target->reliant_file[i])) {
+            flag = 0;
             char* cmd = (char*)malloc(hotfix_strlen(compiler)+1+hotfix_strlen(obj_files)+1+hotfix_strlen(sll_files)+1+hotfix_strlen(dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(linker_flags)+1);
             memset(cmd,0,hotfix_strlen(compiler)+1+hotfix_strlen(obj_files)+1+hotfix_strlen(sll_files)+1+hotfix_strlen(dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(linker_flags)+1);
             hotfix_strcat(cmd,compiler);
@@ -75,5 +78,9 @@ void handleReliance() {
             free(cmd);
             break;
         }
+    }
+
+    if(flag == 1) {
+        printf("[%s]All files have been compiled.\n",ccc_file_path);
     }
 }
