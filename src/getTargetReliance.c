@@ -92,10 +92,13 @@ void printfTargetReliance() {
  * 
  */
 void freeTargetReliance() {
-    free(target_reliance->file_path);
-    for (int i = 0; i < target_reliance->reliance_num; i++) {
-        free(target_reliance->reliant_file[i]);
+    if (target_reliance != NULL) {
+        free(target_reliance->file_path);
+        for (int i = 0; i < target_reliance->reliance_num; i++) {
+            free(target_reliance->reliant_file[i]);
+        }
+        free(target_reliance->reliant_file);
+        free(target_reliance);
     }
-    free(target_reliance->reliant_file);
-    free(target_reliance);
+    
 }

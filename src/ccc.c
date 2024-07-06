@@ -155,7 +155,7 @@ int main(int argc, char* argv[]) {
                 }
             }
 
-            printfSourcelist();
+            // printfSourcelist();
 
             free(source_folder_path_temp);
             freeSplitResult(source_folder_path_split);
