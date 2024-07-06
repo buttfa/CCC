@@ -204,7 +204,7 @@ void parseCCC(char* ccc_path) {
 
         // .ccc文件错误行报错
         else {
-            printf("Error: Unknown argument: %d row.\n", row);
+            printf("(%s)Error: Unknown argument: %d row.\n", ccc_file_path, row);
             // exit(0);
         }
 

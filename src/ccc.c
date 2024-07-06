@@ -13,6 +13,7 @@ char* obj_path = NULL;
 char* output_path = NULL;
 char* library_path = NULL;
 
+char ccc_file_path[128];
 char run_path[128];
 char ccc_file_name[128];
 int main(int argc, char* argv[]) {
@@ -27,7 +28,10 @@ int main(int argc, char* argv[]) {
         printfHelp();
     } else if (argc == 2 && (strcmp(argv[1], "-v") == 0 || strcmp(argv[1], "version") == 0)) {
         printfVersion();
-    } else if (argc == 2) {
+    } else if (argc == 2) { 
+        // 获取ccc文件路径
+        hotfix_strcat(ccc_file_path,argv[1]);
+        
         // 获取文件的绝对路径
         char *ccc_path = (char*)malloc(hotfix_strlen(run_path)+hotfix_strlen(argv[1])+2);
         hotfix_strcat(ccc_path,run_path);

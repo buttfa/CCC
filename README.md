@@ -10,6 +10,8 @@
 make 
 // 或
 make ccc
+// 或（已经安装好CCC的前提下）
+ccc ccc.ccc
 ```
 #### （二）安装项目
 ```c

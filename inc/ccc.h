@@ -41,6 +41,7 @@ extern char* obj_path;
 extern char* output_path;
 extern char* library_path;
 
+extern char ccc_file_path[128];
 extern char ccc_file_name[128];
 /**
  * @brief 打印版本信息
