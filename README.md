@@ -9,7 +9,7 @@
 ```c
 make 
 // 或
-make ccc
+make ccc 
 // 或（已经安装好CCC的前提下）
 ccc ccc.ccc
 ```
