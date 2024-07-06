@@ -46,8 +46,9 @@ void handleReliance() {
                 hotfix_strcat(cmd,header_folders);
                 hotfix_strcat(cmd," ");
                 hotfix_strcat(cmd,compiler_flags);
-                system(cmd);
+
                 printf("%s\n",cmd);
+                system(cmd);
                 free(cmd);
                 break;
             }
@@ -60,21 +61,26 @@ void handleReliance() {
     for (int i = 0; i < target->reliance_num; i++) {
         if (checkReliance(target->file_path,target->reliant_file[i])) {
             flag = 0;
-            char* cmd = (char*)malloc(hotfix_strlen(compiler)+1+hotfix_strlen(obj_files)+1+hotfix_strlen(sll_files)+1+hotfix_strlen(dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(linker_flags)+1);
-            memset(cmd,0,hotfix_strlen(compiler)+1+hotfix_strlen(obj_files)+1+hotfix_strlen(sll_files)+1+hotfix_strlen(dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(linker_flags)+1);
-            hotfix_strcat(cmd,compiler);
+            char* cmd = (char*)malloc(hotfix_strlen(linker)+1+hotfix_strlen(obj_files)+1+hotfix_strlen(sll_files)+1+hotfix_strlen(dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(linker_flags)+1);
+            memset(cmd,0,hotfix_strlen(linker)+1+hotfix_strlen(obj_files)+1+hotfix_strlen(sll_files)+1+hotfix_strlen(dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(linker_flags)+1);
+            hotfix_strcat(cmd,linker);
+            hotfix_strcat(cmd," ");
+            hotfix_strcat(cmd,linker_flags);
+            if (strcmp(linker,"ar") != 0) {
+                hotfix_strcat(cmd," -o ");
+            } 
+            hotfix_strcat(cmd,target->file_path);
             hotfix_strcat(cmd," ");
             hotfix_strcat(cmd,obj_files);
             hotfix_strcat(cmd," ");
             hotfix_strcat(cmd,sll_files);
             hotfix_strcat(cmd," ");
             hotfix_strcat(cmd,dll_files);
-            hotfix_strcat(cmd," -o ");
-            hotfix_strcat(cmd,target->file_path);
-            hotfix_strcat(cmd," ");
-            hotfix_strcat(cmd,linker_flags);
-            system(cmd);
+
+
             printf("%s\n",cmd);
+            system(cmd);
+
             free(cmd);
             break;
         }

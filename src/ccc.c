@@ -190,7 +190,7 @@ int main(int argc, char* argv[]) {
             printf("The target file does not exist or does not have a. ccc suffix\n");
         }
     } else {
-        printf("Error: Invalid argument\n");
+        printf("[CCC]Error: Invalid argument\n");
     }
 /****************************************************************************/
     

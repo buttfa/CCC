@@ -2,7 +2,7 @@
 compiler = gcc
 compile_flags = -g -Wall  -static
 linker = gcc
-link_flags = 
+link_flags = -static
 
 source_folder_path = src
 header_folder_path = inc

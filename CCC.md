@@ -1,23 +1,23 @@
 ## 文件所需变量
 ```c
-target_type= c / c++
+target_type =
 
-compiler=
-compile_flags= 
+compiler =
+compile_flags = 
 
-linker= 
-linker_flags=
+linker = 
+linker_flags =
 
-source_folder_path=
-header_folder_path=
+source_folder_path =
+header_folder_path =
 
-sll_folder_path=
-dll_folder_path=
+sll_folder_path =
+dll_folder_path =
 
-obj_path=
-output_path=
+obj_path =
+output_path =
 
-library_path=
+library_path =
 ```
 
 ## 解释说明
