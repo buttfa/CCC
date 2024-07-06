@@ -32,7 +32,7 @@ make uninstall
 #### （2） Edit. ccc file
 ##### For specific details, please refer to CCC.md under this project
 #### （3） Run the CCC command
-##### Run the ccc \$(ccc_file) command to compile multiple source files into target files. (The file name of the target file is \$(ccc_file), which is stored in the path of \$(output_path) in the ccc file.)
+##### Run the ccc (ccc_file) command to compile multiple source files into target files. (The file name of the target file is (ccc_file), which is stored in the path of (output_path) in the ccc file.)
 <!--####  （4） Delete intermediate files -->
 <!--#####  Run the ccc $(ccc_file) clean command to delete intermediate files. -->
 
