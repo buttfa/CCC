@@ -1,0 +1,18 @@
+target_type = c
+
+compiler = gcc
+compile_flags = -static
+
+linker = gcc
+linker_flags =
+
+source_folder_path = src
+header_folder_path = lib
+
+sll_folder_path = lib
+dll_folder_path =
+
+obj_path = build/obj
+output_path = build
+
+library_path = 

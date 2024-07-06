@@ -1,0 +1,18 @@
+target_type = c
+
+compiler = gcc
+compile_flags = 
+
+linker = ar
+link_flags = rcs
+
+source_folder_path = lib/math
+header_folder_path = lib/math
+
+sll_folder_path =
+dll_folder_path =
+
+obj_path = lib/math/obj
+output_path = lib/math
+
+library_path =
