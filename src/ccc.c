@@ -239,8 +239,8 @@ void printfVersion() {
 void printfHelp() {
     printf("Usage: ccc [OPTION]\n");
     printf("Options:-\n");
-    printf("  -h, --help      display this help and exit\n");
-    printf("  -v, --version   display version information and exit\n");
+    printf("  -h, help      display this help and exit\n");
+    printf("  -v, version   display version information and exit\n");
     printf("  ccc_file        compile based on ccc_file\n");
     printf("Report bugs to <https://github.com/buttfa/CCC/issues>\n");
 }
