@@ -14,7 +14,7 @@ BUILD_DIR = build
 OBJ_PATH = $(BUILD_DIR)/obj
 # 编译输出文件的存放位置
 OUTPUT = $(BUILD_DIR)
- 
+
 ###########################################################################
 # CCC源文件的路径
 CCC_SRC_PATH = $(C_SOURCES)
