@@ -8,7 +8,7 @@ C_SOURCES = src
 # 头文件目录
 C_INCLUDE = inc
 
-# 生成文件目录
+# 生成文件目录 
 BUILD_DIR = build
 # 中间文件存放目录
 OBJ_PATH = $(BUILD_DIR)/obj
