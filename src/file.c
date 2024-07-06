@@ -1,8 +1,8 @@
 #include <file.h>
 bool isFileWithSuffix(const char *path, const char *suffix) {
     // 首先检查路径是否以suffix结尾
-    size_t path_len = strlen(path);
-    size_t suffix_len = strlen(suffix);
+    size_t path_len = hotfix_strlen(path);
+    size_t suffix_len = hotfix_strlen(suffix);
     if (path_len < suffix_len || strcmp(path + path_len - suffix_len, suffix) != 0) {
         return false; // 不是以指定后缀结尾
     }
@@ -33,7 +33,7 @@ char **splitString(const char *str, char delimiter) {
     if (str == NULL) return NULL;
 
     int argc = 0;
-    int strLen = strlen(str);
+    int strLen = hotfix_strlen(str);
     char **result = NULL;
 
     // 预计算需要多少个子字符串
@@ -97,21 +97,21 @@ char* getFileName(char* filePath) {
     
     
     // 获得.的位置
-    int point = strlen(filePath)-1;
+    int point = hotfix_strlen(filePath)-1;
     while (point >= 0 && filePath[point] != '.') {
         point--;
     }
     
     // 获得最后一个/的位置
-    int index = strlen(filePath)-1;
+    int index = hotfix_strlen(filePath)-1;
     while (index >= 0 && filePath[index] != '/') {
         index--;
     }
     
     if (point == -1) {
-        char* fileName = (char*)malloc(strlen(filePath+index+1)+1); 
-        memset(fileName, 0, strlen(filePath+index+1)+1);
-        strncat(fileName, filePath+index+1, strlen(filePath+index+1));
+        char* fileName = (char*)malloc(hotfix_strlen(filePath+index+1)+1); 
+        memset(fileName, 0, hotfix_strlen(filePath+index+1)+1);
+        strncat(fileName, filePath+index+1, hotfix_strlen(filePath+index+1));
         return fileName;
     } else {
         char* fileName = (char*)malloc(point-index);
@@ -187,4 +187,32 @@ char** split_string_by_space(const char* input_str, int* out_num_tokens) {
 
     tokens[*out_num_tokens] = NULL; // 以NULL结束指针数组
     return tokens;
+}
+
+/**
+ * @brief 使用于本项目的特殊strlen，当str指向NULL时，返回0
+ * 
+ * @param str 
+ * @return int 
+ */
+int hotfix_strlen(char* str) {
+    if (str == NULL){
+        return 0;
+    } else {
+        return strlen(str);
+    }
+}
+
+/**
+ * @brief 使用于本项目的特殊strcat，当dest或str指向NULL时，不进行操作
+ * 
+ * @param dest 
+ * @param src 
+ */
+void hotfix_strcat(char* dest, char* src) {
+    if (dest == NULL || src == NULL) {
+        return;
+    } else {
+        strcat(dest, src);
+    }
 }

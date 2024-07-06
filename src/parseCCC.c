@@ -41,16 +41,16 @@ void parseCCC(char* ccc_path) {
 
         // 获取target_type的数据
         if (*argc == 3 && strcmp(argv[0], "target_type") == 0 && strcmp(argv[1], "=")==0 && (strcmp(argv[2], "c") == 0 || strcmp(argv[2], "c++") == 0)) {
-            target_type = (char*)malloc(strlen(argv[2]) + 1);
-            memset(target_type, 0, strlen(argv[2]) + 1);
-            strcat(target_type, argv[2]);
+            target_type = (char*)malloc(hotfix_strlen(argv[2]) + 1);
+            memset(target_type, 0, hotfix_strlen(argv[2]) + 1);
+            hotfix_strcat(target_type, argv[2]);
         }
 
         // 获取compiler的数据
         else if (*argc == 3 && strcmp(argv[0], "compiler") == 0 && strcmp(argv[1], "=")==0) {
-            compiler = (char*)malloc(strlen(argv[2]) + 1);
-            memset(compiler, 0, strlen(argv[2]) + 1);
-            strcat(compiler, argv[2]);
+            compiler = (char*)malloc(hotfix_strlen(argv[2]) + 1);
+            memset(compiler, 0, hotfix_strlen(argv[2]) + 1);
+            hotfix_strcat(compiler, argv[2]);
         }
 
         // 获取compiler_flags的数据
@@ -58,7 +58,7 @@ void parseCCC(char* ccc_path) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
             for (int i = 2; i < *argc; i++) {
-                malloc_size += strlen(argv[i]) + 1;
+                malloc_size += hotfix_strlen(argv[i]) + 1;
             }
 
             // 分配内存
@@ -66,16 +66,16 @@ void parseCCC(char* ccc_path) {
             // 拼接字符串
             memset(compiler_flags, 0, malloc_size + 1);
             for (int i = 2; i < *argc; i++) {
-                strcat(compiler_flags, argv[i]);
-                strcat(compiler_flags, " ");
+                hotfix_strcat(compiler_flags, argv[i]);
+                hotfix_strcat(compiler_flags, " ");
             }
         }
 
         // 获取linker的数据
         else if (*argc == 3 && strcmp(argv[0], "linker") == 0 && strcmp(argv[1], "=")==0) {
-            linker = (char*)malloc(strlen(argv[2]) + 1);
-            memset(linker, 0, strlen(argv[2]) + 1);
-            strcat(linker, argv[2]);
+            linker = (char*)malloc(hotfix_strlen(argv[2]) + 1);
+            memset(linker, 0, hotfix_strlen(argv[2]) + 1);
+            hotfix_strcat(linker, argv[2]);
         }
 
         // 获取linker_flags的数据
@@ -83,7 +83,7 @@ void parseCCC(char* ccc_path) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
             for (int i = 2; i < *argc; i++) {
-                malloc_size += strlen(argv[i]) + 1;
+                malloc_size += hotfix_strlen(argv[i]) + 1;
             }
 
             // 分配内存
@@ -91,8 +91,8 @@ void parseCCC(char* ccc_path) {
             // 拼接字符串
             memset(linker_flags, 0, malloc_size + 1);
             for (int i = 2; i < *argc; i++) {
-                strcat(linker_flags, argv[i]);
-                strcat(linker_flags, " ");
+                hotfix_strcat(linker_flags, argv[i]);
+                hotfix_strcat(linker_flags, " ");
             }            
         }
 
@@ -101,7 +101,7 @@ void parseCCC(char* ccc_path) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
             for (int i = 2; i < *argc; i++) {
-                malloc_size += strlen(argv[i]) + 1;
+                malloc_size += hotfix_strlen(argv[i]) + 1;
             }
 
             // 分配内存
@@ -109,8 +109,8 @@ void parseCCC(char* ccc_path) {
             // 拼接字符串
             memset(source_folder_path, 0, malloc_size + 1);
             for (int i = 2; i < *argc; i++) {
-                strcat(source_folder_path, argv[i]);
-                strcat(source_folder_path, " ");
+                hotfix_strcat(source_folder_path, argv[i]);
+                hotfix_strcat(source_folder_path, " ");
             }   
         }
 
@@ -120,7 +120,7 @@ void parseCCC(char* ccc_path) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
             for (int i = 2; i < *argc; i++) {
-                malloc_size += strlen(argv[i]) + 1;
+                malloc_size += hotfix_strlen(argv[i]) + 1;
             }
 
             // 分配内存
@@ -128,8 +128,8 @@ void parseCCC(char* ccc_path) {
             // 拼接字符串
             memset(header_folder_path, 0, malloc_size + 1);
             for (int i = 2; i < *argc; i++) {
-                strcat(header_folder_path, argv[i]);
-                strcat(header_folder_path, " ");
+                hotfix_strcat(header_folder_path, argv[i]);
+                hotfix_strcat(header_folder_path, " ");
             }   
         }
 
@@ -138,7 +138,7 @@ void parseCCC(char* ccc_path) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
             for (int i = 2; i < *argc; i++) {
-                malloc_size += strlen(argv[i]) + 1;
+                malloc_size += hotfix_strlen(argv[i]) + 1;
             }
 
             // 分配内存
@@ -146,8 +146,8 @@ void parseCCC(char* ccc_path) {
             // 拼接字符串
             memset(sll_folder_path, 0, malloc_size + 1);
             for (int i = 2; i < *argc; i++) {
-                strcat(sll_folder_path, argv[i]);
-                strcat(sll_folder_path, " ");
+                hotfix_strcat(sll_folder_path, argv[i]);
+                hotfix_strcat(sll_folder_path, " ");
             }   
         }
 
@@ -156,7 +156,7 @@ void parseCCC(char* ccc_path) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
             for (int i = 2; i < *argc; i++) {
-                malloc_size += strlen(argv[i]) + 1;
+                malloc_size += hotfix_strlen(argv[i]) + 1;
             }
 
             // 分配内存
@@ -164,23 +164,23 @@ void parseCCC(char* ccc_path) {
             // 拼接字符串
             memset(dll_folder_path, 0, malloc_size + 1);
             for (int i = 2; i < *argc; i++) {
-                strcat(dll_folder_path, argv[i]);
-                strcat(dll_folder_path, " ");
+                hotfix_strcat(dll_folder_path, argv[i]);
+                hotfix_strcat(dll_folder_path, " ");
             }   
        }
 
         // 获取obj_path的数据
         else if (*argc == 3 && strcmp(argv[0], "obj_path") == 0 && strcmp(argv[1], "=")==0) {
-            obj_path = (char*)malloc(strlen(argv[2]) + 1);
-            memset(obj_path, 0, strlen(argv[2]) + 1);
-            strcat(obj_path, argv[2]);
+            obj_path = (char*)malloc(hotfix_strlen(argv[2]) + 1);
+            memset(obj_path, 0, hotfix_strlen(argv[2]) + 1);
+            hotfix_strcat(obj_path, argv[2]);
         }
 
         // 获取output_path的数据
         else if (*argc == 3 && strcmp(argv[0], "output_path") == 0 && strcmp(argv[1], "=")==0) {
-            output_path = (char*)malloc(strlen(argv[2]) + 1);
-            memset(output_path, 0, strlen(argv[2]) + 1);
-            strcat(output_path, argv[2]);
+            output_path = (char*)malloc(hotfix_strlen(argv[2]) + 1);
+            memset(output_path, 0, hotfix_strlen(argv[2]) + 1);
+            hotfix_strcat(output_path, argv[2]);
         }
 
 
@@ -189,7 +189,7 @@ void parseCCC(char* ccc_path) {
             // 判断拼接字符串的长度
             int malloc_size = 0;
             for (int i = 2; i < *argc; i++) {
-                malloc_size += strlen(argv[i]) + 1;
+                malloc_size += hotfix_strlen(argv[i]) + 1;
             }
 
             // 分配内存
@@ -197,8 +197,8 @@ void parseCCC(char* ccc_path) {
             // 拼接字符串
             memset(library_path, 0, malloc_size + 1);
             for (int i = 2; i < *argc; i++) {
-                strcat(library_path, argv[i]);
-                strcat(library_path, " ");
+                hotfix_strcat(library_path, argv[i]);
+                hotfix_strcat(library_path, " ");
             }  
         }
 

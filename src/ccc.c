@@ -29,14 +29,14 @@ int main(int argc, char* argv[]) {
         printfVersion();
     } else if (argc == 2) {
         // 获取文件的绝对路径
-        char *ccc_path = (char*)malloc(strlen(run_path)+strlen(argv[1])+2);
-        strcat(ccc_path,run_path);
-        strcat(ccc_path,"/");
-        strcat(ccc_path,argv[1]);
+        char *ccc_path = (char*)malloc(hotfix_strlen(run_path)+hotfix_strlen(argv[1])+2);
+        hotfix_strcat(ccc_path,run_path);
+        hotfix_strcat(ccc_path,"/");
+        hotfix_strcat(ccc_path,argv[1]);
         // 判断文件是否存在以及是否为.ccc文件
         if (isFileWithSuffix(ccc_path,".ccc")) {
             // 获取文件名（不包含路径和后缀名）
-            strcat(ccc_file_name,getFileName(ccc_path));
+            hotfix_strcat(ccc_file_name,getFileName(ccc_path));
 /****************************************************************************/            
             // 解析.ccc文件
             parseCCC(ccc_path);
@@ -48,18 +48,18 @@ int main(int argc, char* argv[]) {
 /****************************************************************************/
             // 获取头文件目录（非必要）
             // 将header_folder_path和library_path合并，以便操作
-            char* header_folder_path_temp = (char*)malloc(strlen(header_folder_path)+strlen(library_path)+2);
-            memset(header_folder_path_temp,0,strlen(header_folder_path)+strlen(library_path)+2);
-            strcat(header_folder_path_temp,header_folder_path);
-            strcat(header_folder_path_temp," ");
-            strcat(header_folder_path_temp,library_path);
+            char* header_folder_path_temp = (char*)malloc(hotfix_strlen(header_folder_path)+hotfix_strlen(library_path)+2);
+            memset(header_folder_path_temp,0,hotfix_strlen(header_folder_path)+hotfix_strlen(library_path)+2);
+            hotfix_strcat(header_folder_path_temp,header_folder_path);
+            hotfix_strcat(header_folder_path_temp," ");
+            hotfix_strcat(header_folder_path_temp,library_path);
 
             // 将header_folder_path_temp以空格分割
             char** header_folder_path_split = splitString(header_folder_path_temp, ' ');
             // 将header_folder_path_split[i]中包含.h文件的文件夹及子文件夹
             // 添加到header_folder_list中。（每次添加前会检查，避免重复添加）
             for (int i = 0; header_folder_path_split[i] != NULL; i++) {
-                if (strlen(header_folder_path_split[i]) != 0) {
+                if (hotfix_strlen(header_folder_path_split[i]) != 0) {
                     addHeaderFolderList(header_folder_path_split[i]);
                 }
             }
@@ -77,18 +77,18 @@ int main(int argc, char* argv[]) {
             // 判断是否需要载入静态链接库文件
             if (sll_folder_path != NULL || library_path != NULL) {
                 // 将sll_folder_path和library_path合并，以便操作
-                char* sll_folder_path_temp = (char*)malloc(strlen(sll_folder_path)+strlen(library_path)+2);
-                memset(sll_folder_path_temp,0,strlen(sll_folder_path)+strlen(library_path)+2);
-                strcat(sll_folder_path_temp,sll_folder_path);
-                strcat(sll_folder_path_temp," ");
-                strcat(sll_folder_path_temp,library_path);
+                char* sll_folder_path_temp = (char*)malloc(hotfix_strlen(sll_folder_path)+hotfix_strlen(library_path)+2);
+                memset(sll_folder_path_temp,0,hotfix_strlen(sll_folder_path)+hotfix_strlen(library_path)+2);
+                hotfix_strcat(sll_folder_path_temp,sll_folder_path);
+                hotfix_strcat(sll_folder_path_temp," ");
+                hotfix_strcat(sll_folder_path_temp,library_path);
 
                 // 将sll_folder_path以空格分割
                 char** sll_folder_path_split = splitString(sll_folder_path_temp, ' ');
                 // 将sll_folder_path_split[i]文件夹及子文件夹中的.a文件
                 // 添加到sll_list中。（每次添加前会检查，避免重复添加）
                 for (int i = 0; sll_folder_path_split[i] != NULL; i++) {
-                    if (strlen(sll_folder_path_split[i]) != 0) {
+                    if (hotfix_strlen(sll_folder_path_split[i]) != 0) {
                         addSlllist(sll_folder_path_split[i]);
                     }
                 }
@@ -105,18 +105,18 @@ int main(int argc, char* argv[]) {
             // 判断是否需要载入动态链接库文件
             if (dll_folder_path != NULL || library_path != NULL) {
                 // 将dll_folder_path和library_path合并，以便操作
-                char* dll_folder_path_temp = (char*)malloc(strlen(dll_folder_path)+strlen(library_path)+2);
-                memset(dll_folder_path_temp,0,strlen(dll_folder_path)+strlen(library_path)+2);
-                strcat(dll_folder_path_temp,dll_folder_path);
-                strcat(dll_folder_path_temp," ");
-                strcat(dll_folder_path_temp,library_path);
+                char* dll_folder_path_temp = (char*)malloc(hotfix_strlen(dll_folder_path)+hotfix_strlen(library_path)+2);
+                memset(dll_folder_path_temp,0,hotfix_strlen(dll_folder_path)+hotfix_strlen(library_path)+2);
+                hotfix_strcat(dll_folder_path_temp,dll_folder_path);
+                hotfix_strcat(dll_folder_path_temp," ");
+                hotfix_strcat(dll_folder_path_temp,library_path);
 
                 // 将dll_folder_path以空格分割
                 char** dll_folder_path_split = splitString(dll_folder_path_temp, ' ');
                 // 将dll_folder_path_split[i]文件夹及子文件夹中的.so文件
                 // 添加到dll_list中。（每次添加前会检查，避免重复添加）
                 for (int i = 0; dll_folder_path_split[i] != NULL; i++) {
-                    if (strlen(dll_folder_path_split[i]) != 0) {
+                    if (hotfix_strlen(dll_folder_path_split[i]) != 0) {
                         addDlllist(dll_folder_path_split[i]);
                     }
                 }
@@ -133,15 +133,15 @@ int main(int argc, char* argv[]) {
             char* source_folder_path_temp;
             if (library_path != NULL) {
                 // 将source_folder_path和library_path合并，以便操作
-                source_folder_path_temp = (char*)malloc(strlen(source_folder_path)+strlen(library_path)+2);
-                memset(source_folder_path_temp,0,strlen(source_folder_path)+strlen(library_path)+2);
-                strcat(source_folder_path_temp,source_folder_path);
-                strcat(source_folder_path_temp," ");
-                strcat(source_folder_path_temp,library_path);
+                source_folder_path_temp = (char*)malloc(hotfix_strlen(source_folder_path)+hotfix_strlen(library_path)+2);
+                memset(source_folder_path_temp,0,hotfix_strlen(source_folder_path)+hotfix_strlen(library_path)+2);
+                hotfix_strcat(source_folder_path_temp,source_folder_path);
+                hotfix_strcat(source_folder_path_temp," ");
+                hotfix_strcat(source_folder_path_temp,library_path);
             } else {
-                source_folder_path_temp = (char*)malloc(strlen(source_folder_path)+1);
-                memset(source_folder_path_temp,0,strlen(source_folder_path)+1);
-                strcat(source_folder_path_temp,source_folder_path);
+                source_folder_path_temp = (char*)malloc(hotfix_strlen(source_folder_path)+1);
+                memset(source_folder_path_temp,0,hotfix_strlen(source_folder_path)+1);
+                hotfix_strcat(source_folder_path_temp,source_folder_path);
             }
 
 
@@ -150,7 +150,7 @@ int main(int argc, char* argv[]) {
             // 将source_folder_path_split[i]文件夹及子文件夹中的.c/.cpp文件
             // 添加到sources_list中。（每次添加前会检查，避免重复添加）
             for (int i = 0; source_folder_path_split[i] != NULL; i++) {
-                if (strlen(source_folder_path_split[i]) != 0) {
+                if (hotfix_strlen(source_folder_path_split[i]) != 0) {
                     addSourcelist(source_folder_path_split[i]);
                 }
             }
@@ -200,7 +200,7 @@ int main(int argc, char* argv[]) {
     free(header_folder_path);
     free(sll_folder_path);
     free(dll_folder_path);
-    free(obj_path);
+    // free(obj_path);
     free(output_path);
     free(library_path);
 

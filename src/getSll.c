@@ -132,7 +132,7 @@ void createSllFiles() {
 
     // 遍历链表，计算总长度
     while (current != NULL) {
-        total_length += strlen(current->file_path) + 1; // 加1是为了每个路径后的null字符
+        total_length += hotfix_strlen(current->file_path) + 1; // 加1是为了每个路径后的null字符
         current = current->next;
     }
 
@@ -151,8 +151,8 @@ void createSllFiles() {
     // 再次遍历链表，复制文件路径到sll_files中
     while (current != NULL) {
         strcpy(position, current->file_path);
-        strcat(position, " ");
-        position += strlen(current->file_path) + 1; // 移动到下一个路径开始的位置
+        hotfix_strcat(position, " ");
+        position += hotfix_strlen(current->file_path) + 1; // 移动到下一个路径开始的位置
         current = current->next;
     }
 

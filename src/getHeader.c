@@ -126,7 +126,7 @@ void addHeaderFolderList(const char* header_folder_path) {
             if (strcmp(entry->d_name, ".") == 0 || strcmp(entry->d_name, "..") == 0) {
                 continue;
             }
-            char full_path[strlen(header_folder_path) + strlen(entry->d_name) + 2];
+            char full_path[hotfix_strlen((char*)header_folder_path) + hotfix_strlen(entry->d_name) + 2];
             snprintf(full_path, sizeof(full_path), "%s/%s", header_folder_path, entry->d_name);
             
             if (entry->d_type == DT_DIR) {
@@ -190,7 +190,7 @@ void createHeaderFolders() {
 
     // 遍历链表，计算总长度
     while (current != NULL) {
-        total_size += 3 + strlen(current->folder_path) + 1; // +1是为了添加分隔符（如逗号或换行符）
+        total_size += 3 + hotfix_strlen(current->folder_path) + 1; // +1是为了添加分隔符（如逗号或换行符）
         current = current->next;
     }
 
@@ -203,12 +203,12 @@ void createHeaderFolders() {
     // 再次遍历链表，拼接路径到字符串
     current = header_folder_list;
     while (current != NULL) {
-        strcat(header_folders, "-I ");
-        strcat(header_folders, current->folder_path);
+        hotfix_strcat(header_folders, "-I ");
+        hotfix_strcat(header_folders, current->folder_path);
         
         // 可以根据需要添加分隔符
         if (current->next != NULL) {
-            strcat(header_folders, " ");
+            hotfix_strcat(header_folders, " ");
         }
         
         current = current->next;

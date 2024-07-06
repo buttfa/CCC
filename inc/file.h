@@ -61,4 +61,20 @@ char* getFileName(char* filePath);
  * @return char** 
  */
 char** split_string_by_space(const char* input_str, int* out_num_tokens);
+
+/**
+ * @brief 使用于本项目的特殊strlen，当str指向NULL时，返回0
+ * 
+ * @param str 
+ * @return int 
+ */
+int hotfix_strlen(char* str);
+
+/**
+ * @brief 使用于本项目的特殊strcat，当dest或str指向NULL时，不进行操作
+ * 
+ * @param dest 
+ * @param src 
+ */
+void hotfix_strcat(char* dest, char* src);
 #endif

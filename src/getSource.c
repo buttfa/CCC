@@ -56,13 +56,13 @@ void addSourcelist(const char* source_folder_path) {
     // 确定源文件后缀
     char* suffix;
     if (strcmp(target_type,"c")==0) {
-        suffix = (char*)malloc(strlen(".c") + 1);
-        memset(suffix, 0, strlen(".c") + 1);
-        strcat(suffix, ".c\0");
+        suffix = (char*)malloc(hotfix_strlen(".c") + 1);
+        memset(suffix, 0, hotfix_strlen(".c") + 1);
+        hotfix_strcat(suffix, ".c\0");
     } else if (strcmp(target_type,"c++")==0) {
-        suffix = (char*)malloc(strlen(".cpp") + 1);
-        memset(suffix, 0, strlen(".cpp") + 1);
-        strcat(suffix, ".cpp\0");
+        suffix = (char*)malloc(hotfix_strlen(".cpp") + 1);
+        memset(suffix, 0, hotfix_strlen(".cpp") + 1);
+        hotfix_strcat(suffix, ".cpp\0");
     }
 
     DIR* dir;

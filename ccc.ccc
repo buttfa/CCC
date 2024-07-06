@@ -2,14 +2,14 @@
 compiler = gcc
 compile_flags = -g -Wall  -static
 linker = gcc
-link_flags = -static
+link_flags = 
 
 source_folder_path = ../src
 header_folder_path = ../inc
-sll_folder_path = ../src
-dll_folder_path = ../src
+sll_folder_path = 
+dll_folder_path = 
 
 obj_path = ../build/obj
 output_path = ../build
 
-library_path = ../src
+library_path = 
