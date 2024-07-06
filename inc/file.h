@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <sys/stat.h>
+#include <ctype.h>
 
 /**
  * @brief 文件链表节点
