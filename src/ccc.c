@@ -179,9 +179,9 @@ int main(int argc, char* argv[]) {
             // 获取中间文件组
             createObjFiles();
 /****************************************************************************/
-
-
             // 检查依赖
+            handleReliance();
+/****************************************************************************/
         } else {
             printf("The target file does not exist or does not have a. ccc suffix\n");
         }
