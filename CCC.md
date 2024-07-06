@@ -35,3 +35,18 @@ library_path =
 |obj_path||中间文件存放路径|
 |output_path||输出文件存放路径|
 |library_path||外部库文件路径|
+
+## 关于变量
+#### 对于一个基于CCC的项目，上述中必要的变量有：
+```c
+target_type
+compiler
+linker
+source_folder_path
+obj_path
+output_path。
+```
+
+## 关于书写格式
+#### （一）变量的等号两边都要留空格。
+#### （二）注释为以#开头的单行注释。

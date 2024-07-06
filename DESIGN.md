@@ -1,6 +1,5 @@
 
 ```c
-// 文件节点
 struct file_node {
     char* file_path;
     struct file_node* next;
