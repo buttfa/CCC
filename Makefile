@@ -39,7 +39,7 @@ install:
 	@sudo cp build/ccc /usr/local/bin
 	@echo "Successfully installed CCC."
 ###########################################################################
-
+ 
 ###########################################################################
 uninstall:
 	@sudo rm -rf /usr/local/bin/ccc
