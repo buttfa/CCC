@@ -7,7 +7,7 @@ linker = gcc
 linker_flags =
 
 source_folder_path = src
-header_folder_path = lib
+header_folder_path = 
 
 sll_folder_path = lib
 dll_folder_path =

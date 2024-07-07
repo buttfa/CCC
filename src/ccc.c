@@ -82,75 +82,62 @@ int main(int argc, char* argv[]) {
 /****************************************************************************/
             // 载入静态链接库文件（非必要）
             
-            // 判断是否需要载入静态链接库文件
-            if (sll_folder_path != NULL || library_path != NULL) {
-                // 将sll_folder_path和library_path合并，以便操作
-                char* sll_folder_path_temp = (char*)malloc(hotfix_strlen(sll_folder_path)+hotfix_strlen(library_path)+2);
-                memset(sll_folder_path_temp,0,hotfix_strlen(sll_folder_path)+hotfix_strlen(library_path)+2);
-                hotfix_strcat(sll_folder_path_temp,sll_folder_path);
-                hotfix_strcat(sll_folder_path_temp," ");
-                hotfix_strcat(sll_folder_path_temp,library_path);
+            // 将sll_folder_path和library_path合并，以便操作
+            char* sll_folder_path_temp = (char*)malloc(hotfix_strlen(sll_folder_path)+hotfix_strlen(library_path)+2);
+            memset(sll_folder_path_temp,0,hotfix_strlen(sll_folder_path)+hotfix_strlen(library_path)+2);
+            hotfix_strcat(sll_folder_path_temp,sll_folder_path);
+            hotfix_strcat(sll_folder_path_temp," ");
+            hotfix_strcat(sll_folder_path_temp,library_path);
 
-                // 将sll_folder_path以空格分割
-                char** sll_folder_path_split = splitString(sll_folder_path_temp, ' ');
-                // 将sll_folder_path_split[i]文件夹及子文件夹中的.a文件
-                // 添加到sll_list中。（每次添加前会检查，避免重复添加）
-                for (int i = 0; sll_folder_path_split[i] != NULL; i++) {
-                    if (hotfix_strlen(sll_folder_path_split[i]) != 0) {
-                        addSlllist(sll_folder_path_split[i]);
-                    }
+            // 将sll_folder_path以空格分割
+            char** sll_folder_path_split = splitString(sll_folder_path_temp, ' ');
+            // 将sll_folder_path_split[i]文件夹及子文件夹中的.a文件
+            // 添加到sll_list中。（每次添加前会检查，避免重复添加）
+            for (int i = 0; sll_folder_path_split[i] != NULL; i++) {
+                if (hotfix_strlen(sll_folder_path_split[i]) != 0) {
+                    addSlllist(sll_folder_path_split[i]);
                 }
-                // printfSlllist();
-                // 根据sll_list创建sll_files
-                createSllFiles();
+            }
+            // printfSlllist();
+            // 根据sll_list创建sll_files
+            createSllFiles();
 
-                free(sll_folder_path_temp);
-                freeSplitResult(sll_folder_path_split);
-            } 
+            free(sll_folder_path_temp);
+            freeSplitResult(sll_folder_path_split); 
 /****************************************************************************/
             // 载入动态链接库文件（非必要）
             
-            // 判断是否需要载入动态链接库文件
-            if (dll_folder_path != NULL || library_path != NULL) {
-                // 将dll_folder_path和library_path合并，以便操作
-                char* dll_folder_path_temp = (char*)malloc(hotfix_strlen(dll_folder_path)+hotfix_strlen(library_path)+2);
-                memset(dll_folder_path_temp,0,hotfix_strlen(dll_folder_path)+hotfix_strlen(library_path)+2);
-                hotfix_strcat(dll_folder_path_temp,dll_folder_path);
-                hotfix_strcat(dll_folder_path_temp," ");
-                hotfix_strcat(dll_folder_path_temp,library_path);
+            // 将dll_folder_path和library_path合并，以便操作
+            char* dll_folder_path_temp = (char*)malloc(hotfix_strlen(dll_folder_path)+hotfix_strlen(library_path)+2);
+            memset(dll_folder_path_temp,0,hotfix_strlen(dll_folder_path)+hotfix_strlen(library_path)+2);
+            hotfix_strcat(dll_folder_path_temp,dll_folder_path);
+            hotfix_strcat(dll_folder_path_temp," ");
+            hotfix_strcat(dll_folder_path_temp,library_path);
 
-                // 将dll_folder_path以空格分割
-                char** dll_folder_path_split = splitString(dll_folder_path_temp, ' ');
-                // 将dll_folder_path_split[i]文件夹及子文件夹中的.so文件
-                // 添加到dll_list中。（每次添加前会检查，避免重复添加）
-                for (int i = 0; dll_folder_path_split[i] != NULL; i++) {
-                    if (hotfix_strlen(dll_folder_path_split[i]) != 0) {
-                        addDlllist(dll_folder_path_split[i]);
-                    }
+            // 将dll_folder_path以空格分割
+            char** dll_folder_path_split = splitString(dll_folder_path_temp, ' ');
+            // 将dll_folder_path_split[i]文件夹及子文件夹中的.so文件
+            // 添加到dll_list中。（每次添加前会检查，避免重复添加）
+            for (int i = 0; dll_folder_path_split[i] != NULL; i++) {
+                if (hotfix_strlen(dll_folder_path_split[i]) != 0) {
+                    addDlllist(dll_folder_path_split[i]);
                 }
-                // printfDlllist();
-                // 根据dll_list创建dll_files
-                createDllFiles();
+            }
+            // printfDlllist();
+            // 根据dll_list创建dll_files
+            createDllFiles();
 
-                free(dll_folder_path_temp);
-                freeSplitResult(dll_folder_path_split);
-            } 
+            free(dll_folder_path_temp);
+            freeSplitResult(dll_folder_path_split);
 /****************************************************************************/
 
             // 获取源文件组
             char* source_folder_path_temp;
-            if (library_path != NULL) {
-                // 将source_folder_path和library_path合并，以便操作
-                source_folder_path_temp = (char*)malloc(hotfix_strlen(source_folder_path)+hotfix_strlen(library_path)+2);
-                memset(source_folder_path_temp,0,hotfix_strlen(source_folder_path)+hotfix_strlen(library_path)+2);
-                hotfix_strcat(source_folder_path_temp,source_folder_path);
-                hotfix_strcat(source_folder_path_temp," ");
-                hotfix_strcat(source_folder_path_temp,library_path);
-            } else {
-                source_folder_path_temp = (char*)malloc(hotfix_strlen(source_folder_path)+1);
-                memset(source_folder_path_temp,0,hotfix_strlen(source_folder_path)+1);
-                hotfix_strcat(source_folder_path_temp,source_folder_path);
-            }
+            source_folder_path_temp = (char*)malloc(hotfix_strlen(source_folder_path)+hotfix_strlen(library_path)+2);
+            memset(source_folder_path_temp,0,hotfix_strlen(source_folder_path)+hotfix_strlen(library_path)+2);
+            hotfix_strcat(source_folder_path_temp,source_folder_path);
+            hotfix_strcat(source_folder_path_temp," ");
+            hotfix_strcat(source_folder_path_temp,library_path);
 
 
             // 将source_folder_path_tmp以空格分割
