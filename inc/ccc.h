@@ -11,6 +11,7 @@
 #ifndef __CCC_H__
 #define __CCC_H__
 
+#include <instruction.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -43,16 +44,16 @@ extern char* library_path;
 
 extern char ccc_file_path[128];
 extern char ccc_file_name[128];
-/**
- * @brief 打印版本信息
- * 
- */
-void printfVersion();
+// /**
+//  * @brief 打印版本信息
+//  * 
+//  */
+// void printfVersion();
 
-/**
- * @brief 打印帮助信息
- * 
- */
-void printfHelp();
+// /**
+//  * @brief 打印帮助信息
+//  * 
+//  */
+// void printfHelp();
 
 #endif
