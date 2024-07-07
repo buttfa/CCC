@@ -7,6 +7,9 @@
 #include <stdbool.h>
 #include <help.h>
 
+#include <version.h>
+#include <compile.h>
+
 /**
  * @brief 定义了指令结构体
  * 

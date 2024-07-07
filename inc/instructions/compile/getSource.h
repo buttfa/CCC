@@ -8,6 +8,7 @@
 #include <stdbool.h>
 #include <file.h>
 #include <dirent.h>
+#include <compile.h>
 /**
  * @brief source文件链表
  * 

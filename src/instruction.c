@@ -24,8 +24,25 @@ void init_instructions() {
     help->func = printfHelp;
     add_instruction(help);
 /****************************************************************************/
-    // add_instruction(instruction_version);
-    
+    // 添加version指令
+    struct instruction* version = (struct instruction*)malloc(sizeof(struct instruction));
+    memset(version, 0, sizeof(struct instruction));
+    version->name = (char*)malloc(strlen("version") + 1);
+    memset(version->name, 0, strlen("version") + 1);
+    strcat(version->name, "version");
+    version->cdt_func = cdt_version;
+    version->func = printfVersion;
+    add_instruction(version);
+/****************************************************************************/
+    // 添加build指令
+    struct instruction* compile = (struct instruction*)malloc(sizeof(struct instruction));
+    memset(compile, 0, sizeof(struct instruction));
+    compile->name = (char*)malloc(strlen("compile") + 1);
+    memset(compile->name, 0, strlen("compile") + 1);
+    strcat(compile->name, "compile");
+    compile->cdt_func = cdt_compile;
+    compile->func = compile_func;
+    add_instruction(compile);
 }
 
 /**

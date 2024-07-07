@@ -3,7 +3,7 @@
 
 #include <ccc.h>
 #include <reliance.h>
-
+#include <compile.h>
 /**
  * @brief 目标依赖
  * 
