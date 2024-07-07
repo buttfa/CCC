@@ -1,7 +1,7 @@
 # 编译器
 COMPILER = gcc
 # 编译选项
-C_FLAGS = -static -Wall -O3 -finput-charset=UTF-8 -fexec-charset=GBK -g
+C_FLAGS = -static -w -O3 -finput-charset=UTF-8 -fexec-charset=GBK -g
 
 # 头文件目录
 C_INCLUDE = -I inc -I inc/instructions/compile -I inc/instructions/help -I inc/instructions/version

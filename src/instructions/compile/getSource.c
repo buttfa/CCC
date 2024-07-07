@@ -54,16 +54,16 @@ void appendToSourceList(struct file_node** head, const char* path) {
  */
 void addSourcelist(const char* source_folder_path) {
     // 确定源文件后缀
-    char* suffix;
-    if (strcmp(target_type,"c")==0) {
-        suffix = (char*)malloc(hotfix_strlen(".c") + 1);
-        memset(suffix, 0, hotfix_strlen(".c") + 1);
-        hotfix_strcat(suffix, ".c\0");
-    } else if (strcmp(target_type,"c++")==0) {
-        suffix = (char*)malloc(hotfix_strlen(".cpp") + 1);
-        memset(suffix, 0, hotfix_strlen(".cpp") + 1);
-        hotfix_strcat(suffix, ".cpp\0");
-    }
+    // char* suffix;
+    // if (strcmp(target_type,"c")==0) {
+    //     suffix = (char*)malloc(hotfix_strlen(".c") + 1);
+    //     memset(suffix, 0, hotfix_strlen(".c") + 1);
+    //     hotfix_strcat(suffix, ".c\0");
+    // } else if (strcmp(target_type,"c++")==0) {
+    //     suffix = (char*)malloc(hotfix_strlen(".cpp") + 1);
+    //     memset(suffix, 0, hotfix_strlen(".cpp") + 1);
+    //     hotfix_strcat(suffix, ".cpp\0");
+    // }
 
     DIR* dir;
     struct dirent* ent;
@@ -83,16 +83,36 @@ void addSourcelist(const char* source_folder_path) {
             //         appendToSourceList(&source_list, full_path);
             //     }
             // }
-            } else if (strstr(ent->d_name, suffix) != NULL) {
-                char* tmp = strstr(ent->d_name, suffix);
-                // 检查并添加.c/.cpp文件到链表
-                if (strcmp(tmp,suffix)==0 && !isPathInSourceList(source_list, full_path)) {
+            // } else if (strstr(ent->d_name, suffix) != NULL) {
+            //     char* tmp = strstr(ent->d_name, suffix);
+            //     // 检查并添加.c/.cpp文件到链表
+            //     if (strcmp(tmp,suffix)==0 && !isPathInSourceList(source_list, full_path)) {
+            //         appendToSourceList(&source_list, full_path);
+            //     }
+            // }
+            } else if (strstr(ent->d_name, ".c") != NULL || strstr(ent->d_name, ".s") != NULL) {
+                char* tmp_c = strstr(ent->d_name, ".c");
+                char* tmp_s = strstr(ent->d_name, ".s");
+                // 如果是汇编文件则直接加入
+                if (tmp_s != NULL && strcmp(tmp_s,".s")==0 && !isPathInSourceList(source_list, full_path)) {
                     appendToSourceList(&source_list, full_path);
+                }
+                // 如果target_type是c，则只加入.c而不加入.cpp
+                else if (strcmp(target_type,"c")==0) {
+                    if (strcmp(tmp_c,".c")==0 && !isPathInSourceList(source_list, full_path)) {
+                        appendToSourceList(&source_list, full_path);
+                    }
+                }
+                // 如果target_type是c++，则加入.cpp和.c
+                else if (strcmp(target_type,"c++")==0) {
+                    if (!isPathInSourceList(source_list, full_path)) {
+                        appendToSourceList(&source_list, full_path);
+                    }
                 }
             }
         }
         closedir(dir);
-        free(suffix);
+        // free(suffix);
     } else {
         perror("opendir");
     }
