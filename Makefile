@@ -3,10 +3,8 @@ COMPILER = gcc
 # 编译选项
 C_FLAGS = -static -Wall -O3 -finput-charset=UTF-8 -fexec-charset=GBK -g
 
-# 源文件目录
-C_SOURCES = src
 # 头文件目录
-C_INCLUDE = inc
+C_INCLUDE = -I inc -I inc/instructions/compile -I inc/instructions/help -I inc/instructions/version
  
 # 生成文件目录 
 BUILD_DIR = build
@@ -15,23 +13,44 @@ OBJ_PATH = $(BUILD_DIR)/obj
 # 编译输出文件的存放位置
 OUTPUT = $(BUILD_DIR)
 
-###########################################################################
-# CCC源文件的路径
-CCC_SRC_PATH = $(C_SOURCES)
-# 读取CCC源文件路径下的所有.c文件
-CCC_SRC_FILES = $(wildcard $(CCC_SRC_PATH)/*.c)
-# CCC的所有.o中间文件（包含存放的目标路径）
-CCC_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(CCC_SRC_FILES)))
-# FTS头文件文件夹
-CCC_INC_FOLDER = $(C_INCLUDE)
 
-# 链接生成CCC程序
-ccc: $(CCC_OBJ_FILES)
-	$(COMPILER) $(CCC_OBJ_FILES) -o $(OUTPUT)/ccc
-	
-# 迭代编译所需源文件
-$(CCC_OBJ_FILES): $(OBJ_PATH)/%.o: $(CCC_SRC_PATH)/%.c
-	$(COMPILER) -c $^ -o $@ -I $(CCC_INC_FOLDER) $(C_FLAGS)
+all: CCC VERSION HELP COMPILE 
+	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(COMPILE_OBJ_FILES) -o $(OUTPUT)/ccc
+
+###########################################################################
+# 编译CCC主体文件
+CCC_FILES = $(wildcard src/*.c)
+CCC_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(CCC_FILES)))
+CCC: $(CCC_OBJ_FILES)
+$(CCC_OBJ_FILES):  $(OBJ_PATH)/%.o: src/%.c
+	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
+###########################################################################
+
+###########################################################################
+# 编译VERSION指令文件
+VERSION_FILES = $(wildcard src/instructions/version/*.c)
+VERSION_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(VERSION_FILES)))
+VERSION: $(VERSION_OBJ_FILES)
+$(VERSION_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/version/%.c
+	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
+###########################################################################
+
+###########################################################################
+# 编译HELP指令文件
+HELP_FILES = $(wildcard src/instructions/help/*.c)
+HELP_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(HELP_FILES)))
+HELP: $(HELP_OBJ_FILES)
+$(HELP_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/help/%.c
+	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
+###########################################################################
+
+###########################################################################
+# 编译COMPILE指令文件
+COMPILE_FILES = $(wildcard src/instructions/compile/*.c)
+COMPILE_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(COMPILE_FILES)))
+COMPILE: $(COMPILE_OBJ_FILES)
+$(COMPILE_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/compile/%.c
+	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
 ###########################################################################
 
 ###########################################################################
