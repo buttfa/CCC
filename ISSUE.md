@@ -7,6 +7,6 @@
 |c++下使用c源文件|当target_type为c++时，CCC并不会将.c源文件加入编译中。|已解决|
 |ccc $(ccc_file) clean|没有提供清理.o文件和目标的功能|未解决|
 |sll/dll_folder_path头文件|CCC不会读取sll_folder_path和dll_folder_path下包含头文件的文件夹|已解决|
-|汇编支持|CCC不支持汇编文件|未解决|
+|汇编支持|CCC不支持汇编文件|已解决|
 |CCC不支持单个文件的输入|当项目中因为某些原因，需要将某一个源文件存放在根目录时，此时如果我们将根目录传入source_folder_path变量，会导致CCC遍历整个项目。当项目规模较大时，会极大浪费时间。|未解决|
 |链接脚本|CCC不支持链接脚本|未解决| 
