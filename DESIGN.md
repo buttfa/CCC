@@ -38,7 +38,7 @@ char* dll_files;
 
 ## 工作原理
 #### （一）获得头文件目录
-##### 1. 遍历$(header_folder_path)和$(library_path)中的文件夹，找到包含.h文件的文件夹，确认路径不重复后为其创造header_folder结构体，并添加到header_folder_list链表中。（为了确保路径不重复，每次添加前都需要从头遍历head_folder_list链表，确认该路径不存在后才添加节点）
+##### 1. 遍历header_folder_path、sll_folder_path、dll_folder_path和library_path中的文件夹，找到包含.h文件的文件夹，确认路径不重复后为其创造header_folder结构体，并添加到header_folder_list链表中。（为了确保路径不重复，每次添加前都需要从头遍历head_folder_list链表，确认该路径不存在后才添加节点）
 ##### 2. 遍历header_folder_list链表，统计folder_path的总长度，计算header_folders应该分配的内存。
 ##### 3. 再次遍历header_folder_list链表，将每个节点的folder_path复制到header_folders中。
 

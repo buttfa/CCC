@@ -51,10 +51,14 @@ int main(int argc, char* argv[]) {
             checkCCC();
 /****************************************************************************/
             // 获取头文件目录（非必要）
-            // 将header_folder_path和library_path合并，以便操作
-            char* header_folder_path_temp = (char*)malloc(hotfix_strlen(header_folder_path)+hotfix_strlen(library_path)+2);
-            memset(header_folder_path_temp,0,hotfix_strlen(header_folder_path)+hotfix_strlen(library_path)+2);
+            // 将header_folder_path、sll_folder_path、dll_folder_path和library_path合并，以便操作
+            char* header_folder_path_temp = (char*)malloc(hotfix_strlen(header_folder_path)+1+hotfix_strlen(sll_folder_path)+1+hotfix_strlen(dll_folder_path)+1+hotfix_strlen(library_path)+1);
+            memset(header_folder_path_temp,0,hotfix_strlen(header_folder_path)+1+hotfix_strlen(sll_folder_path)+1+hotfix_strlen(dll_folder_path)+1+hotfix_strlen(library_path)+1);
             hotfix_strcat(header_folder_path_temp,header_folder_path);
+            hotfix_strcat(header_folder_path_temp," ");
+            hotfix_strcat(header_folder_path_temp,sll_folder_path);
+            hotfix_strcat(header_folder_path_temp," ");
+            hotfix_strcat(header_folder_path_temp,dll_folder_path);
             hotfix_strcat(header_folder_path_temp," ");
             hotfix_strcat(header_folder_path_temp,library_path);
 
