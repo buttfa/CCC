@@ -4,7 +4,7 @@
 |.ccc文件对于'\\'的支持|目前不支持在.ccc中使用'\\'将变量书写至多行|未解决|
 |代码利用率低|getHeader、getSll、getDll、getSource中存在大量相似操作，考虑将这些操作封装成一个函数，减少重复代码|未解决|
 |编译时的库文件夹路径|gcc在编译时，需要在每个库文件夹前面添加-I，否则编译无法获取全部的头文件。而header_folders仅仅将头文件文件夹归纳在一起却没有为每个文件夹添加-I，导致编译无法获取全部的头文件。|已修复|
-|c++下使用c源文件|当target_type为c++时，CCC并不会将.c源文件加入编译中。|未解决|
+|c++下使用c源文件|当target_type为c++时，CCC并不会将.c源文件加入编译中。|已解决|
 |ccc $(ccc_file) clean|没有提供清理.o文件和目标的功能|未解决|
 |sll/dll_folder_path头文件|CCC不会读取sll_folder_path和dll_folder_path下包含头文件的文件夹|未解决|
 |汇编支持|CCC不支持汇编文件|未解决|
