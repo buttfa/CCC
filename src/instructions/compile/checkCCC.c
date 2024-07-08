@@ -24,8 +24,8 @@ void checkCCC() {
         flag = 0;
     }
 
-    // 检查是否设置source_folder_path
-    if (source_folder_path == NULL) {
+    // 检查是否设置source_folder_path或source_sig_files
+    if (source_folder_path == NULL && source_sig_files == NULL) {
         printf("Error: source_folder_path is not set.\n");
         flag = 0;
     }

@@ -61,7 +61,7 @@ void compile_func(int argc, char** argv) {
     hotfix_strcat(ccc_path,"/");
     hotfix_strcat(ccc_path,argv[1]);
     // 判断文件是否存在以及是否为.ccc文件
-    if (isFileWithSuffix(ccc_file_path,".ccc")) {
+    if (access(ccc_file_path, F_OK)==0 && isFileWithSuffix(ccc_file_path,".ccc")) {
         // 获取文件名（不包含路径和后缀名）
         hotfix_strcat(ccc_file_name,getFileName(ccc_path));
 /****************************************************************************/            
@@ -70,7 +70,7 @@ void compile_func(int argc, char** argv) {
 /****************************************************************************/
         // 判断是否缺少必要ccc文件信息
         // 必要信息包括，target_type、compiler、linker、
-        // source_folder_path、obj_path、output_path。
+        // source_folder_path(或source_sig_files)、obj_path、output_path。
         checkCCC();
 /****************************************************************************/
         // 获取头文件目录（非必要）
@@ -80,7 +80,7 @@ void compile_func(int argc, char** argv) {
         int* header_sig_files_num = (int*)malloc(sizeof(int));
         char** header_sig_files_split = split_string_by_space(header_sig_files,header_sig_files_num);
         for (int i = 0; i < *header_sig_files_num; i++) {
-            if (isFileWithSuffix(header_sig_files_split[i],".h")) {
+            if (access(header_sig_files_split[i], F_OK)==0&&isFileWithSuffix(header_sig_files_split[i],".h")) {
                 addSigHeaderFolderList(header_sig_files_split[i]);
             }
         }
@@ -125,7 +125,7 @@ void compile_func(int argc, char** argv) {
         char** sll_sig_files_split = split_string_by_space(sll_sig_files, sll_sig_files_num);
         // 添加到sll_list中
         for(int i = 0; i < *sll_sig_files_num; i++) {
-            if (isFileWithSuffix(sll_sig_files_split[i], ".a")) {
+            if (access(sll_sig_files_split[i], F_OK)==0&&isFileWithSuffix(sll_sig_files_split[i], ".a")) {
                 addSllfileToList(sll_sig_files_split[i]);
             }
         }
@@ -165,7 +165,7 @@ void compile_func(int argc, char** argv) {
         char** dll_sig_files_split = split_string_by_space(dll_sig_files, dll_sig_files_num);
         // 添加到dll_list中
         for(int i = 0; i < *dll_sig_files_num; i++) {
-            if (isFileWithSuffix(dll_sig_files_split[i], ".so")) {
+            if (access(dll_sig_files_split[i], F_OK)==0&&isFileWithSuffix(dll_sig_files_split[i], ".so")) {
                 addDllfileToList(dll_sig_files_split[i]);
             }
         }
