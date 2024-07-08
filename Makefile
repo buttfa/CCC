@@ -10,7 +10,7 @@ C_INCLUDE = -I inc -I inc/instructions/compile -I inc/instructions/help -I inc/i
 BUILD_DIR = build
 # 中间文件存放目录
 OBJ_PATH = $(BUILD_DIR)/obj
-# 编译输出文件的存放位置
+# 编译输出文件的存放位置 
 OUTPUT = $(BUILD_DIR)
  
 
