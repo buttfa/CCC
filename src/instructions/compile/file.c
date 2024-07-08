@@ -130,63 +130,69 @@ char* getFileName(char* filePath) {
  * @return char** 
  */
 char** split_string_by_space(const char* input_str, int* out_num_tokens) {
-    int count = 0;
-    const char* p = input_str;
-    
-    // 跳过开头的空格
-    while (isspace(*p)) {
-        ++p;
-    }
-    
-    // 计算非空格分隔的单词数量
-    while (*p != '\0') {
-        if (!isspace(*p)) {
-            ++count;
-            while (*p != '\0' && !isspace(*p)) {
-                ++p;
+    if (input_str != NULL) {
+        int count = 0;
+        const char* p = input_str;
+        
+        // 跳过开头的空格
+        while (isspace(*p)) {
+            ++p;
+        }
+        
+        // 计算非空格分隔的单词数量
+        while (*p != '\0') {
+            if (!isspace(*p)) {
+                ++count;
+                while (*p != '\0' && !isspace(*p)) {
+                    ++p;
+                }
+            } else {
+                ++p; // 跳过空格
             }
-        } else {
-            ++p; // 跳过空格
         }
-    }
 
-    // 分配足够的空间来存储指针数组和每个子字符串
-    char** tokens = (char**)malloc((count + 1) * sizeof(char*));
-    *out_num_tokens = 0;
+        // 分配足够的空间来存储指针数组和每个子字符串
+        char** tokens = (char**)malloc((count + 1) * sizeof(char*));
+        *out_num_tokens = 0;
 
-    // 回退指针p到第一个单词的开始位置
-    p = input_str;
-    while (isspace(*p)) {
-        ++p;
-    }
-
-    for(int i = 0; i < count; ++i) {
+        // 回退指针p到第一个单词的开始位置
+        p = input_str;
         while (isspace(*p)) {
-            ++p; // 跳过前导空格
-        }
-        if (*p == '\0') break; // 如果到达字符串末尾，跳出循环
-
-        // 找到单词的结束位置
-        const char* token_end = p;
-        while (*token_end != '\0' && !isspace(*token_end)) {
-            ++token_end;
+            ++p;
         }
 
-        // 分配内存并复制单词
-        size_t len = token_end - p;
-        tokens[(*out_num_tokens)++] = (char*)malloc(len + 1);
-        strncpy(tokens[*out_num_tokens - 1], p, len);
-        tokens[*out_num_tokens - 1][len] = '\0';
+        for(int i = 0; i < count; ++i) {
+            while (isspace(*p)) {
+                ++p; // 跳过前导空格
+            }
+            if (*p == '\0') break; // 如果到达字符串末尾，跳出循环
 
-        // 移动到下一个单词的开始位置
-        p = token_end;
-        while (isspace(*p)) {
-            ++p; // 跳过后导空格
+            // 找到单词的结束位置
+            const char* token_end = p;
+            while (*token_end != '\0' && !isspace(*token_end)) {
+                ++token_end;
+            }
+
+            // 分配内存并复制单词
+            size_t len = token_end - p;
+            tokens[(*out_num_tokens)++] = (char*)malloc(len + 1);
+            strncpy(tokens[*out_num_tokens - 1], p, len);
+            tokens[*out_num_tokens - 1][len] = '\0';
+
+            // 移动到下一个单词的开始位置
+            p = token_end;
+            while (isspace(*p)) {
+                ++p; // 跳过后导空格
+            }
         }
+
+        tokens[*out_num_tokens] = NULL; // 以NULL结束指针数组
+        return tokens;
     }
-
-    tokens[*out_num_tokens] = NULL; // 以NULL结束指针数组
-    return tokens;
+    else {
+        *out_num_tokens = 0;
+        return NULL;
+    }
 }
 
 /**

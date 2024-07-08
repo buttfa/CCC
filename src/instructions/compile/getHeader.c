@@ -168,7 +168,8 @@ bool isInHeaderFolderList(const char* path)
  */
 void addSigHeaderFolderList(char* header_file_path) {
     if (!isInHeaderFolderList(dirname(header_file_path))) {
-        appendToHeaderFolderList(dirname(header_file_path));
+        // dirname是在原字符串的地址上操作，因此dirname只需执行一次
+        appendToHeaderFolderList(header_file_path);
     }
 }
 

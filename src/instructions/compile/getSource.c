@@ -98,14 +98,14 @@ void addSourcelist(const char* source_folder_path) {
                     appendToSourceList(&source_list, full_path);
                 }
                 // 如果target_type是c，则只加入.c而不加入.cpp
-                else if (strcmp(target_type,"c")==0) {
+                else if (tmp_c != NULL && strcmp(target_type,"c")==0) {
                     if (strcmp(tmp_c,".c")==0 && !isPathInSourceList(source_list, full_path)) {
                         appendToSourceList(&source_list, full_path);
                     }
                 }
                 // 如果target_type是c++，则加入.cpp和.c
-                else if (strcmp(target_type,"c++")==0) {
-                    if (!isPathInSourceList(source_list, full_path)) {
+                else if (tmp_c != NULL && strcmp(target_type,"c++")==0 ) {
+                    if ((strcmp(tmp_c,".c")==0 || strcmp(tmp_c,".cpp")==0) && !isPathInSourceList(source_list, full_path)) {
                         appendToSourceList(&source_list, full_path);
                     }
                 }
