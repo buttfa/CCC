@@ -1,16 +1,26 @@
 #include <compile.h>
 // .ccc文件信息
 char* target_type = NULL;
+
 char* compiler = NULL;
 char* compiler_flags = NULL;
+
 char* linker = NULL;
 char* linker_flags = NULL;
+
+char* source_sig_files = NULL;
 char* source_folder_path = NULL;
+char* header_sig_files = NULL;
 char* header_folder_path = NULL;
+
+char* sll_sig_files = NULL;
 char* sll_folder_path = NULL;
+char* dll_sig_files = NULL;
 char* dll_folder_path = NULL;
+
 char* obj_path = NULL;
 char* output_path = NULL;
+
 char* library_path = NULL;
 
 char ccc_file_path[128];
@@ -64,6 +74,17 @@ void compile_func(int argc, char** argv) {
         checkCCC();
 /****************************************************************************/
         // 获取头文件目录（非必要）
+        
+        // 从header_sig_files获得头文件夹目录
+        // char** header_sig_files_split = splitString(header_sig_files," ");
+        int* header_sig_files_num = (int*)malloc(sizeof(int));
+        char** header_sig_files_split = split_string_by_space(header_sig_files,header_sig_files_num);
+        for (int i = 0; i < *header_sig_files_num; i++) {
+            if (isFileWithSuffix(header_sig_files_split[i],".h")) {
+                addSigHeaderFolderList(header_sig_files_split[i]);
+            }
+        }
+        
         // 将header_folder_path、sll_folder_path、dll_folder_path和library_path合并，以便操作
         char* header_folder_path_temp = (char*)malloc(hotfix_strlen(header_folder_path)+1+hotfix_strlen(sll_folder_path)+1+hotfix_strlen(dll_folder_path)+1+hotfix_strlen(library_path)+1);
         memset(header_folder_path_temp,0,hotfix_strlen(header_folder_path)+1+hotfix_strlen(sll_folder_path)+1+hotfix_strlen(dll_folder_path)+1+hotfix_strlen(library_path)+1);
@@ -84,17 +105,30 @@ void compile_func(int argc, char** argv) {
                 addHeaderFolderList(header_folder_path_split[i]);
             }
         }
-        // printfHeaderFolderList();
+        printfHeaderFolderList();
         // 根据header_folder_list创建header_folders
         createHeaderFolders();
+        printf("header_folders: %s\n", header_folders);
 
         // 释放该步骤所需的临时内存
         free(header_folder_path_temp);
         freeSplitResult(header_folder_path_split);
+        freeSplitResult(header_sig_files_split);
         freeHeaderFolderList(header_folder_list);
 /****************************************************************************/
         // 载入静态链接库文件（非必要）
         
+        // 载入sll_sig_files
+        char** sll_sig_files_split = splitString(sll_sig_files, ' ');
+        // 添加到sll_list中
+        for(int i = 0; sll_sig_files_split[i] != NULL; i++) {
+            if (isFileWithSuffix(sll_sig_files_split[i], ".a")) {
+                addSllfileToList(sll_sig_files_split[i]);
+            }
+        }
+        // printfSlllist();
+
+
         // 将sll_folder_path和library_path合并，以便操作
         char* sll_folder_path_temp = (char*)malloc(hotfix_strlen(sll_folder_path)+hotfix_strlen(library_path)+2);
         memset(sll_folder_path_temp,0,hotfix_strlen(sll_folder_path)+hotfix_strlen(library_path)+2);
@@ -111,15 +145,25 @@ void compile_func(int argc, char** argv) {
                 addSlllist(sll_folder_path_split[i]);
             }
         }
-        // printfSlllist();
+        printfSlllist();
         // 根据sll_list创建sll_files
         createSllFiles();
 
         free(sll_folder_path_temp);
-        freeSplitResult(sll_folder_path_split); 
+        freeSplitResult(sll_folder_path_split);
+        freeSlllist(sll_sig_files_split); 
 /****************************************************************************/
         // 载入动态链接库文件（非必要）
         
+        // 载入dll_sig_files
+        char** dll_sig_files_split = splitString(dll_sig_files, ' ');
+        // 添加到dll_list中
+        for(int i = 0; dll_sig_files_split[i] != NULL; i++) {
+            if (isFileWithSuffix(dll_sig_files_split[i], ".so")) {
+                addDllfileToList(dll_sig_files_split[i]);
+            }
+        }
+
         // 将dll_folder_path和library_path合并，以便操作
         char* dll_folder_path_temp = (char*)malloc(hotfix_strlen(dll_folder_path)+hotfix_strlen(library_path)+2);
         memset(dll_folder_path_temp,0,hotfix_strlen(dll_folder_path)+hotfix_strlen(library_path)+2);
@@ -136,13 +180,23 @@ void compile_func(int argc, char** argv) {
                 addDlllist(dll_folder_path_split[i]);
             }
         }
-        // printfDlllist();
+        printfDlllist();
         // 根据dll_list创建dll_files
         createDllFiles();
 
         free(dll_folder_path_temp);
         freeSplitResult(dll_folder_path_split);
+        freeSplitResult(dll_sig_files_split);
 /****************************************************************************/
+
+        // 获取单个的源文件
+        char** source_sig_files_tmp = splitString(source_sig_files, ' ');
+        // 添加到source_list中
+        for (int i = 0; source_sig_files_tmp[i] != NULL; i++) {
+            if (access(source_sig_files_tmp[i], F_OK)==0) {
+                addSourcefileToList(source_sig_files_tmp[i]);
+            }
+        }
 
         // 获取源文件组
         char* source_folder_path_temp;
@@ -167,6 +221,7 @@ void compile_func(int argc, char** argv) {
 
         free(source_folder_path_temp);
         freeSplitResult(source_folder_path_split);
+        freeSplitResult(source_sig_files_tmp);
 /****************************************************************************/
         // 计算中间文件依赖关系
         struct file_node* source_file = source_list;

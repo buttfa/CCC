@@ -119,6 +119,16 @@ void addSourcelist(const char* source_folder_path) {
 }
 
 /**
+ * @brief 将单个源文件添加到source_list
+ * 
+ */
+void addSourcefileToList(char* file_path){
+    if (!(isPathInSourceList(source_list, file_path))) {
+        appendToSourceList(&source_list, file_path);
+    }
+}
+
+/**
  * @brief 打印source_list
  * 
  */

@@ -143,6 +143,37 @@ void addHeaderFolderList(const char* header_folder_path) {
 }
 
 /**
+ * @brief 判断目录是否已经在路径集合中
+ * 
+ * @param path 
+ * @return true 
+ * @return false 
+ */
+bool isInHeaderFolderList(const char* path)
+{
+    struct header_folder* current = header_folder_list;
+    while (current != NULL) {
+        if (strcmp(current->folder_path, path) == 0) {
+            return true;
+        }
+        current = current->next;
+    }
+    return false;
+}
+
+/**
+ * @brief 添加单个头文件文件夹到header_folder_list中
+ * 
+ * @param header_folder_path 
+ */
+void addSigHeaderFolderList(char* header_file_path) {
+    if (!isInHeaderFolderList(dirname(header_file_path))) {
+        appendToHeaderFolderList(dirname(header_file_path));
+    }
+}
+
+
+/**
  * @brief 打印头文件夹链表
  * 
  */

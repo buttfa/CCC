@@ -85,6 +85,17 @@ void addDlllist(const char* dll_folder_path) {
 }
 
 /**
+ * @brief 将单个文件添加到dll_list中
+ * 
+ * @param file_path 
+ */
+void addDllfileToList(char* file_path) {
+    if (!isPathInDllList(dll_list, file_path)) {
+        appendToDllList(&dll_list, file_path);
+    }
+}
+
+/**
  * @brief 打印dll_list
  * 
  */

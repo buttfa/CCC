@@ -24,6 +24,12 @@ extern struct file_node* source_list;
 void addSourcelist(const char* source_folder_path);
 
 /**
+ * @brief 将单个源文件添加到source_list
+ * 
+ */
+void addSourcefileToList(char* file_path);
+
+/**
  * @brief 打印source_list
  * 
  */

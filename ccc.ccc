@@ -1,12 +1,19 @@
 target_type  = c++
+
 compiler = gcc
 compile_flags = -static -w -O3 -finput-charset=UTF-8 -fexec-charset=GBK -g
+
 linker = gcc
 link_flags = -static
 
+source_sig_files = 
 source_folder_path = src
+header_sig_files = 
 header_folder_path = inc
+
+sll_sig_files = 
 sll_folder_path = 
+dll_sig_files = 
 dll_folder_path = 
 
 obj_path = build/obj

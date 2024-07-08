@@ -6,6 +6,8 @@
 #include <stdbool.h>
 #include <stdlib.h>
 #include <file.h>
+#include <unistd.h>
+#include <libgen.h> 
 /**
  * @brief 头文件夹链表节点
  * 
@@ -42,6 +44,13 @@ extern char* header_folders;
  * @param header_folder_path 
  */
 void addHeaderFolderList(const char* header_folder_path);
+
+/**
+ * @brief 添加单个头文件文件夹到header_folder_list中
+ * 
+ * @param header_folder_path 
+ */
+void addSigHeaderFolderList(char* header_file_path);
 
 /**
  * @brief 释放header_folder_list

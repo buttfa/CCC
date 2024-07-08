@@ -202,6 +202,77 @@ void parseCCC(char* ccc_path) {
             }  
         }
 
+        // 获取source_sig_files的数据
+        else if (*argc >= 3 && strcmp(argv[0], "source_sig_files") == 0 && strcmp(argv[1], "=")==0) {
+            // 判断拼接字符串的长度
+            int malloc_size = 0;
+            for (int i = 2; i < *argc; i++) {
+                malloc_size += hotfix_strlen(argv[i]) + 1;
+            }
+
+            // 分配内存
+            source_sig_files = (char*)malloc(malloc_size + 1);
+            // 拼接字符串
+            memset(source_sig_files, 0, malloc_size + 1);
+            for (int i = 2; i < *argc; i++) {
+                hotfix_strcat(source_sig_files, argv[i]);
+                hotfix_strcat(source_sig_files, " ");
+            }  
+        }
+
+        // 获取header_sig_files的数据
+        else if (*argc >= 3 && strcmp(argv[0], "header_sig_files") == 0 && strcmp(argv[1], "=")==0) {
+            // 判断拼接字符串的长度
+            int malloc_size = 0;
+            for (int i = 2; i < *argc; i++) {
+                malloc_size += hotfix_strlen(argv[i]) + 1;
+            }
+
+            // 分配内存
+            header_sig_files = (char*)malloc(malloc_size + 1);
+            // 拼接字符串
+            memset(header_sig_files, 0, malloc_size + 1);
+            for (int i = 2; i < *argc; i++) {
+                hotfix_strcat(header_sig_files, argv[i]);
+                hotfix_strcat(header_sig_files, " ");
+            }  
+        }
+
+        // 获取sll_sig_files的数据
+        else if (*argc >= 3 && strcmp(argv[0], "sll_sig_files") == 0 && strcmp(argv[1], "=")==0) {
+            // 判断拼接字符串的长度
+            int malloc_size = 0;
+            for (int i = 2; i < *argc; i++) {
+                malloc_size += hotfix_strlen(argv[i]) + 1;
+            }
+
+            // 分配内存
+            sll_sig_files = (char*)malloc(malloc_size + 1);
+            // 拼接字符串
+            memset(sll_sig_files, 0, malloc_size + 1);
+            for (int i = 2; i < *argc; i++) {
+                hotfix_strcat(sll_sig_files, argv[i]);
+                hotfix_strcat(sll_sig_files, " ");
+            }  
+        }
+
+        // 获取dll_sig_files的数据
+        else if (*argc >= 3 && strcmp(argv[0], "dll_sig_files") == 0 && strcmp(argv[1], "=")==0) {
+            // 判断拼接字符串的长度
+            int malloc_size = 0;
+            for (int i = 2; i < *argc; i++) {
+                malloc_size += hotfix_strlen(argv[i]) + 1;
+            }
+
+            // 分配内存
+            dll_sig_files = (char*)malloc(malloc_size + 1);
+            // 拼接字符串
+            memset(dll_sig_files, 0, malloc_size + 1);
+            for (int i = 2; i < *argc; i++) {
+                hotfix_strcat(dll_sig_files, argv[i]);
+                hotfix_strcat(dll_sig_files, " ");
+            }  
+        }
         // .ccc文件错误行报错
         else {
             printf("[%s]Error: Unknown argument: %d row.\n", ccc_file_path, row);

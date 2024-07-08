@@ -8,10 +8,14 @@ compile_flags =
 linker = 
 linker_flags =
 
+source_sig_files = 
 source_folder_path =
+header_sig_files = 
 header_folder_path =
 
-sll_folder_path =
+sll_sig_files = 
+sll_folder_path = 
+dll_sig_files = 
 dll_folder_path =
 
 obj_path =
@@ -28,9 +32,13 @@ library_path =
 |compiler_flags||编译器编译选项|
 |linker||指定链接器|
 |linker||链接器链接选项|
+|source_sig_files||源文件组|
 |source_folder_path||源文件文件夹路径|
+|header_sig_files||头文件组|
 |header_folder_path||头文件文件夹路径|
+|sll_files||静态链接库文件组|
 |sll_folder_path||静态链接库的路径|
+|dll_files||动态链接库文件组|
 |dll_folder_path||动态链接库的路径|
 |obj_path||中间文件存放路径|
 |output_path||输出文件存放路径|

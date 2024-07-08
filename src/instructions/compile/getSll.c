@@ -85,6 +85,17 @@ void addSlllist(const char* sll_folder_path) {
 }
 
 /**
+ * @brief 将单个文件添加到sll_list中
+ * 
+ * @param file_path 
+ */
+void addSllfileToList(char* file_path) {
+    if (!isPathInSllList(sll_list, file_path)) {
+        appendToSllList(&sll_list, file_path);
+    }
+}
+
+/**
  * @brief 打印sll_list
  * 
  */

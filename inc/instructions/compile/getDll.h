@@ -28,6 +28,13 @@ extern char* dll_files;
 void addDlllist(const char* dll_folder_path);
 
 /**
+ * @brief 将单个文件添加到dll_list中
+ * 
+ * @param file_path 
+ */
+void addDllfileToList(char* file_path);
+
+/**
  * @brief 打印dll_list
  * 
  */
