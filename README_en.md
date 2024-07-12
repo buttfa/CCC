@@ -8,18 +8,18 @@
 #### （1） Compile project
 ```c
 make 
-//Or
-make ccc 
-//Or (provided that CCC has been installed)
+// Or (provided that CCC has been installed)
 ccc ccc.ccc
 ```
 #### （2） Installation project
 ```c
 make install
 ```
-#### （3） Delete intermediate files
+#### （3） Delete intermediate files and target
 ```c
 make clean
+// Or (provided that CCC has been installed)
+ccc ccc.ccc clean
 ```
 #### （4） Uninstall Project
 ```c

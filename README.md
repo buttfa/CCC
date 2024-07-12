@@ -8,9 +8,7 @@
 #### （一）编译项目 
 ```c
 make 
-// 或
-make ccc 
-// 或（已经安装好CCC的前提下）
+// 或（已经安装CCC的前提下）
 ccc ccc.ccc
 ```
 #### （二）安装项目
@@ -20,6 +18,8 @@ make install
 #### （三）删除中间文件
 ```c
 make clean
+// 或（已经安装CCC的前提下）
+ccc ccc.ccc clean
 ```
 #### （四）卸载项目
 ```c

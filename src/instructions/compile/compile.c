@@ -254,6 +254,31 @@ void compile_func(int argc, char** argv) {
 /****************************************************************************/
         // 检查依赖
         handleReliance();
+
+
+        // 释放内存
+        free(target_type);
+
+        free(compiler);
+        free(compiler_flags);
+        
+        free(linker);
+        free(linker_flags);
+
+        free(source_sig_files);
+        free(source_folder_path);
+        free(header_sig_files);
+        free(header_folder_path);
+
+        free(sll_sig_files);
+        free(sll_folder_path);
+        free(dll_sig_files);
+        free(dll_folder_path);
+
+        free(obj_path);
+        free(output_path);
+
+        free(library_path);
     } else {
         printf("[CCC]The target file does not exist or does not have a. ccc suffix\n");
     }
