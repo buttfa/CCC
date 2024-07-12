@@ -1,10 +1,10 @@
 target_type  = c++
 
 compiler = gcc
-compile_flags = -static -w -O3 -finput-charset=UTF-8 -fexec-charset=GBK -g
+compile_flags = 
 
 linker = gcc
-link_flags = -static
+link_flags = 
 
 source_sig_files = 
 source_folder_path = src
