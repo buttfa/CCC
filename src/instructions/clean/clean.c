@@ -24,6 +24,8 @@ bool cdt_clean(int argc, char* argv[]) {
 void clean_func(int arg, char* argv[]) {
     // 判断ccc文件是否存在，且以.ccc为后缀
     if (access(argv[1], F_OK)==0 && isFileWithSuffix(argv[1],".ccc")) {
+        // 获取ccc文件路径
+        hotfix_strcat(ccc_file_path,argv[1]);
         // 获取文件名（不包含路径和后缀名）
         hotfix_strcat(ccc_file_name,getFileName(argv[1]));
 /****************************************************************************/            
