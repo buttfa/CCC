@@ -67,8 +67,9 @@ void handleReliance() {
             hotfix_strcat(cmd," ");
             hotfix_strcat(cmd,linker_flags);
             if (strcmp(linker,"ar") != 0) {
-                hotfix_strcat(cmd," -o ");
+                hotfix_strcat(cmd," -o");
             } 
+            hotfix_strcat(cmd, " ");
             hotfix_strcat(cmd,target->file_path);
             hotfix_strcat(cmd," ");
             hotfix_strcat(cmd,obj_files);

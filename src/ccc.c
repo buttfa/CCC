@@ -18,7 +18,7 @@ int main(int argc, char* argv[]) {
     // 如果指令不存在，则输出错误信息
     if (ins == NULL) {
         printf("[CCC]Error: Invalid argument\n");
-        printf("[CCC]Please enter ccc help or ccc - h for help.\n");
+        printf("[CCC]Please enter ccc help or ccc -h for help.\n");
     }
 
     // 释放指令链表
