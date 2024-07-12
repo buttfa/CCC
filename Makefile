@@ -15,7 +15,7 @@ OUTPUT = $(BUILD_DIR)
  
 
 all: CCC VERSION HELP COMPILE CLEAN
-	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(COMPILE_OBJ_FILES) -o $(OUTPUT)/ccc
+	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(COMPILE_OBJ_FILES) $(CLEAN_OBJ_FILES) -o $(OUTPUT)/ccc
 
 ###########################################################################
 # 编译CCC主体文件

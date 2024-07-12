@@ -9,6 +9,7 @@
 
 #include <version.h>
 #include <compile.h>
+#include <clean.h>
 
 /**
  * @brief 定义了指令结构体
