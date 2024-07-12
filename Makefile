@@ -4,7 +4,7 @@ COMPILER = gcc
 C_FLAGS = -static -w -O3 -finput-charset=UTF-8 -fexec-charset=GBK -g
 
 # 头文件目录
-C_INCLUDE = -I inc -I inc/instructions/compile -I inc/instructions/help -I inc/instructions/version
+C_INCLUDE = -I inc -I inc/instructions/compile -I inc/instructions/help -I inc/instructions/version -I inc/instructions/clean
  
 # 生成文件目录 
 BUILD_DIR = build
@@ -14,7 +14,7 @@ OBJ_PATH = $(BUILD_DIR)/obj
 OUTPUT = $(BUILD_DIR)
  
 
-all: CCC VERSION HELP COMPILE 
+all: CCC VERSION HELP COMPILE CLEAN
 	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(COMPILE_OBJ_FILES) -o $(OUTPUT)/ccc
 
 ###########################################################################
@@ -50,6 +50,15 @@ COMPILE_FILES = $(wildcard src/instructions/compile/*.c)
 COMPILE_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(COMPILE_FILES)))
 COMPILE: $(COMPILE_OBJ_FILES)
 $(COMPILE_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/compile/%.c
+	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
+###########################################################################
+
+###########################################################################
+# 编译CLEAN指令文件
+CLEAN_FILES = $(wildcard src/instructions/clean/*.c)
+CLEAN_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(CLEAN_FILES)))
+CLEAN: $(CLEAN_OBJ_FILES)
+$(CLEAN_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/clean/%.c
 	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
 ###########################################################################
 
