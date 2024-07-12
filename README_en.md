@@ -20,7 +20,7 @@ make install
 make clean
 // Or (provided that CCC has been installed)
 ccc ccc.ccc clean
-```
+``` 
 #### （4） Uninstall Project
 ```c
 make uninstall
