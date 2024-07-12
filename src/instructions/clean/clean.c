@@ -30,7 +30,7 @@ void clean_func(int arg, char* argv[]) {
         hotfix_strcat(ccc_file_name,getFileName(argv[1]));
 /****************************************************************************/            
         // 解析.ccc文件
-        parseCCC(argv[1]);
+        parseCCC(argv[1]); 
 /****************************************************************************/
         // 判断是否缺少必要ccc文件信息
         // 必要信息包括，target_type、compiler、linker、
