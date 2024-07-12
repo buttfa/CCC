@@ -7,7 +7,7 @@ C_FLAGS =
 C_INCLUDE = -I inc -I inc/instructions/compile -I inc/instructions/help -I inc/instructions/version -I inc/instructions/clean
  
 # 生成文件目录 
-BUILD_DIR = build
+BUILD_DIR = build 
 # 中间文件存放目录
 OBJ_PATH = $(BUILD_DIR)/obj
 # 编译输出文件的存放位置 
