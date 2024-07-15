@@ -34,8 +34,8 @@ void handleReliance() {
         for (int i = 0; i < reliance->reliance_num; i++) {
             if (checkReliance(reliance->file_path,reliance->reliant_file[i])) {
                 flag = 0;
-                char* cmd = (char*)malloc(hotfix_strlen(compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(header_folders)+1+hotfix_strlen(compiler_flags)+1);
-                memset(cmd,0,hotfix_strlen(compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(header_folders)+1+hotfix_strlen(compiler_flags)+1);
+                char* cmd = (char*)malloc(hotfix_strlen(compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(header_folders)+1+hotfix_strlen(compile_flags)+1);
+                memset(cmd,0,hotfix_strlen(compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(header_folders)+1+hotfix_strlen(compile_flags)+1);
                 hotfix_strcat(cmd,compiler);
                 hotfix_strcat(cmd," ");
                 hotfix_strcat(cmd,"-c ");
@@ -45,7 +45,7 @@ void handleReliance() {
                 hotfix_strcat(cmd," ");
                 hotfix_strcat(cmd,header_folders);
                 hotfix_strcat(cmd," ");
-                hotfix_strcat(cmd,compiler_flags);
+                hotfix_strcat(cmd,compile_flags);
 
                 printf("%s\n",cmd);
                 system(cmd);
@@ -61,11 +61,11 @@ void handleReliance() {
     for (int i = 0; i < target->reliance_num; i++) {
         if (checkReliance(target->file_path,target->reliant_file[i])) {
             flag = 0;
-            char* cmd = (char*)malloc(hotfix_strlen(linker)+1+hotfix_strlen(obj_files)+1+hotfix_strlen(sll_files)+1+hotfix_strlen(dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(linker_flags)+1);
-            memset(cmd,0,hotfix_strlen(linker)+1+hotfix_strlen(obj_files)+1+hotfix_strlen(sll_files)+1+hotfix_strlen(dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(linker_flags)+1);
+            char* cmd = (char*)malloc(hotfix_strlen(linker)+1+hotfix_strlen(obj_files)+1+hotfix_strlen(sll_files)+1+hotfix_strlen(dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(link_flags)+1);
+            memset(cmd,0,hotfix_strlen(linker)+1+hotfix_strlen(obj_files)+1+hotfix_strlen(sll_files)+1+hotfix_strlen(dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(link_flags)+1);
             hotfix_strcat(cmd,linker);
             hotfix_strcat(cmd," ");
-            hotfix_strcat(cmd,linker_flags);
+            hotfix_strcat(cmd,link_flags);
             if (strcmp(linker,"ar") != 0) {
                 hotfix_strcat(cmd," -o");
             } 

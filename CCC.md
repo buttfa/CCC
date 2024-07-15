@@ -6,7 +6,7 @@ compiler =
 compile_flags = 
 
 linker = 
-linker_flags =
+link_flags =
 
 source_sig_files = 
 source_folder_path =
@@ -40,7 +40,7 @@ library_path =
 ## 非必要变量
 |变量名称|值|解释|
 |-|-|-|
-|compiler_flags||编译器编译选项|
+|compile_flags||编译器编译选项|
 |linker||链接器链接选项|
 |source_sig_files||源文件组|
 |header_sig_files||头文件组|

@@ -20,10 +20,10 @@
 extern char* target_type;
 
 extern char* compiler;
-extern char* compiler_flags;
+extern char* compile_flags;
 
 extern char* linker;
-extern char* linker_flags;
+extern char* link_flags;
 
 extern char* source_sig_files;
 extern char* source_folder_path;

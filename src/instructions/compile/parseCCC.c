@@ -61,12 +61,12 @@ void parseCCC(char* ccc_path) {
             }
 
             // 分配内存
-            compiler_flags = (char*)malloc(malloc_size + 1);
+            compile_flags = (char*)malloc(malloc_size + 1);
             // 拼接字符串
-            memset(compiler_flags, 0, malloc_size + 1);
+            memset(compile_flags, 0, malloc_size + 1);
             for (int i = 2; i < *argc; i++) {
-                hotfix_strcat(compiler_flags, argv[i]);
-                hotfix_strcat(compiler_flags, " ");
+                hotfix_strcat(compile_flags, argv[i]);
+                hotfix_strcat(compile_flags, " ");
             }
         }
 
@@ -86,12 +86,12 @@ void parseCCC(char* ccc_path) {
             }
 
             // 分配内存
-            linker_flags = (char*)malloc(malloc_size + 1);
+            link_flags = (char*)malloc(malloc_size + 1);
             // 拼接字符串
-            memset(linker_flags, 0, malloc_size + 1);
+            memset(link_flags, 0, malloc_size + 1);
             for (int i = 2; i < *argc; i++) {
-                hotfix_strcat(linker_flags, argv[i]);
-                hotfix_strcat(linker_flags, " ");
+                hotfix_strcat(link_flags, argv[i]);
+                hotfix_strcat(link_flags, " ");
             }            
         }
 

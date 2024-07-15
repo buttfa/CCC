@@ -3,10 +3,10 @@
 char* target_type = NULL;
 
 char* compiler = NULL;
-char* compiler_flags = NULL;
+char* compile_flags = NULL;
 
 char* linker = NULL;
-char* linker_flags = NULL;
+char* link_flags = NULL;
 
 char* source_sig_files = NULL;
 char* source_folder_path = NULL;
@@ -260,10 +260,10 @@ void compile_func(int argc, char** argv) {
         free(target_type);
 
         free(compiler);
-        free(compiler_flags);
+        free(compile_flags);
         
         free(linker);
-        free(linker_flags);
+        free(link_flags);
 
         free(source_sig_files);
         free(source_folder_path);

@@ -6,7 +6,7 @@ compiler =
 compile_flags = 
 
 linker = 
-linker_flags =
+link_flags =
 
 source_sig_files = 
 source_folder_path =
@@ -30,26 +30,26 @@ library_path =
 ## Necessary variables
 |Variable Name | Value | Explanation|
 |:-|:-:|:-|
-|target_type|1.  C<br>2. c++| Specify whether to compile the source file as c or c++|
-|Compiler | | Specify the compiler|
-|Linker | | Specify linker|
-|Source_sig_files<br>or source_folder_path | | Source file group, where at least one of the two variables has a value|
-|Obj_path | | Path for storing intermediate files|
-|Output_path | | The path where the output file is stored|
+|target_type|1.  c<br>2. c++| Specify whether to compile the source file as c or c++|
+|compiler | | Specify the compiler|
+|linker | | Specify linker|
+|source_sig_files<br>or source_folder_path | | Source file group, where at least one of the two variables has a value|
+|obj_path | | Path for storing intermediate files|
+|output_path | | The path where the output file is stored|
 
 ## Non essential variables
 |Variable Name | Value | Explanation|
 |-|-|-|
-|Compiler flags | | compiler compilation options|
-|Linker | | Linker Link Options|
-|Source_sig_files | | Source file group|
-|Header_sig_files | | Header file group|
-|Header_folder_path | | Path to the header file folder|
-|SLL_files | | Static link library file group|
-|SLL_folder_path | | Path to the static link library|
-|Dll-files | | Dynamic Link Library file group|
-|Dll-folder_path | | Path to the dynamic link library|
-|Library_path | | External library file path|
+|compile_flags | | compiler compilation options|
+|link_flags | | Linker Link Options|
+|source_sig_files | | Source file group|
+|header_sig_files | | Header file group|
+|header_folder_path | | Path to the header file folder|
+|sll_files | | Static link library file group|
+|sll_folder_path | | Path to the static link library|
+|dll_files | | Dynamic Link Library file group|
+|dll_folder_path | | Path to the dynamic link library|
+|library_path | | External library file path|
 
 
 ## About Writing Format

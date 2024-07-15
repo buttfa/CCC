@@ -56,10 +56,10 @@ void clean_func(int arg, char* argv[]) {
         free(target_type);
 
         free(compiler);
-        free(compiler_flags);
+        free(compile_flags);
         
         free(linker);
-        free(linker_flags);
+        free(link_flags);
 
         free(source_sig_files);
         free(source_folder_path);
