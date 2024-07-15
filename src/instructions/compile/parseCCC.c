@@ -30,14 +30,13 @@ void parseCCC(char* ccc_path) {
             index++;
         } buf[index] = '\0';
 
-        // 将buf转化为arg参数
-        // char **argv = splitString(buf, ' ');
-        // int argc = 0;
-        // while (argv[argc] != NULL) {
-        //     argc++;
-        // }
         int* argc = (int*)malloc(sizeof(int));
         char** argv = split_string_by_space(buf,argc);
+
+        // 如果是空行，则跳过处理
+        if(*argc == 0) {
+            continue;
+        }
 
         // 获取target_type的数据
         if (*argc == 3 && strcmp(argv[0], "target_type") == 0 && strcmp(argv[1], "=")==0 && (strcmp(argv[2], "c") == 0 || strcmp(argv[2], "c++") == 0)) {

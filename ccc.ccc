@@ -1,22 +1,10 @@
-target_type  = c++
+target_type  = c
 
 compiler = gcc
-compile_flags = 
-
 linker = gcc
-link_flags = 
-
-source_sig_files = 
+  
 source_folder_path = src
-header_sig_files = 
 header_folder_path = inc
-
-sll_sig_files = 
-sll_folder_path = 
-dll_sig_files = 
-dll_folder_path = 
-
+    
 obj_path = build/obj
 output_path = build
-
-library_path = 
