@@ -66,7 +66,7 @@ void compile_func(int argc, char** argv) {
         hotfix_strcat(ccc_file_name,getFileName(ccc_path));
 /****************************************************************************/            
         // 解析.ccc文件
-        parseCCC(ccc_file_path);
+        // parseCCC(ccc_file_path);
         compileTask task = { 0 }; 
         task = parseCCCtask(ccc_file_path);
 /****************************************************************************/
@@ -80,24 +80,24 @@ void compile_func(int argc, char** argv) {
         // 从header_sig_files获得头文件夹目录
         // char** header_sig_files_split = splitString(header_sig_files," ");
         int* header_sig_files_num = (int*)malloc(sizeof(int));
-        char** header_sig_files_split = split_string_by_space(header_sig_files,header_sig_files_num);
+        char** header_sig_files_split = split_string_by_space(task.header_sig_files,header_sig_files_num);
         for (int i = 0; i < *header_sig_files_num; i++) {
             if (access(header_sig_files_split[i], F_OK)==0&&isFileWithSuffix(header_sig_files_split[i],".h")) {
-                addSigHeaderFolderList(header_sig_files_split[i]);
+                addSigHeaderFolderList(header_sig_files_split[i], &task);
             }
         }
         free(header_sig_files_num);
         
         // 将header_folder_path、sll_folder_path、dll_folder_path和library_path合并，以便操作
-        char* header_folder_path_temp = (char*)malloc(hotfix_strlen(header_folder_path)+1+hotfix_strlen(sll_folder_path)+1+hotfix_strlen(dll_folder_path)+1+hotfix_strlen(library_path)+1);
-        memset(header_folder_path_temp,0,hotfix_strlen(header_folder_path)+1+hotfix_strlen(sll_folder_path)+1+hotfix_strlen(dll_folder_path)+1+hotfix_strlen(library_path)+1);
-        hotfix_strcat(header_folder_path_temp,header_folder_path);
+        char* header_folder_path_temp = (char*)malloc(hotfix_strlen(task.header_folder_path)+1+hotfix_strlen(task.sll_folder_path)+1+hotfix_strlen(task.dll_folder_path)+1+hotfix_strlen(task.library_path)+1);
+        memset(header_folder_path_temp,0,hotfix_strlen(task.header_folder_path)+1+hotfix_strlen(task.sll_folder_path)+1+hotfix_strlen(task.dll_folder_path)+1+hotfix_strlen(task.library_path)+1);
+        hotfix_strcat(header_folder_path_temp,task.header_folder_path);
         hotfix_strcat(header_folder_path_temp," ");
-        hotfix_strcat(header_folder_path_temp,sll_folder_path);
+        hotfix_strcat(header_folder_path_temp,task.sll_folder_path);
         hotfix_strcat(header_folder_path_temp," ");
-        hotfix_strcat(header_folder_path_temp,dll_folder_path);
+        hotfix_strcat(header_folder_path_temp,task.dll_folder_path);
         hotfix_strcat(header_folder_path_temp," ");
-        hotfix_strcat(header_folder_path_temp,library_path);
+        hotfix_strcat(header_folder_path_temp,task.library_path);
 
         // 将header_folder_path_temp以空格分割
         char** header_folder_path_split = splitString(header_folder_path_temp, ' ');
@@ -105,19 +105,19 @@ void compile_func(int argc, char** argv) {
         // 添加到header_folder_list中。（每次添加前会检查，避免重复添加）
         for (int i = 0; header_folder_path_split[i] != NULL; i++) {
             if (hotfix_strlen(header_folder_path_split[i]) != 0) {
-                addHeaderFolderList(header_folder_path_split[i]);
+                addHeaderFolderList(header_folder_path_split[i], &task);
             }
         }
-        // printfHeaderFolderList();
+        printfHeaderFolderList(&task);
         // 根据header_folder_list创建header_folders
-        createHeaderFolders();
+        createHeaderFolders(&task);
         // printf("header_folders: %s\n", header_folders);
 
         // 释放该步骤所需的临时内存
         free(header_folder_path_temp);
         freeSplitResult(header_folder_path_split);
         freeSplitResult(header_sig_files_split);
-        freeHeaderFolderList(header_folder_list);
+        freeHeaderFolderList(&task);
 /****************************************************************************/
         // 载入静态链接库文件（非必要）
         

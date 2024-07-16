@@ -94,11 +94,11 @@ bool hasHFile(const char *dir_path) {
  * 
  * @param folder_path 
  */
-void appendToHeaderFolderList(const char* folder_path) {
+void appendToHeaderFolderList(const char* folder_path, struct COMPILE_TASK* task) {
     struct header_folder* new_node = (struct header_folder*)malloc(sizeof(struct header_folder));
     new_node->folder_path = strdup(folder_path);
-    new_node->next = header_folder_list;
-    header_folder_list = new_node;
+    new_node->next = task->header_folder_list;
+    task->header_folder_list = new_node;
 }
 
 /**
@@ -107,14 +107,14 @@ void appendToHeaderFolderList(const char* folder_path) {
  * 
  * @param header_folder_path 
  */
-void addHeaderFolderList(const char* header_folder_path) {
+void addHeaderFolderList(const char* header_folder_path, struct COMPILE_TASK* task) {
     PathHashSet* seen_dirs = initHashSet();
 
     // 首先检查传入的路径本身是否包含.h文件
     if (hasHFile(header_folder_path)) {
         if (!isInHashSet(seen_dirs, header_folder_path)) {
             addToHashSet(seen_dirs, header_folder_path);
-            appendToHeaderFolderList(header_folder_path);
+            appendToHeaderFolderList(header_folder_path, task);
         }
     }
 
@@ -130,7 +130,7 @@ void addHeaderFolderList(const char* header_folder_path) {
             snprintf(full_path, sizeof(full_path), "%s/%s", header_folder_path, entry->d_name);
             
             if (entry->d_type == DT_DIR) {
-                addHeaderFolderList(full_path); // 递归调用
+                addHeaderFolderList(full_path, task); // 递归调用
             } else if (strstr(entry->d_name, ".h") != NULL) {
                 // 这里实际上不需要处理，因为hasHFile在开始时已经检查过了根目录
                 // 保留此注释作为理解流程的参考
@@ -166,10 +166,10 @@ bool isInHeaderFolderList(const char* path)
  * 
  * @param header_folder_path 
  */
-void addSigHeaderFolderList(char* header_file_path) {
+void addSigHeaderFolderList(char* header_file_path, struct COMPILE_TASK* task) {
     if (!isInHeaderFolderList(dirname(header_file_path))) {
         // dirname是在原字符串的地址上操作，因此dirname只需执行一次
-        appendToHeaderFolderList(header_file_path);
+        appendToHeaderFolderList(header_file_path, task);
     }
 }
 
@@ -178,8 +178,8 @@ void addSigHeaderFolderList(char* header_file_path) {
  * @brief 打印头文件夹链表
  * 
  */
-void printfHeaderFolderList(){
-    struct header_folder* current = header_folder_list;
+void printfHeaderFolderList(struct COMPILE_TASK* task){
+    struct header_folder* current = task->header_folder_list;
     while (current != NULL) {
         printf("%s\n", current->folder_path);
         current = current->next;
@@ -190,8 +190,8 @@ void printfHeaderFolderList(){
  * @brief 释放header_folder_list
  * 
  */
-void freeHeaderFolderList() {
-    struct header_folder* current = header_folder_list;
+void freeHeaderFolderList(struct COMPILE_TASK* task) {
+    struct header_folder* current = task->header_folder_list;
     struct header_folder* next;
 
     while (current != NULL) {
@@ -216,8 +216,8 @@ void freeHeaderFolderList() {
  * @brief 根据header_folder_list创建header_folders
  * 
  */
-void createHeaderFolders() {
-    struct header_folder* current = header_folder_list;
+void createHeaderFolders(struct COMPILE_TASK* task) {
+    struct header_folder* current = task->header_folder_list;
     size_t total_size = 0; // 计算总长度以预先分配足够的内存
 
     // 遍历链表，计算总长度
@@ -227,20 +227,20 @@ void createHeaderFolders() {
     }
 
     // 分配足够的内存，+1是为了存放末尾的空字符
-    header_folders = (char*)malloc(total_size + 1);
+    task->header_folders = (char*)malloc(total_size + 1);
 
     // 初始化字符串为空
-    header_folders[0] = '\0';
+    task->header_folders[0] = '\0';
 
     // 再次遍历链表，拼接路径到字符串
-    current = header_folder_list;
+    current = task->header_folder_list;
     while (current != NULL) {
-        hotfix_strcat(header_folders, "-I ");
-        hotfix_strcat(header_folders, current->folder_path);
+        hotfix_strcat(task->header_folders, "-I ");
+        hotfix_strcat(task->header_folders, current->folder_path);
         
         // 可以根据需要添加分隔符
         if (current->next != NULL) {
-            hotfix_strcat(header_folders, " ");
+            hotfix_strcat(task->header_folders, " ");
         }
         
         current = current->next;

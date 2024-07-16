@@ -8,14 +8,15 @@
 #include <file.h>
 #include <unistd.h>
 #include <libgen.h> 
-/**
- * @brief 头文件夹链表节点
- * 
- */
-struct header_folder {
-    char* folder_path;
-    struct header_folder* next;
-};
+#include <compileTask.h>
+// /**
+//  * @brief 头文件夹链表节点
+//  * 
+//  */
+// struct header_folder {
+//     char* folder_path;
+//     struct header_folder* next;
+// };
 
 /**
  * @brief 哈希集合用于去重，这里简化处理，实际应用中可能需要更复杂的数据结构
@@ -43,30 +44,30 @@ extern char* header_folders;
  * 
  * @param header_folder_path 
  */
-void addHeaderFolderList(const char* header_folder_path);
+void addHeaderFolderList(const char* header_folder_path, struct COMPILE_TASK* task);
 
 /**
  * @brief 添加单个头文件文件夹到header_folder_list中
  * 
  * @param header_folder_path 
  */
-void addSigHeaderFolderList(char* header_file_path);
+void addSigHeaderFolderList(char* header_file_path, struct COMPILE_TASK* task);
 
 /**
  * @brief 释放header_folder_list
  * 
  */
-void freeHeaderFolderList();
+void freeHeaderFolderList(struct COMPILE_TASK* task);
 
 /**
  * @brief 根据header_folder_list创建header_folders
  * 
  */
-void createHeaderFolders();
+void createHeaderFolders(struct COMPILE_TASK* task);
 
 /**
  * @brief 打印头文件夹链表
  * 
  */
-void printfHeaderFolderList();
+void printfHeaderFolderList(struct COMPILE_TASK* task);
 #endif

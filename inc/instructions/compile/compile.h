@@ -27,8 +27,8 @@ extern char* link_flags;
 
 extern char* source_sig_files;
 extern char* source_folder_path;
-extern char* header_sig_files;
-extern char* header_folder_path;
+// extern char* header_sig_files;
+// extern char* header_folder_path;
 
 extern char* sll_sig_files;
 extern char* sll_folder_path;
@@ -43,34 +43,6 @@ extern char* library_path;
 extern char ccc_file_path[128];
 extern char ccc_file_name[128];
 
-typedef struct COMPILE_TASK{
-    char* target_type;
-
-    char* compiler;
-    char* compile_flags;
-    
-    char* linker;
-    char* link_flags;
-
-    char* source_sig_files;
-    char* source_folder_path;
-    char* header_sig_files;
-    char* header_folder_path;
-
-    char* sll_sig_files;
-    char* sll_folder_path;
-    char* dll_sig_files;
-    char* dll_folder_path;
-
-    char* obj_path;
-    char* output_path;
-
-    char* library_path;
-
-    char ccc_file_path[512];
-    char run_path[512];
-    char ccc_file_name[512];
-} compileTask;
 
 /**
  * @brief compile的条件函数
