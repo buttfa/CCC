@@ -4,40 +4,40 @@
  * @brief 检查是否缺少必要ccc文件信息
  * 
  */
-void checkCCC() {
+void checkCCC(compileTask task) {
     int flag = 1;
     // 检查是否设置target_type
-    if (target_type == NULL) {
+    if (task.target_type == NULL) {
         printf("Error: target_type is not set.\n");
         flag = 0;
     }
 
     // 检查是否设置compiler
-    if (compiler == NULL) {
+    if (task.compiler == NULL) {
         printf("Error: compiler is not set.\n");
         flag = 0;
     }
 
     // 检查是否设置linker
-    if (linker == NULL) {
+    if (task.linker == NULL) {
         printf("Error: linker is not set.\n");
         flag = 0;
     }
 
     // 检查是否设置source_folder_path或source_sig_files
-    if (source_folder_path == NULL && source_sig_files == NULL) {
+    if (task.source_folder_path == NULL && task.source_sig_files == NULL) {
         printf("Error: source_folder_path is not set.\n");
         flag = 0;
     }
 
     // 检查是否设置obj_path
-    if (obj_path == NULL) {
+    if (task.obj_path == NULL) {
         printf("Error: obj_path is not set.\n");
         flag = 0;
     }
 
     // 检查是否设置output_path
-    if (output_path == NULL) {
+    if (task.output_path == NULL) {
         printf("Error: output_path is not set.\n");
         flag = 0;
     }

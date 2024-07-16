@@ -8,6 +8,6 @@
  * @brief 检查是否缺少必要ccc文件信息
  * 
  */
-void checkCCC();
+void checkCCC(struct COMPILE_TASK task);
 
 #endif

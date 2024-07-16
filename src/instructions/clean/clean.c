@@ -35,7 +35,7 @@ void clean_func(int arg, char* argv[]) {
         // 判断是否缺少必要ccc文件信息
         // 必要信息包括，target_type、compiler、linker、
         // source_folder_path(或source_sig_files)、obj_path、output_path。
-        checkCCC();
+        // checkCCC();
 /****************************************************************************/
         // 根据obj_path和output_path删除指定文件
         char* cmd = (char*)malloc(hotfix_strlen("rm -rf ")+hotfix_strlen(obj_path)+hotfix_strlen("/*.o")+1+hotfix_strlen(output_path)+1+hotfix_strlen(ccc_file_name)+1);

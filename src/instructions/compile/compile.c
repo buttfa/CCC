@@ -73,7 +73,7 @@ void compile_func(int argc, char** argv) {
         // 判断是否缺少必要ccc文件信息
         // 必要信息包括，target_type、compiler、linker、
         // source_folder_path(或source_sig_files)、obj_path、output_path。
-        checkCCC();
+        checkCCC(task);
 /****************************************************************************/
         // 获取头文件目录（非必要）
         
