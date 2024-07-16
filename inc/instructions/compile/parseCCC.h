@@ -11,13 +11,6 @@ struct ARG{
     char** argv;
 };
 
-/**
- * @brief 解析ccc文件中的内容填入ccc文件信息
- * 
- * @param ccc_path 
- */
-void parseCCC(char* ccc_path);
-
 
 /**
  * @brief 解析ccc文件中的内容填入ccc文件信息

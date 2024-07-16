@@ -1,6 +1,8 @@
 #ifndef __COMPILE_TASK_H__
 #define __COMPILE_TASK_H__
 
+#include <stdlib.h>
+
 /**
  * @brief 头文件夹链表节点
  * 
