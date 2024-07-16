@@ -19,5 +19,12 @@ struct ARG{
 void parseCCC(char* ccc_path);
 
 
+/**
+ * @brief 解析ccc文件中的内容填入ccc文件信息
+ * 
+ * @param ccc_path 
+ * @return compileTask 
+ */
+struct COMPILE_TASK parseCCCtask(char* ccc_path);
 
 #endif

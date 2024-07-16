@@ -67,6 +67,8 @@ void compile_func(int argc, char** argv) {
 /****************************************************************************/            
         // 解析.ccc文件
         parseCCC(ccc_file_path);
+        compileTask task = { 0 }; 
+        task = parseCCCtask(ccc_file_path);
 /****************************************************************************/
         // 判断是否缺少必要ccc文件信息
         // 必要信息包括，target_type、compiler、linker、

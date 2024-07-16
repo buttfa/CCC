@@ -70,7 +70,7 @@ typedef struct COMPILE_TASK{
     char ccc_file_path[512];
     char run_path[512];
     char ccc_file_name[512];
-} compile_task;
+} compileTask;
 
 /**
  * @brief compile的条件函数
