@@ -49,6 +49,7 @@ typedef struct COMPILE_TASK{
     char ccc_file_name[512];
 
     struct reliance* reliance_list;
+    struct reliance* target_reliance;
 } compileTask;
 
 #endif

@@ -246,7 +246,7 @@ void compile_func(int argc, char** argv) {
 /****************************************************************************/
 
         // 计算目标依赖关系
-        createTargetReliance();
+        createTargetReliance(&task);
         // printfTargetReliance();
 
 /****************************************************************************/
