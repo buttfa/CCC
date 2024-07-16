@@ -1,16 +1,16 @@
 #include <getDll.h>
 
-/**
- * @brief dll文件链表
- * 
- */
-struct file_node* dll_list;
+// /**
+//  * @brief dll文件链表
+//  * 
+//  */
+// struct file_node* dll_list;
 
-/**
- * @brief dll文件字符串
- * 
- */
-char* dll_files;
+// /**
+//  * @brief dll文件字符串
+//  * 
+//  */
+// char* dll_files;
 
 
 /**
@@ -58,7 +58,7 @@ void appendToDllList(struct file_node** head, const char* path) {
  * 
  * @param dll_folder_path 
  */
-void addDlllist(const char* dll_folder_path) {
+void addDlllist(const char* dll_folder_path, struct COMPILE_TASK* task) {
     DIR* dir;
     struct dirent* ent;
     if ((dir = opendir(dll_folder_path)) != NULL) {
@@ -70,11 +70,11 @@ void addDlllist(const char* dll_folder_path) {
             snprintf(full_path, FILENAME_MAX, "%s/%s", dll_folder_path, ent->d_name);
             if (ent->d_type == DT_DIR) {
                 // 递归遍历子目录
-                addDlllist(full_path);
+                addDlllist(full_path, task);
             } else if (strstr(ent->d_name, ".so") != NULL) {
                 // 检查并添加.so文件到链表
-                if (!isPathInDllList(dll_list, full_path)) {
-                    appendToDllList(&dll_list, full_path);
+                if (!isPathInDllList(task->dll_list, full_path)) {
+                    appendToDllList(&task->dll_list, full_path);
                 }
             }
         }
@@ -89,9 +89,9 @@ void addDlllist(const char* dll_folder_path) {
  * 
  * @param file_path 
  */
-void addDllfileToList(char* file_path) {
-    if (!isPathInDllList(dll_list, file_path)) {
-        appendToDllList(&dll_list, file_path);
+void addDllfileToList(char* file_path, struct COMPILE_TASK* task) {
+    if (!isPathInDllList(task->dll_list, file_path)) {
+        appendToDllList(&task->dll_list, file_path);
     }
 }
 
@@ -99,8 +99,8 @@ void addDllfileToList(char* file_path) {
  * @brief 打印dll_list
  * 
  */
-void printfDlllist() {
-    struct file_node* current = dll_list;
+void printfDlllist(struct COMPILE_TASK* task) {
+    struct file_node* current = task->dll_list;
     while (current != NULL) {
         printf("%s\n", current->file_path);
         current = current->next;
@@ -111,8 +111,8 @@ void printfDlllist() {
  * @brief 释放dll_list
  * 
  */
-void freeDlllist() {
-    struct file_node* current = dll_list;
+void freeDlllist(struct COMPILE_TASK* task) {
+    struct file_node* current = task->dll_list;
     struct file_node* next;
 
     while (current != NULL) {
@@ -130,16 +130,16 @@ void freeDlllist() {
     }
 
     // 清空链表头指针
-    dll_list = NULL;
+    task->dll_list = NULL;
 }
 
 /**
  * @brief 根据dll_list创建dll_files
  * 
  */
-void createDllFiles() {
+void createDllFiles(struct COMPILE_TASK* task) {
     int total_length = 0; // 用于计算总的字符串长度
-    struct file_node* current = dll_list;
+    struct file_node* current = task->dll_list;
 
     // 遍历链表，计算总长度
     while (current != NULL) {
@@ -148,16 +148,16 @@ void createDllFiles() {
     }
 
     // 分配足够的内存空间给dll_files
-    dll_files = (char*)malloc(total_length * sizeof(char));
+    task->dll_files = (char*)malloc(total_length * sizeof(char));
 
     // 确保内存分配成功
-    if (dll_files == NULL) {
+    if (task->dll_files == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
         exit(EXIT_FAILURE);
     }
 
-    char* position = dll_files; // 用于追踪dll_files中的当前位置
-    current = dll_list;
+    char* position = task->dll_files; // 用于追踪dll_files中的当前位置
+    current = task->dll_list;
 
     // 再次遍历链表，复制文件路径到dll_files中
     while (current != NULL) {

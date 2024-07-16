@@ -7,17 +7,18 @@
 #include <stdbool.h>
 #include <file.h>
 #include <dirent.h>
-/**
- * @brief dll文件链表
- * 
- */
-extern struct file_node* dll_list;
+#include <compileTask.h>
+// /**
+//  * @brief dll文件链表
+//  * 
+//  */
+// extern struct file_node* dll_list;
 
-/**
- * @brief dll文件字符串
- * 
- */
-extern char* dll_files;
+// /**
+//  * @brief dll文件字符串
+//  * 
+//  */
+// extern char* dll_files;
 
 /**
  * @brief 将dll_folder_path文件夹及其子文件夹中的.a文件添加到dll_list中
@@ -25,30 +26,30 @@ extern char* dll_files;
  * 
  * @param dll_folder_path 
  */
-void addDlllist(const char* dll_folder_path);
+void addDlllist(const char* dll_folder_path, struct COMPILE_TASK* task);
 
 /**
  * @brief 将单个文件添加到dll_list中
  * 
  * @param file_path 
  */
-void addDllfileToList(char* file_path);
+void addDllfileToList(char* file_path, struct COMPILE_TASK* task);
 
 /**
  * @brief 打印dll_list
  * 
  */
-void printfDlllist();
+void printfDlllist(struct COMPILE_TASK* task);
 
 /**
  * @brief 释放dll_list
  * 
  */
-void freeDlllist();
+void freeDlllist(struct COMPILE_TASK* task);
 
 /**
  * @brief 根据dll_list创建dll_files
  * 
  */
-void createDllFiles();
+void createDllFiles(struct COMPILE_TASK* task);
 #endif
