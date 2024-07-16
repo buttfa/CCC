@@ -1,10 +1,10 @@
 #include <getSource.h>
 
-/**
- * @brief source文件链表
- * 
- */
-struct file_node* source_list;
+// /**
+//  * @brief source文件链表
+//  * 
+//  */
+// struct file_node* source_list;
 
 
 /**
@@ -52,7 +52,7 @@ void appendToSourceList(struct file_node** head, const char* path) {
  * 
  * @param source_folder_path 
  */
-void addSourcelist(const char* source_folder_path) {
+void addSourcelist(const char* source_folder_path, struct COMPILE_TASK* task) {
     // 确定源文件后缀
     // char* suffix;
     // if (strcmp(target_type,"c")==0) {
@@ -76,7 +76,7 @@ void addSourcelist(const char* source_folder_path) {
             snprintf(full_path, FILENAME_MAX, "%s/%s", source_folder_path, ent->d_name);
             if (ent->d_type == DT_DIR) {
                 // 递归遍历子目录
-                addSourcelist(full_path);
+                addSourcelist(full_path, task);
             // } else if (strstr(ent->d_name, suffix) != NULL) {
             //     // 检查并添加.c文件到链表
             //     if (!isPathInSourceList(source_list, full_path)) {
@@ -94,19 +94,19 @@ void addSourcelist(const char* source_folder_path) {
                 char* tmp_c = strstr(ent->d_name, ".c");
                 char* tmp_s = strstr(ent->d_name, ".s");
                 // 如果是汇编文件则直接加入
-                if (tmp_s != NULL && strcmp(tmp_s,".s")==0 && !isPathInSourceList(source_list, full_path)) {
-                    appendToSourceList(&source_list, full_path);
+                if (tmp_s != NULL && strcmp(tmp_s,".s")==0 && !isPathInSourceList(task->source_list, full_path)) {
+                    appendToSourceList(&task->source_list, full_path);
                 }
                 // 如果target_type是c，则只加入.c而不加入.cpp
-                else if (tmp_c != NULL && strcmp(target_type,"c")==0) {
-                    if (strcmp(tmp_c,".c")==0 && !isPathInSourceList(source_list, full_path)) {
-                        appendToSourceList(&source_list, full_path);
+                else if (tmp_c != NULL && strcmp(task->target_type,"c")==0) {
+                    if (strcmp(tmp_c,".c")==0 && !isPathInSourceList(task->source_list, full_path)) {
+                        appendToSourceList(&task->source_list, full_path);
                     }
                 }
                 // 如果target_type是c++，则加入.cpp和.c
-                else if (tmp_c != NULL && strcmp(target_type,"c++")==0 ) {
-                    if ((strcmp(tmp_c,".c")==0 || strcmp(tmp_c,".cpp")==0) && !isPathInSourceList(source_list, full_path)) {
-                        appendToSourceList(&source_list, full_path);
+                else if (tmp_c != NULL && strcmp(task->target_type,"c++")==0 ) {
+                    if ((strcmp(tmp_c,".c")==0 || strcmp(tmp_c,".cpp")==0) && !isPathInSourceList(task->source_list, full_path)) {
+                        appendToSourceList(&task->source_list, full_path);
                     }
                 }
             }
@@ -122,9 +122,9 @@ void addSourcelist(const char* source_folder_path) {
  * @brief 将单个源文件添加到source_list
  * 
  */
-void addSourcefileToList(char* file_path){
-    if (!(isPathInSourceList(source_list, file_path))) {
-        appendToSourceList(&source_list, file_path);
+void addSourcefileToList(char* file_path, struct COMPILE_TASK* task){
+    if (!(isPathInSourceList(task->source_list, file_path))) {
+        appendToSourceList(&task->source_list, file_path);
     }
 }
 
@@ -132,8 +132,8 @@ void addSourcefileToList(char* file_path){
  * @brief 打印source_list
  * 
  */
-void printfSourcelist() {
-    struct file_node* current = source_list;
+void printfSourcelist(struct COMPILE_TASK* task) {
+    struct file_node* current = task->source_list;
     while (current != NULL) {
         printf("%s\n", current->file_path);
         current = current->next;
@@ -144,8 +144,8 @@ void printfSourcelist() {
  * @brief 释放source_list
  * 
  */
-void freeSourcelist() {
-    struct file_node* current = source_list;
+void freeSourcelist(struct COMPILE_TASK* task) {
+    struct file_node* current = task->source_list;
     struct file_node* next;
 
     while (current != NULL) {
@@ -163,5 +163,5 @@ void freeSourcelist() {
     }
 
     // 清空链表头指针
-    source_list = NULL;
+    task->source_list = NULL;
 }

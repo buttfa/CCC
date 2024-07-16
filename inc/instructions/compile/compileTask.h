@@ -21,6 +21,7 @@ typedef struct COMPILE_TASK{
 
     char* source_sig_files;
     char* source_folder_path;
+    struct file_node* source_list;
 
     char* header_sig_files;
     char* header_folder_path;

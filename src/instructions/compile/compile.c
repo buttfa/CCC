@@ -1,15 +1,15 @@
 #include <compile.h>
 // .ccc文件信息
-char* target_type = NULL;
+// char* target_type = NULL;
 
-char* compiler = NULL;
-char* compile_flags = NULL;
+// char* compiler = NULL;
+// char* compile_flags = NULL;
 
-char* linker = NULL;
-char* link_flags = NULL;
+// char* linker = NULL;
+// char* link_flags = NULL;
 
-char* source_sig_files = NULL;
-char* source_folder_path = NULL;
+// char* source_sig_files = NULL;
+// char* source_folder_path = NULL;
 // char* header_sig_files = NULL;
 // char* header_folder_path = NULL;
 
@@ -21,7 +21,7 @@ char* source_folder_path = NULL;
 char* obj_path = NULL;
 char* output_path = NULL;
 
-char* library_path = NULL;
+// char* library_path = NULL;
 
 char ccc_file_path[128];
 char run_path[128];
@@ -201,22 +201,22 @@ void compile_func(int argc, char** argv) {
         // 获取单个的源文件
         // char** source_sig_files_split = splitString(source_sig_files, ' ');
         int* source_sig_files_num = (int*)malloc(sizeof(int));
-        char** source_sig_files_split = split_string_by_space(source_sig_files, source_sig_files_num);
+        char** source_sig_files_split = split_string_by_space(task.source_sig_files, source_sig_files_num);
         // 添加到source_list中
         for (int i = 0; i < *source_sig_files_num; i++) {
             if (access(source_sig_files_split[i], F_OK)==0) {
-                addSourcefileToList(source_sig_files_split[i]);
+                addSourcefileToList(source_sig_files_split[i], &task);
             }
         }
         free(source_sig_files_num);
 
         // 获取源文件组
         char* source_folder_path_temp;
-        source_folder_path_temp = (char*)malloc(hotfix_strlen(source_folder_path)+hotfix_strlen(library_path)+2);
-        memset(source_folder_path_temp,0,hotfix_strlen(source_folder_path)+hotfix_strlen(library_path)+2);
-        hotfix_strcat(source_folder_path_temp,source_folder_path);
+        source_folder_path_temp = (char*)malloc(hotfix_strlen(task.source_folder_path)+hotfix_strlen(task.library_path)+2);
+        memset(source_folder_path_temp,0,hotfix_strlen(task.source_folder_path)+hotfix_strlen(task.library_path)+2);
+        hotfix_strcat(source_folder_path_temp,task.source_folder_path);
         hotfix_strcat(source_folder_path_temp," ");
-        hotfix_strcat(source_folder_path_temp,library_path);
+        hotfix_strcat(source_folder_path_temp,task.library_path);
 
 
         // 将source_folder_path_tmp以空格分割
@@ -225,7 +225,7 @@ void compile_func(int argc, char** argv) {
         // 添加到sources_list中。（每次添加前会检查，避免重复添加）
         for (int i = 0; source_folder_path_split[i] != NULL; i++) {
             if (hotfix_strlen(source_folder_path_split[i]) != 0) {
-                addSourcelist(source_folder_path_split[i]);
+                addSourcelist(source_folder_path_split[i], &task);
             }
         }
 
@@ -236,7 +236,7 @@ void compile_func(int argc, char** argv) {
         freeSplitResult(source_sig_files_split);
 /****************************************************************************/
         // 计算中间文件依赖关系
-        struct file_node* source_file = source_list;
+        struct file_node* source_file = task.source_list;
         while (source_file != NULL) {
             addRelianceList(source_file->file_path);
             source_file = source_file->next;
@@ -259,16 +259,16 @@ void compile_func(int argc, char** argv) {
 
 
         // 释放内存
-        free(target_type);
+        // free(target_type);
 
-        free(compiler);
-        free(compile_flags);
+        // free(compiler);
+        // free(compile_flags);
         
-        free(linker);
-        free(link_flags);
+        // free(linker);
+        // free(link_flags);
 
-        free(source_sig_files);
-        free(source_folder_path);
+        // free(source_sig_files);
+        // free(source_folder_path);
         // free(header_sig_files);
         // free(header_folder_path);
 
@@ -280,7 +280,7 @@ void compile_func(int argc, char** argv) {
         free(obj_path);
         free(output_path);
 
-        free(library_path);
+        // free(library_path);
     } else {
         printf("[CCC]The target file does not exist or does not have a. ccc suffix\n");
     }
