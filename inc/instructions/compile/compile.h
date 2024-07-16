@@ -17,29 +17,6 @@
 #include <unistd.h>
 
 // .ccc文件信息
-extern char* target_type;
-
-extern char* compiler;
-extern char* compile_flags;
-
-extern char* linker;
-extern char* link_flags;
-
-extern char* source_sig_files;
-extern char* source_folder_path;
-// extern char* header_sig_files;
-// extern char* header_folder_path;
-
-extern char* sll_sig_files;
-extern char* sll_folder_path;
-extern char* dll_sig_files;
-extern char* dll_folder_path;
-
-extern char* obj_path;
-extern char* output_path;
-
-extern char* library_path;
-
 extern char ccc_file_path[128];
 extern char ccc_file_name[128];
 

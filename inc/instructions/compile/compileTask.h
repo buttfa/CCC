@@ -52,4 +52,11 @@ typedef struct COMPILE_TASK{
     struct reliance* target_reliance;
 } compileTask;
 
+/**
+ * @brief 释放任务
+ * 
+ * @param task 
+ */
+void freeTask(struct COMPILE_TASK* task);
+
 #endif

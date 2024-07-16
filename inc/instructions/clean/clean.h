@@ -6,6 +6,9 @@
 #include <string.h>
 
 #include <compile.h>
+#include <compileTask.h>
+
+typedef compileTask cleanTask;
 
 /**
  * @brief clean指令的条件函数

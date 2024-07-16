@@ -1,28 +1,5 @@
 #include <compile.h>
 // .ccc文件信息
-// char* target_type = NULL;
-
-// char* compiler = NULL;
-// char* compile_flags = NULL;
-
-// char* linker = NULL;
-// char* link_flags = NULL;
-
-// char* source_sig_files = NULL;
-// char* source_folder_path = NULL;
-// char* header_sig_files = NULL;
-// char* header_folder_path = NULL;
-
-// char* sll_sig_files = NULL;
-// char* sll_folder_path = NULL;
-// char* dll_sig_files = NULL;
-// char* dll_folder_path = NULL;
-
-// char* obj_path = NULL;
-// char* output_path = NULL;
-
-// char* library_path = NULL;
-
 char ccc_file_path[128];
 char run_path[128];
 char ccc_file_name[128];
@@ -108,10 +85,10 @@ void compile_func(int argc, char** argv) {
                 addHeaderFolderList(header_folder_path_split[i], &task);
             }
         }
-        printfHeaderFolderList(&task);
+        // printfHeaderFolderList(&task);
         // 根据header_folder_list创建header_folders
         createHeaderFolders(&task);
-        printf("header_folders: %s\n", task.header_folders);
+        // printf("header_folders: %s\n", task.header_folders);
 
         // 释放该步骤所需的临时内存
         free(header_folder_path_temp);
@@ -254,33 +231,12 @@ void compile_func(int argc, char** argv) {
         // 获取中间文件组
         createObjFiles(&task);
 /****************************************************************************/
-        // 检查依赖
-        handleReliance();
+        // 处理依赖
+        handleReliance(&task);
 
 
         // 释放内存
-        // free(target_type);
-
-        // free(compiler);
-        // free(compile_flags);
-        
-        // free(linker);
-        // free(link_flags);
-
-        // free(source_sig_files);
-        // free(source_folder_path);
-        // free(header_sig_files);
-        // free(header_folder_path);
-
-        // free(sll_sig_files);
-        // free(sll_folder_path);
-        // free(dll_sig_files);
-        // free(dll_folder_path);
-
-        // free(obj_path);
-        // free(output_path);
-
-        // free(library_path);
+        freeTask(&task);
     } else {
         printf("[CCC]The target file does not exist or does not have a. ccc suffix\n");
     }

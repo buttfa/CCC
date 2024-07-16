@@ -2,8 +2,10 @@
 #define __RELIANCE_H__
 
 #include <sys/stat.h>
-#include <getObjReliance.h>
-#include <getTargetReliance.h>
+#include <stdbool.h>
+#include <string.h>
+#include <compileTask.h>
+#include <compile.h>
 
 /**
  * @brief 依赖节点
@@ -18,16 +20,16 @@ struct reliance {
     struct reliance* next;
 };
 
-/**
- * @brief 目标依赖
- * 
- */
-extern struct reliance* target_reliance;
+// /**
+//  * @brief 目标依赖
+//  * 
+//  */
+// extern struct reliance* target_reliance;
 
 /**
  * @brief 处理中间依赖组和目标依赖，并实现编译
  * 
  */
-void handleReliance();
+void handleReliance(struct COMPILE_TASK* task);
 
 #endif
