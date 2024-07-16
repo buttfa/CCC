@@ -1,16 +1,16 @@
 #include <getSll.h>
 
-/**
- * @brief sll文件链表
- * 
- */
-struct file_node* sll_list;
+// /**
+//  * @brief sll文件链表
+//  * 
+//  */
+// struct file_node* sll_list;
 
-/**
- * @brief sll文件字符串
- * 
- */
-char* sll_files;
+// /**
+//  * @brief sll文件字符串
+//  * 
+//  */
+// char* sll_files;
 
 
 /**
@@ -58,7 +58,7 @@ void appendToSllList(struct file_node** head, const char* path) {
  * 
  * @param sll_folder_path 
  */
-void addSlllist(const char* sll_folder_path) {
+void addSlllist(const char* sll_folder_path, struct COMPILE_TASK* task) {
     DIR* dir;
     struct dirent* ent;
     if ((dir = opendir(sll_folder_path)) != NULL) {
@@ -70,11 +70,11 @@ void addSlllist(const char* sll_folder_path) {
             snprintf(full_path, FILENAME_MAX, "%s/%s", sll_folder_path, ent->d_name);
             if (ent->d_type == DT_DIR) {
                 // 递归遍历子目录
-                addSlllist(full_path);
+                addSlllist(full_path, task);
             } else if (strstr(ent->d_name, ".a") != NULL) {
                 // 检查并添加.a文件到链表
-                if (!isPathInSllList(sll_list, full_path)) {
-                    appendToSllList(&sll_list, full_path);
+                if (!isPathInSllList(task->sll_list, full_path)) {
+                    appendToSllList(&task->sll_list, full_path);
                 }
             }
         }
@@ -89,9 +89,9 @@ void addSlllist(const char* sll_folder_path) {
  * 
  * @param file_path 
  */
-void addSllfileToList(char* file_path) {
-    if (!isPathInSllList(sll_list, file_path)) {
-        appendToSllList(&sll_list, file_path);
+void addSllfileToList(char* file_path, struct COMPILE_TASK* task) {
+    if (!isPathInSllList(task->sll_list, file_path)) {
+        appendToSllList(&task->sll_list, file_path);
     }
 }
 
@@ -99,8 +99,8 @@ void addSllfileToList(char* file_path) {
  * @brief 打印sll_list
  * 
  */
-void printfSlllist() {
-    struct file_node* current = sll_list;
+void printfSlllist(struct COMPILE_TASK* task) {
+    struct file_node* current = task->sll_list;
     while (current != NULL) {
         printf("%s\n", current->file_path);
         current = current->next;
@@ -111,8 +111,8 @@ void printfSlllist() {
  * @brief 释放sll_list
  * 
  */
-void freeSlllist() {
-    struct file_node* current = sll_list;
+void freeSlllist(struct COMPILE_TASK* task) {
+    struct file_node* current = task->sll_list;
     struct file_node* next;
 
     while (current != NULL) {
@@ -130,16 +130,16 @@ void freeSlllist() {
     }
 
     // 清空链表头指针
-    sll_list = NULL;
+    task->sll_list = NULL;
 }
 
 /**
  * @brief 根据sll_list创建sll_files
  * 
  */
-void createSllFiles() {
+void createSllFiles(struct COMPILE_TASK* task) {
     int total_length = 0; // 用于计算总的字符串长度
-    struct file_node* current = sll_list;
+    struct file_node* current = task->sll_list;
 
     // 遍历链表，计算总长度
     while (current != NULL) {
@@ -148,16 +148,16 @@ void createSllFiles() {
     }
 
     // 分配足够的内存空间给sll_files
-    sll_files = (char*)malloc(total_length * sizeof(char));
+    task->sll_files = (char*)malloc(total_length * sizeof(char));
 
     // 确保内存分配成功
-    if (sll_files == NULL) {
+    if (task->sll_files == NULL) {
         fprintf(stderr, "Memory allocation failed\n");
         exit(EXIT_FAILURE);
     }
 
-    char* position = sll_files; // 用于追踪sll_files中的当前位置
-    current = sll_list;
+    char* position = task->sll_files; // 用于追踪sll_files中的当前位置
+    current = task->sll_list;
 
     // 再次遍历链表，复制文件路径到sll_files中
     while (current != NULL) {

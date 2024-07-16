@@ -10,11 +10,11 @@ char* link_flags = NULL;
 
 char* source_sig_files = NULL;
 char* source_folder_path = NULL;
-char* header_sig_files = NULL;
-char* header_folder_path = NULL;
+// char* header_sig_files = NULL;
+// char* header_folder_path = NULL;
 
-char* sll_sig_files = NULL;
-char* sll_folder_path = NULL;
+// char* sll_sig_files = NULL;
+// char* sll_folder_path = NULL;
 char* dll_sig_files = NULL;
 char* dll_folder_path = NULL;
 
@@ -111,7 +111,7 @@ void compile_func(int argc, char** argv) {
         printfHeaderFolderList(&task);
         // 根据header_folder_list创建header_folders
         createHeaderFolders(&task);
-        // printf("header_folders: %s\n", header_folders);
+        printf("header_folders: %s\n", task.header_folders);
 
         // 释放该步骤所需的临时内存
         free(header_folder_path_temp);
@@ -124,11 +124,11 @@ void compile_func(int argc, char** argv) {
         // 载入sll_sig_files
         // char** sll_sig_files_split = splitString(sll_sig_files, ' ');
         int* sll_sig_files_num = (int*)malloc(sizeof(int));
-        char** sll_sig_files_split = split_string_by_space(sll_sig_files, sll_sig_files_num);
+        char** sll_sig_files_split = split_string_by_space(task.sll_sig_files, sll_sig_files_num);
         // 添加到sll_list中
         for(int i = 0; i < *sll_sig_files_num; i++) {
             if (access(sll_sig_files_split[i], F_OK)==0&&isFileWithSuffix(sll_sig_files_split[i], ".a")) {
-                addSllfileToList(sll_sig_files_split[i]);
+                addSllfileToList(sll_sig_files_split[i], &task);
             }
         }
         free(sll_sig_files_num);
@@ -136,11 +136,11 @@ void compile_func(int argc, char** argv) {
 
 
         // 将sll_folder_path和library_path合并，以便操作
-        char* sll_folder_path_temp = (char*)malloc(hotfix_strlen(sll_folder_path)+hotfix_strlen(library_path)+2);
-        memset(sll_folder_path_temp,0,hotfix_strlen(sll_folder_path)+hotfix_strlen(library_path)+2);
-        hotfix_strcat(sll_folder_path_temp,sll_folder_path);
+        char* sll_folder_path_temp = (char*)malloc(hotfix_strlen(task.sll_folder_path)+hotfix_strlen(task.library_path)+2);
+        memset(sll_folder_path_temp,0,hotfix_strlen(task.sll_folder_path)+hotfix_strlen(task.library_path)+2);
+        hotfix_strcat(sll_folder_path_temp,task.sll_folder_path);
         hotfix_strcat(sll_folder_path_temp," ");
-        hotfix_strcat(sll_folder_path_temp,library_path);
+        hotfix_strcat(sll_folder_path_temp,task.library_path);
 
         // 将sll_folder_path以空格分割
         char** sll_folder_path_split = splitString(sll_folder_path_temp, ' ');
@@ -148,16 +148,16 @@ void compile_func(int argc, char** argv) {
         // 添加到sll_list中。（每次添加前会检查，避免重复添加）
         for (int i = 0; sll_folder_path_split[i] != NULL; i++) {
             if (hotfix_strlen(sll_folder_path_split[i]) != 0) {
-                addSlllist(sll_folder_path_split[i]);
+                addSlllist(sll_folder_path_split[i], &task);
             }
         }
         // printfSlllist();
         // 根据sll_list创建sll_files
-        createSllFiles();
+        createSllFiles(&task);
 
         free(sll_folder_path_temp);
         freeSplitResult(sll_folder_path_split);
-        freeSlllist(sll_sig_files_split); 
+        freeSlllist(&task); 
 /****************************************************************************/
         // 载入动态链接库文件（非必要）
         
@@ -269,11 +269,11 @@ void compile_func(int argc, char** argv) {
 
         free(source_sig_files);
         free(source_folder_path);
-        free(header_sig_files);
-        free(header_folder_path);
+        // free(header_sig_files);
+        // free(header_folder_path);
 
-        free(sll_sig_files);
-        free(sll_folder_path);
+        // free(sll_sig_files);
+        // free(sll_folder_path);
         free(dll_sig_files);
         free(dll_folder_path);
 

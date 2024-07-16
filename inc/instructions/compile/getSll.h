@@ -7,17 +7,18 @@
 #include <stdbool.h>
 #include <file.h>
 #include <dirent.h>
-/**
- * @brief sll文件链表
- * 
- */
-extern struct file_node* sll_list;
+#include <compileTask.h>
+// /**
+//  * @brief sll文件链表
+//  * 
+//  */
+// extern struct file_node* sll_list;
 
-/**
- * @brief sll文件字符串
- * 
- */
-extern char* sll_files;
+// /**
+//  * @brief sll文件字符串
+//  * 
+//  */
+// extern char* sll_files;
 
 /**
  * @brief 将sll_folder_path文件夹及其子文件夹中的.a文件添加到sll_list中
@@ -25,30 +26,30 @@ extern char* sll_files;
  * 
  * @param sll_folder_path 
  */
-void addSlllist(const char* sll_folder_path);
+void addSlllist(const char* sll_folder_path, struct COMPILE_TASK* task);
 
 /**
  * @brief 将单个文件添加到sll_list中
  * 
  * @param file_path 
  */
-void addSllfileToList(char* file_path);
+void addSllfileToList(char* file_path, struct COMPILE_TASK* task);
 
 /**
  * @brief 打印sll_list
  * 
  */
-void printfSlllist();
+void printfSlllist(struct COMPILE_TASK* task);
 
 /**
  * @brief 释放sll_list
  * 
  */
-void freeSlllist();
+void freeSlllist(struct COMPILE_TASK* task);
 
 /**
  * @brief 根据sll_list创建sll_files
  * 
  */
-void createSllFiles();
+void createSllFiles(struct COMPILE_TASK* task);
 #endif

@@ -29,6 +29,9 @@ typedef struct COMPILE_TASK{
 
     char* sll_sig_files;
     char* sll_folder_path;
+    struct file_node* sll_list;
+    char* sll_files;
+
     char* dll_sig_files;
     char* dll_folder_path;
 
