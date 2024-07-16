@@ -22,6 +22,7 @@ typedef struct COMPILE_TASK{
     char* source_sig_files;
     char* source_folder_path;
     struct file_node* source_list;
+    char* obj_files;
 
     char* header_sig_files;
     char* header_folder_path;
@@ -46,6 +47,8 @@ typedef struct COMPILE_TASK{
     char ccc_file_path[512];
     char run_path[512];
     char ccc_file_name[512];
+
+    struct reliance* reliance_list;
 } compileTask;
 
 #endif

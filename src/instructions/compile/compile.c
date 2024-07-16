@@ -18,8 +18,8 @@
 // char* dll_sig_files = NULL;
 // char* dll_folder_path = NULL;
 
-char* obj_path = NULL;
-char* output_path = NULL;
+// char* obj_path = NULL;
+// char* output_path = NULL;
 
 // char* library_path = NULL;
 
@@ -238,7 +238,7 @@ void compile_func(int argc, char** argv) {
         // 计算中间文件依赖关系
         struct file_node* source_file = task.source_list;
         while (source_file != NULL) {
-            addRelianceList(source_file->file_path);
+            addRelianceList(source_file->file_path, &task);
             source_file = source_file->next;
         }
 
@@ -252,7 +252,7 @@ void compile_func(int argc, char** argv) {
 /****************************************************************************/
 
         // 获取中间文件组
-        createObjFiles();
+        createObjFiles(&task);
 /****************************************************************************/
         // 检查依赖
         handleReliance();
@@ -277,8 +277,8 @@ void compile_func(int argc, char** argv) {
         // free(dll_sig_files);
         // free(dll_folder_path);
 
-        free(obj_path);
-        free(output_path);
+        // free(obj_path);
+        // free(output_path);
 
         // free(library_path);
     } else {

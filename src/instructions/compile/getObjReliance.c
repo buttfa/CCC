@@ -1,27 +1,27 @@
 #include <getObjReliance.h>
 
-/**
- * @brief 中间文件依赖列表
- * 
- */
-struct reliance* reliance_list;
+// /**
+//  * @brief 中间文件依赖列表
+//  * 
+//  */
+// struct reliance* reliance_list;
 
-/**
- * @brief 中间文件组
- * 
- */
-char* obj_files;
+// /**
+//  * @brief 中间文件组
+//  * 
+//  */
+// char* obj_files;
 
 /**
  * @brief 将reliance节点追加到reliance_list中
  * 
  * @param reliance 
  */
-void appendToRelianceList(struct reliance* reliance) {
-    if (reliance_list == NULL) {
-        reliance_list = reliance;
+void appendToRelianceList(struct reliance* reliance, struct COMPILE_TASK* task) {
+    if (task->reliance_list == NULL) {
+        task->reliance_list = reliance;
     } else {
-        struct reliance * current = reliance_list;
+        struct reliance * current = task->reliance_list;
         while (current->next != NULL) {
             current = current->next;
         }
@@ -34,7 +34,7 @@ void appendToRelianceList(struct reliance* reliance) {
  * 
  * @param source_file_path 
  */
-void addRelianceList(char* source_file_path) {
+void addRelianceList(char* source_file_path, struct COMPILE_TASK* task) {
     // 获取对应的.o文件及路径
     // char* file_name = getFileName(source_file_path);
     // char* obj_file = (char*)malloc(hotfix_strlen(run_path)+1+hotfix_strlen(obj_path)+1+hotfix_strlen(file_name)+1+hotfix_strlen(".o\0")+1);
@@ -46,9 +46,9 @@ void addRelianceList(char* source_file_path) {
     // hotfix_strcat(obj_file, file_name);
     // hotfix_strcat(obj_file, ".o\0");
     char* file_name = getFileName(source_file_path);
-    char* obj_file = (char*)malloc(hotfix_strlen(obj_path)+1+hotfix_strlen(file_name)+1+hotfix_strlen(".o\0")+1);
-    memset(obj_file, 0, hotfix_strlen(obj_path)+1+hotfix_strlen(file_name)+1+hotfix_strlen(".o\0")+1);
-    hotfix_strcat(obj_file, obj_path);
+    char* obj_file = (char*)malloc(hotfix_strlen(task->obj_path)+1+hotfix_strlen(file_name)+1+hotfix_strlen(".o\0")+1);
+    memset(obj_file, 0, hotfix_strlen(task->obj_path)+1+hotfix_strlen(file_name)+1+hotfix_strlen(".o\0")+1);
+    hotfix_strcat(obj_file, task->obj_path);
     hotfix_strcat(obj_file, "/");
     hotfix_strcat(obj_file, file_name);
     hotfix_strcat(obj_file, ".o\0");
@@ -109,15 +109,15 @@ void addRelianceList(char* source_file_path) {
     remove("tmp");
 
     // 将依赖节点添加到依赖列表中
-    appendToRelianceList(reliance);
+    appendToRelianceList(reliance, task);
 }
 
 /**
  * @brief 打印依赖列表
  * 
  */
-void printfRelianceList() {
-    struct reliance* temp = reliance_list;
+void printfRelianceList(struct COMPILE_TASK* task) {
+    struct reliance* temp = task->reliance_list;
     while (temp != NULL) {
         printf("%s(%d):\n", temp->file_path,temp->reliance_num);
         for (int i = 0; i < temp->reliance_num; i++) {
@@ -131,8 +131,8 @@ void printfRelianceList() {
  * @brief 释放依赖列表内存 
  * 
  */
-void freeRelianceList() {
-    struct reliance* current = reliance_list;
+void freeRelianceList(struct COMPILE_TASK* task) {
+    struct reliance* current = task->reliance_list;
     struct reliance* next;
     while (current != NULL) {
         next = current->next;
@@ -144,15 +144,15 @@ void freeRelianceList() {
         free(current);
         current = next;
     }
-    reliance_list = NULL;
+    task->reliance_list = NULL;
 }
 
 /**
  * @brief 根据reliance_list创建中间文件组
  * 
  */
-void createObjFiles() {
-    struct reliance* temp = reliance_list;
+void createObjFiles(struct COMPILE_TASK* task) {
+    struct reliance* temp = task->reliance_list;
     // 第一次遍历统计所需长度
     int length = 0;
     while (temp != NULL) {
@@ -160,12 +160,12 @@ void createObjFiles() {
         temp = temp->next;
     }
     // 第二次遍历读取中间文件路径
-    obj_files = (char*)malloc(length+1);
-    memset(obj_files, 0, length+1);
-    temp = reliance_list;
+    task->obj_files = (char*)malloc(length+1);
+    memset(task->obj_files, 0, length+1);
+    temp = task->reliance_list;
     while (temp != NULL) {
-        hotfix_strcat(obj_files, temp->file_path);
-        hotfix_strcat(obj_files, " ");
+        hotfix_strcat(task->obj_files, temp->file_path);
+        hotfix_strcat(task->obj_files, " ");
         temp = temp->next;
     }
 }
