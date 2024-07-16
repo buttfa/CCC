@@ -1,17 +1,5 @@
 #include <getDll.h>
 
-// /**
-//  * @brief dll文件链表
-//  * 
-//  */
-// struct file_node* dll_list;
-
-// /**
-//  * @brief dll文件字符串
-//  * 
-//  */
-// char* dll_files;
-
 
 /**
  * @brief 检查链表中是否存在特定路径

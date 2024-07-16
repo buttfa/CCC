@@ -3,14 +3,6 @@
 
 #include <stdlib.h>
 
-/**
- * @brief 头文件夹链表节点
- * 
- */
-struct header_folder {
-    char* folder_path;
-    struct header_folder* next;
-};
 
 typedef struct COMPILE_TASK{
     char* target_type;

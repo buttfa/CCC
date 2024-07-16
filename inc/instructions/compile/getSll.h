@@ -8,17 +8,6 @@
 #include <file.h>
 #include <dirent.h>
 #include <compileTask.h>
-// /**
-//  * @brief sll文件链表
-//  * 
-//  */
-// extern struct file_node* sll_list;
-
-// /**
-//  * @brief sll文件字符串
-//  * 
-//  */
-// extern char* sll_files;
 
 /**
  * @brief 将sll_folder_path文件夹及其子文件夹中的.a文件添加到sll_list中

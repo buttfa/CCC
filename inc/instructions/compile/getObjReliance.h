@@ -7,20 +7,6 @@
 #include <reliance.h>
 #include <compileTask.h>
 
-extern char run_path[128];
-
-// /**
-//  * @brief 中间文件组
-//  * 
-//  */
-// extern char* obj_files;
-
-// /**
-//  * @brief 中间文件依赖列表
-//  * 
-//  */
-// extern struct reliance* reliance_list;
-
 /**
  * @brief 为传入的.c/.cpp文件对应的.o文件创建依赖
  * 

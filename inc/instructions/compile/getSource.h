@@ -10,11 +10,7 @@
 #include <dirent.h>
 #include <compile.h>
 #include <compileTask.h>
-// /**
-//  * @brief source文件链表
-//  * 
-//  */
-// extern struct file_node* source_list;
+#include <file.h>
 
 /**
  * @brief 将source_folder_path文件夹及其子文件夹中的.a文件添加到source_list中
@@ -22,7 +18,7 @@
  * 
  * @param source_folder_path 
  */
-void addSourcelist(const char* source_folder_path, struct file_node* source_list;);
+void addSourcelist(const char* source_folder_path, struct COMPILE_TASK* task);
 
 /**
  * @brief 将单个源文件添加到source_list
@@ -34,7 +30,7 @@ void addSourcefileToList(char* file_path, struct COMPILE_TASK* task);
  * @brief 打印source_list
  * 
  */
-void printfSourcelist(struct file_node* source_list;);
+void printfSourcelist(struct COMPILE_TASK* task);
 
 /**
  * @brief 释放source_list

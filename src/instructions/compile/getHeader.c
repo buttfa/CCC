@@ -1,16 +1,5 @@
 #include <getHeader.h>
 
-/**
- * @brief 头文件夹链表
- * 
- */
-struct header_folder* header_folder_list;
-/**
- * @brief 头文件夹字符串
- * 
- */
-char* header_folders;
-
 
 
 /**
@@ -149,9 +138,9 @@ void addHeaderFolderList(const char* header_folder_path, struct COMPILE_TASK* ta
  * @return true 
  * @return false 
  */
-bool isInHeaderFolderList(const char* path)
+bool isInHeaderFolderList(const char* path, struct COMPILE_TASK* task)
 {
-    struct header_folder* current = header_folder_list;
+    struct header_folder* current = task->header_folder_list;
     while (current != NULL) {
         if (strcmp(current->folder_path, path) == 0) {
             return true;
@@ -167,7 +156,7 @@ bool isInHeaderFolderList(const char* path)
  * @param header_folder_path 
  */
 void addSigHeaderFolderList(char* header_file_path, struct COMPILE_TASK* task) {
-    if (!isInHeaderFolderList(dirname(header_file_path))) {
+    if (!isInHeaderFolderList(dirname(header_file_path), task)) {
         // dirname是在原字符串的地址上操作，因此dirname只需执行一次
         appendToHeaderFolderList(header_file_path, task);
     }
@@ -209,7 +198,7 @@ void freeHeaderFolderList(struct COMPILE_TASK* task) {
     }
 
     // 最后，将链表头指针设为NULL
-    header_folder_list = NULL;
+    task->header_folder_list = NULL;
 }
 
 /**

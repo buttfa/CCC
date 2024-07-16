@@ -9,14 +9,7 @@
 #include <unistd.h>
 #include <libgen.h> 
 #include <compileTask.h>
-// /**
-//  * @brief 头文件夹链表节点
-//  * 
-//  */
-// struct header_folder {
-//     char* folder_path;
-//     struct header_folder* next;
-// };
+
 
 /**
  * @brief 哈希集合用于去重，这里简化处理，实际应用中可能需要更复杂的数据结构
@@ -26,17 +19,6 @@ typedef struct {
     char** paths;
     size_t size;
 } PathHashSet;
-
-/**
- * @brief 头文件夹链表
- * 
- */
-extern struct header_folder* header_folder_list;
-/**
- * @brief 头文件夹字符串
- * 
- */
-extern char* header_folders;
 
 /**
  * @brief 将header_folder_path中包含.h文件的文件夹及子文件夹

@@ -4,7 +4,7 @@
  * @brief 检查是否缺少必要ccc文件信息
  * 
  */
-void checkCCC(compileTask task) {
+void checkCCC(struct COMPILE_TASK task) {
     int flag = 1;
     // 检查是否设置target_type
     if (task.target_type == NULL) {

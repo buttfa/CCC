@@ -1,12 +1,5 @@
 #include <getSource.h>
 
-// /**
-//  * @brief source文件链表
-//  * 
-//  */
-// struct file_node* source_list;
-
-
 /**
  * @brief 检查链表中是否存在特定路径
  * 

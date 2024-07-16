@@ -1,17 +1,5 @@
 #include <getObjReliance.h>
 
-// /**
-//  * @brief 中间文件依赖列表
-//  * 
-//  */
-// struct reliance* reliance_list;
-
-// /**
-//  * @brief 中间文件组
-//  * 
-//  */
-// char* obj_files;
-
 /**
  * @brief 将reliance节点追加到reliance_list中
  * 
@@ -61,12 +49,12 @@ void addRelianceList(char* source_file_path, struct COMPILE_TASK* task) {
     reliance->reliance_num = 1;
 
     // 使用system()获取源文件依赖的头文件
-    char* cmd = (char*)malloc(hotfix_strlen("gcc -MM ")+hotfix_strlen(source_file_path)+1+hotfix_strlen(header_folders)+hotfix_strlen(" > tmp\0")+1);
-    memset(cmd, 0, hotfix_strlen("gcc -MM ")+hotfix_strlen(source_file_path)+1+hotfix_strlen(header_folders)+hotfix_strlen(" > tmp\0")+1);
+    char* cmd = (char*)malloc(hotfix_strlen("gcc -MM ")+hotfix_strlen(source_file_path)+1+hotfix_strlen(task->header_folders)+hotfix_strlen(" > tmp\0")+1);
+    memset(cmd, 0, hotfix_strlen("gcc -MM ")+hotfix_strlen(source_file_path)+1+hotfix_strlen(task->header_folders)+hotfix_strlen(" > tmp\0")+1);
     hotfix_strcat(cmd, "gcc -MM ");
     hotfix_strcat(cmd, source_file_path);
     hotfix_strcat(cmd, " ");
-    hotfix_strcat(cmd, header_folders);
+    hotfix_strcat(cmd, task->header_folders);
     hotfix_strcat(cmd, " > tmp\0");
     system(cmd);
 
