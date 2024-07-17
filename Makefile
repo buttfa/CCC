@@ -76,12 +76,7 @@ uninstall:
 
 ###########################################################################
 test:
-	make ccc
-	./build/ccc ./example/easy/easy.ccc
-
-#	./build/ccc ./example/easy/src/a.ccc
-#	./build/ccc version
-#	./build/ccc 
+	make -C test
 ###########################################################################
  
 

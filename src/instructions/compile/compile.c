@@ -57,7 +57,7 @@ void compile_func(int argc, char** argv) {
         // 从header_sig_files获得头文件夹目录
         // char** header_sig_files_split = splitString(header_sig_files," ");
         int* header_sig_files_num = (int*)malloc(sizeof(int));
-        char** header_sig_files_split = split_string_by_space(task.header_sig_files,header_sig_files_num);
+        char** header_sig_files_split = splitStringBySpace(task.header_sig_files,header_sig_files_num);
         for (int i = 0; i < *header_sig_files_num; i++) {
             if (access(header_sig_files_split[i], F_OK)==0&&isFileWithSuffix(header_sig_files_split[i],".h")) {
                 addSigHeaderFolderList(header_sig_files_split[i], &task);
@@ -101,7 +101,7 @@ void compile_func(int argc, char** argv) {
         // 载入sll_sig_files
         // char** sll_sig_files_split = splitString(sll_sig_files, ' ');
         int* sll_sig_files_num = (int*)malloc(sizeof(int));
-        char** sll_sig_files_split = split_string_by_space(task.sll_sig_files, sll_sig_files_num);
+        char** sll_sig_files_split = splitStringBySpace(task.sll_sig_files, sll_sig_files_num);
         // 添加到sll_list中
         for(int i = 0; i < *sll_sig_files_num; i++) {
             if (access(sll_sig_files_split[i], F_OK)==0&&isFileWithSuffix(sll_sig_files_split[i], ".a")) {
@@ -141,7 +141,7 @@ void compile_func(int argc, char** argv) {
         // 载入dll_sig_files
         // char** dll_sig_files_split = splitString(dll_sig_files, ' ');
         int* dll_sig_files_num = (int*)malloc(sizeof(int));
-        char** dll_sig_files_split = split_string_by_space(task.dll_sig_files, dll_sig_files_num);
+        char** dll_sig_files_split = splitStringBySpace(task.dll_sig_files, dll_sig_files_num);
         // 添加到dll_list中
         for(int i = 0; i < *dll_sig_files_num; i++) {
             if (access(dll_sig_files_split[i], F_OK)==0&&isFileWithSuffix(dll_sig_files_split[i], ".so")) {
@@ -178,7 +178,7 @@ void compile_func(int argc, char** argv) {
         // 获取单个的源文件
         // char** source_sig_files_split = splitString(source_sig_files, ' ');
         int* source_sig_files_num = (int*)malloc(sizeof(int));
-        char** source_sig_files_split = split_string_by_space(task.source_sig_files, source_sig_files_num);
+        char** source_sig_files_split = splitStringBySpace(task.source_sig_files, source_sig_files_num);
         // 添加到source_list中
         for (int i = 0; i < *source_sig_files_num; i++) {
             if (access(source_sig_files_split[i], F_OK)==0) {

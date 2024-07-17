@@ -35,7 +35,7 @@ struct header_folder {
  * @return true 
  * @return false 
  */
-bool isFileWithSuffix(const char *path, const char *suffix);
+bool isFileWithSuffix(char *path, char *suffix);
 
 /**
  * @brief 将字符串str拆分成以delimiter为分隔符的数组，返回数组指针。
@@ -44,7 +44,7 @@ bool isFileWithSuffix(const char *path, const char *suffix);
  * @param delimiter 
  * @return char** 
  */
-char **splitString(const char *str, char delimiter);
+char **splitString(char *str, char delimiter);
 
 /**
  * @brief 释放分割字符串的数组。
@@ -69,7 +69,7 @@ char* getFileName(char* filePath);
  * @param out_num_tokens 
  * @return char** 
  */
-char** split_string_by_space(const char* input_str, int* out_num_tokens);
+char** splitStringBySpace(char* input_str, int* out_num_tokens);
 
 /**
  * @brief 使用于本项目的特殊strlen，当str指向NULL时，返回0

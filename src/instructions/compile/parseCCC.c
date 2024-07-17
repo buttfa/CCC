@@ -33,7 +33,7 @@ compileTask parseCCCtask(char* ccc_path) {
         } buf[index] = '\0';
 
         int* argc = (int*)malloc(sizeof(int));
-        char** argv = split_string_by_space(buf,argc);
+        char** argv = splitStringBySpace(buf,argc);
 
         // 如果是空行，则跳过处理
         if(*argc == 0) {

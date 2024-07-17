@@ -1,5 +1,5 @@
 #include <file.h>
-bool isFileWithSuffix(const char *path, const char *suffix) {
+bool isFileWithSuffix(char *path, char *suffix) {
     // 首先检查路径是否以suffix结尾
     size_t path_len = hotfix_strlen(path);
     size_t suffix_len = hotfix_strlen(suffix);
@@ -29,7 +29,7 @@ bool isFileWithSuffix(const char *path, const char *suffix) {
  * @param delimiter 
  * @return char** 
  */
-char **splitString(const char *str, char delimiter) {
+char **splitString(char *str, char delimiter) {
     if (str == NULL) return NULL;
 
     int argc = 0;
@@ -129,10 +129,10 @@ char* getFileName(char* filePath) {
  * @param out_num_tokens 
  * @return char** 
  */
-char** split_string_by_space(const char* input_str, int* out_num_tokens) {
+char** splitStringBySpace(char* input_str, int* out_num_tokens) {
     if (input_str != NULL) {
         int count = 0;
-        const char* p = input_str;
+        char* p = input_str;
         
         // 跳过开头的空格
         while (isspace(*p)) {
@@ -168,7 +168,7 @@ char** split_string_by_space(const char* input_str, int* out_num_tokens) {
             if (*p == '\0') break; // 如果到达字符串末尾，跳出循环
 
             // 找到单词的结束位置
-            const char* token_end = p;
+            char* token_end = p;
             while (*token_end != '\0' && !isspace(*token_end)) {
                 ++token_end;
             }

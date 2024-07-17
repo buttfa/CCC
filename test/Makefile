@@ -1,0 +1,2 @@
+allTest: 
+	make -C instructions
