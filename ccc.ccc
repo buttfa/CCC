@@ -1,4 +1,4 @@
-[ccc]
+[<task>ccc]
 target_type  = c
 compiler = gcc
 linker = gcc

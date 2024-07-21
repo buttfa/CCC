@@ -32,7 +32,18 @@ void clean_func(int arg, char* argv[]) {
         ini* ccc_ini = iniParseFile(ccc_file_path);
         cleanTask task;
         for (int i = 0; i < ccc_ini->section_num; i++) {
-            task = parseCCCIni(ccc_ini->sections[i]);
+            section* ccc_section = ccc_ini->sections[i];
+            // 跳过非编译任务
+            if (strlen(ccc_section->name)<=6 || strncmp(ccc_section->name, "<task>", 6) != 0)
+                continue;
+
+            // 修改section的名称
+            char* task_name = strdup(ccc_section->name+6);
+            free(ccc_section->name);
+            ccc_section->name = task_name;
+
+            // 生成清理任务
+            task = parseCCCIni(ccc_section);
 /****************************************************************************/
             // 判断是否缺少必要ccc文件信息
             // 必要信息包括，target_type、compiler、linker、

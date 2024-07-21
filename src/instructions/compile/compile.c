@@ -45,8 +45,18 @@ void compile_func(int argc, char** argv) {
         // task = parseCCCtask(ccc_file_path);
         ini* ccc_ini = iniParseFile(ccc_file_path);
         for (int i = 0; i < ccc_ini->section_num; i++) {
-            task = parseCCCIni(ccc_ini->sections[i]);
-            handTask(task);
+            section* ccc_section = ccc_ini->sections[i];
+            // 判断是否是编译任务
+            if (strlen(ccc_section->name)>6 && strncmp(ccc_section->name, "<task>", 6) == 0) {
+                // 修改section的名称
+                char* task_name = strdup(ccc_section->name+6);
+                free(ccc_section->name);
+                ccc_section->name = task_name;
+
+                // 执行编译任务
+                task = parseCCCIni(ccc_section);
+                handTask(task);
+            }
         }
     } else {
         printf("[CCC]The target file does not exist or does not have a. ccc suffix\n");
