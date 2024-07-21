@@ -7,17 +7,17 @@ bool isFileWithSuffix(char *path, char *suffix) {
         return false; // 不是以指定后缀结尾
     }
 
-    // 使用stat函数获取文件状态信息
-    struct stat st;
-    if (stat(path, &st) == -1) {
-        // 文件不存在或无法访问
-        return false;
-    }
+    // // 使用stat函数获取文件状态信息
+    // struct stat st;
+    // if (stat(path, &st) == -1) {
+    //     // 文件不存在或无法访问
+    //     return false;
+    // }
 
-    // 检查是否为常规文件
-    if (!S_ISREG(st.st_mode)) {
-        return false; // 不是常规文件
-    }
+    // // 检查是否为常规文件
+    // if (!S_ISREG(st.st_mode)) {
+    //     return false; // 不是常规文件
+    // }
 
     return true; // 文件存在且以指定后缀结尾
 }

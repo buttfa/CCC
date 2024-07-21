@@ -8,5 +8,5 @@ obj_path = build/obj
 output_path = build
 library_path = lib
 
-[<shell>Hello World!]
+[<shell>Hello_World]
 printf = echo "Hello World!" 
