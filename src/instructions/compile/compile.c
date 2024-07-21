@@ -54,8 +54,32 @@ void compile_func(int argc, char** argv) {
                 ccc_section->name = task_name;
 
                 // 执行编译任务
+                printf("[CCC]Compile task: %s\n", task_name);
                 task = parseCCCIni(ccc_section);
                 handTask(task);
+
+                // 释放任务
+                freeTask(&task);
+                printf("[CCC]Compile task: %s done\n\n", task_name);
+                continue;
+            }
+
+            // 判断是否是Shell任务
+            if (strlen(ccc_section->name) > 7 && strncmp(ccc_section->name, "<shell>", 7) == 0) {
+                // 修改section的名称
+                char* task_name = strdup(ccc_section->name+7);
+                free(ccc_section->name);
+                ccc_section->name = task_name;
+
+                // 执行Shell任务
+                printf("[CCC]Shell task: %s\n", task_name);
+                for (int i = 0; i < ccc_section->kvp_num; i++) {
+                    printf("%s\n", ccc_section->kvps[i]->key);
+                    system(ccc_section->kvps[i]->value);
+                }
+
+                printf("[CCC]Shell task: %s done\n\n", task_name);
+                continue;
             }
         }
     } else {

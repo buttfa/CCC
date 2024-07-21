@@ -7,3 +7,6 @@ header_folder_path = inc
 obj_path = build/obj
 output_path = build
 library_path = lib
+
+[<shell>Hello World!]
+printf = echo "Hello World!" 

@@ -193,10 +193,6 @@ void handTask(struct COMPILE_TASK task) {
 /****************************************************************************/
         // 处理依赖
         handleReliance(&task);
-
-
-        // 释放内存
-        freeTask(&task);
 }
 
 /**

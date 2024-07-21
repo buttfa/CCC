@@ -43,6 +43,7 @@ void clean_func(int arg, char* argv[]) {
             ccc_section->name = task_name;
 
             // 生成清理任务
+            printf("[CCC]Clean task: %s\n", task_name);
             task = parseCCCIni(ccc_section);
 /****************************************************************************/
             // 判断是否缺少必要ccc文件信息
@@ -66,6 +67,7 @@ void clean_func(int arg, char* argv[]) {
 
             free(cmd);
             // 释放内存
+            printf("[CCC]Clean task: %s done\n\n", task_name);
             freeTask(&task);
         }
     }  else {
