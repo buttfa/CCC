@@ -70,7 +70,7 @@ char* dll_files;
 
 
 ##### 目标的依赖关系
-##### 1. target_reliance的file_path写入为$(output_path)/$(ccc_file_name)
+##### 1. target_reliance的file_path写入为$(output_path)/$(target_name)
 ##### 1. 遍历reliance_list、sll_list和dll_list的节点，计算节点数。
 ##### 2. 将节点数写入target_reliance的reliance_num中，并为char** reliant_files分配空间
 ##### 3. 再次遍历reliance_list、sll_list和dll_list的节点，将节点的file_path写入target_reliance.reliant_files中。

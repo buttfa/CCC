@@ -293,3 +293,115 @@ compileTask parseCCCtask(char* ccc_path) {
     fclose(ccc_file);
     return task;
 }
+
+/**
+ * @brief 解析section中的内容填入compileTask
+ * 
+ * @param ini_ptr 
+ * @return struct COMPILE_TASK 
+ */
+struct COMPILE_TASK parseCCCIni(section* task_section_ptr) {
+    // 创建compile_task
+    struct COMPILE_TASK task = {0};
+
+    task.target_name = strdup(task_section_ptr->name);
+    // 遍历section中的kvp
+    for (int i = 0; i < task_section_ptr->kvp_num; i++) {
+        // 获取target_type
+        if (strcmp(task_section_ptr->kvps[i]->key, "target_type")==0) {
+            task.target_type = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+        
+        // 获取compiler
+        if (strcmp(task_section_ptr->kvps[i]->key, "compiler")==0) {
+            task.compiler = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+
+        // 获取compile_flags
+        if (strcmp(task_section_ptr->kvps[i]->key, "compile_flags")==0) {
+            task.compile_flags = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+        
+        // 获取linker
+        if (strcmp(task_section_ptr->kvps[i]->key, "linker")==0) {
+            task.linker = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+        
+        // 获取link_flags
+        if (strcmp(task_section_ptr->kvps[i]->key, "link_flags")==0) {
+            task.link_flags = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+        
+        // 获取source_sig_files
+        if (strcmp(task_section_ptr->kvps[i]->key, "source_sig_files")==0) {
+            task.source_sig_files = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+        
+        // 获取source_folder_path
+        if (strcmp(task_section_ptr->kvps[i]->key, "source_folder_path")==0) {
+            task.source_folder_path = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+        
+        // 获取header_sig_files
+        if (strcmp(task_section_ptr->kvps[i]->key, "header_sig_files")==0) {
+            task.header_sig_files = strdup(task_section_ptr->kvps[i]->value); 
+            continue;
+        }
+        
+        // 获取header_folder_path
+        if (strcmp(task_section_ptr->kvps[i]->key, "header_folder_path")==0) {
+            task.header_folder_path = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+        
+        // 获取sll_sig_files
+        if (strcmp(task_section_ptr->kvps[i]->key, "sll_sig_files")==0) {
+            task.sll_sig_files = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+        
+        // 获取sll_folder_path
+        if (strcmp(task_section_ptr->kvps[i]->key, "sll_folder_path")==0) {
+            task.sll_folder_path = strdup(task_section_ptr->kvps[i]->value); 
+            continue;
+        }
+        
+        // 获取dll_sig_files
+        if (strcmp(task_section_ptr->kvps[i]->key, "dll_sig_files")==0) {
+            task.dll_sig_files = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+        
+        // 获取dll_folder_path
+        if (strcmp(task_section_ptr->kvps[i]->key, "dll_folder_path")==0) {
+            task.dll_folder_path = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+        
+        // 获取obj_path
+        if (strcmp(task_section_ptr->kvps[i]->key, "obj_path")==0) {
+            task.obj_path = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+
+        // 获取output_path
+        if (strcmp(task_section_ptr->kvps[i]->key, "output_path")==0) {
+            task.output_path = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+
+        // 获取library_path
+        if (strcmp(task_section_ptr->kvps[i]->key, "library_path")==0) {
+            task.library_path = strdup(task_section_ptr->kvps[i]->value);
+            continue;
+        }
+    }
+    return task;
+}

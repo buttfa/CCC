@@ -6,19 +6,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <file.h>
-#include <parseCCC.h>
-#include <checkCCC.h>
-#include <getHeader.h>
-#include <getSll.h>
-#include <getDll.h>
-#include <getSource.h>
-#include <getObjReliance.h>
-#include <getTargetReliance.h>
 #include <unistd.h>
+#include <compileTask.h>
 
 // .ccc文件信息
 extern char ccc_file_path[128];
-extern char ccc_file_name[128];
 
 
 /**

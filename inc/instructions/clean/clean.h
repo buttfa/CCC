@@ -8,7 +8,7 @@
 #include <compile.h>
 #include <compileTask.h>
 
-typedef compileTask cleanTask;
+typedef struct COMPILE_TASK cleanTask;
 
 /**
  * @brief clean指令的条件函数

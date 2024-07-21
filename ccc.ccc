@@ -1,10 +1,9 @@
+[ccc]
 target_type  = c
-
 compiler = gcc
 linker = gcc
-  
 source_folder_path = src
 header_folder_path = inc
-    
 obj_path = build/obj
 output_path = build
+library_path = lib

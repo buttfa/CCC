@@ -4,8 +4,13 @@ COMPILER = gcc
 C_FLAGS = 
 
 # 头文件目录
-C_INCLUDE = -I inc -I inc/instructions/compile -I inc/instructions/help -I inc/instructions/version -I inc/instructions/clean
- 
+C_INCLUDE = -I inc \
+-I inc/instructions/compile \
+-I inc/instructions/help \
+-I inc/instructions/version \
+-I inc/instructions/clean \
+-I lib/ini 
+
 # 生成文件目录 
 BUILD_DIR = build
 # 中间文件存放目录
@@ -14,8 +19,8 @@ OBJ_PATH = $(BUILD_DIR)/obj
 OUTPUT = $(BUILD_DIR)
  
 
-all: CCC VERSION HELP COMPILE CLEAN
-	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(COMPILE_OBJ_FILES) $(CLEAN_OBJ_FILES) -o $(OUTPUT)/ccc
+all: CCC VERSION HELP COMPILE CLEAN EINIP
+	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(COMPILE_OBJ_FILES) $(CLEAN_OBJ_FILES) $(EINIP_OBJ_FILES) -o $(OUTPUT)/ccc
 
 ###########################################################################
 # 编译CCC主体文件
@@ -60,6 +65,13 @@ CLEAN_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(CLEAN_FILES)))
 CLEAN: $(CLEAN_OBJ_FILES)
 $(CLEAN_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/clean/%.c
 	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
+###########################################################################
+
+###########################################################################
+# 编译EINIP库
+EINIP_OBJ_FILES = $(OBJ_PATH)/ini.o
+EINIP:
+	$(COMPILER) -c lib/ini/ini.c -o $(OBJ_PATH)/ini.o
 ###########################################################################
 
 ###########################################################################

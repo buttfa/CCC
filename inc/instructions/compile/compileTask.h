@@ -2,9 +2,17 @@
 #define __COMPILE_TASK_H__
 
 #include <stdlib.h>
-
+#include <parseCCC.h>
+#include <checkCCC.h>
+#include <getHeader.h>
+#include <getSll.h>
+#include <getDll.h>
+#include <getSource.h>
+#include <getObjReliance.h>
+#include <getTargetReliance.h>
  
 typedef struct COMPILE_TASK{
+    char* target_name;
     char* target_type;
 
     char* compiler;
@@ -38,13 +46,16 @@ typedef struct COMPILE_TASK{
 
     char* library_path;
 
-    char ccc_file_path[512];
-    char run_path[512];
-    char ccc_file_name[512];
-
     struct reliance* reliance_list;
     struct reliance* target_reliance;
 } compileTask;
+
+/**
+ * @brief 处理任务
+ * 
+ * @param task 
+ */
+void handTask(struct COMPILE_TASK task);
 
 /**
  * @brief 释放任务

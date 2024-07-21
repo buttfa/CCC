@@ -9,21 +9,11 @@ void createTargetReliance(struct COMPILE_TASK* task) {
     task->target_reliance = (struct reliance*)malloc(sizeof(struct reliance));
     memset(task->target_reliance, 0, sizeof(struct reliance));
     // 写入目标file_path
-    task->target_reliance->file_path = (char*)malloc(hotfix_strlen(task->output_path)+1+hotfix_strlen(ccc_file_name)+1);
-    memset(task->target_reliance->file_path, 0, hotfix_strlen(task->output_path)+1+hotfix_strlen(ccc_file_name)+1);
+    task->target_reliance->file_path = (char*)malloc(hotfix_strlen(task->output_path)+1+hotfix_strlen(task->target_name)+1);
+    memset(task->target_reliance->file_path, 0, hotfix_strlen(task->output_path)+1+hotfix_strlen(task->target_name)+1);
     hotfix_strcat(task->target_reliance->file_path, task->output_path);
     hotfix_strcat(task->target_reliance->file_path, "/");
-    hotfix_strcat(task->target_reliance->file_path, ccc_file_name);
-
-
-    // target_reliance->file_path = (char*)malloc(hotfix_strlen(run_path)+1+hotfix_strlen(output_path)+1+hotfix_strlen(ccc_file_name)+1);
-    // memset(target_reliance->file_path, 0, hotfix_strlen(run_path)+1+hotfix_strlen(output_path)+1+hotfix_strlen(ccc_file_name)+1);
-    // hotfix_strcat(target_reliance->file_path, run_path);
-    // hotfix_strcat(target_reliance->file_path, "/");
-    // hotfix_strcat(target_reliance->file_path, output_path);
-    // hotfix_strcat(target_reliance->file_path, "/");
-    // hotfix_strcat(target_reliance->file_path, ccc_file_name);
-
+    hotfix_strcat(task->target_reliance->file_path, task->target_name);
 
     // 遍历reliance_list、sll_list和dll_list计算target->reliance_num
     int size = 0;
