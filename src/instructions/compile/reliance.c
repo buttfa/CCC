@@ -58,9 +58,9 @@ void handleReliance(struct COMPILE_TASK* task) {
 
     // 处理目标依赖
     struct reliance* target = task->target_reliance;
-    for (int i = 0; i < target->reliance_num; i++) {
-        if (checkReliance(target->file_path,target->reliant_file[i])) {
-            flag = 0;
+    // for (int i = 0; i < target->reliance_num; i++) {
+    //     if (checkReliance(target->file_path,target->reliant_file[i])) {
+    //         flag = 0;
             char* cmd = (char*)malloc(hotfix_strlen(task->linker)+1+hotfix_strlen(task->obj_files)+1+hotfix_strlen(task->sll_files)+1+hotfix_strlen(task->dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(task->link_flags)+1);
             memset(cmd,0,hotfix_strlen(task->linker)+1+hotfix_strlen(task->obj_files)+1+hotfix_strlen(task->sll_files)+1+hotfix_strlen(task->dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(task->link_flags)+1);
             hotfix_strcat(cmd,task->linker);
@@ -83,11 +83,11 @@ void handleReliance(struct COMPILE_TASK* task) {
             system(cmd);
 
             free(cmd);
-            break;
-        }
-    }
+    //         break;
+    //     }
+    // }
 
-    if(flag == 1) {
-        printf("[%s]All files have been compiled.\n",ccc_file_path);
-    }
+    // if(flag == 1) {
+    //     printf("[%s]All files have been compiled.\n",ccc_file_path);
+    // }
 }
