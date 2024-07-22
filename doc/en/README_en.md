@@ -1,3 +1,5 @@
+### <div align="center">|[简体中文](../../README.md)|[English](README_en.md)|</div>
+
 ## Project Name
 #### CCC / C-series compiler coprocessor
 

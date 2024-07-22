@@ -1,3 +1,4 @@
+### <div align="center">|[简体中文](README.md)|[English](doc/en/README_en.md)|</div>
 ## 项目名称 
 #### CCC / C-series compiler coprocessor
 
