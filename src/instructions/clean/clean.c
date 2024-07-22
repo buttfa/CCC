@@ -67,7 +67,7 @@ void clean_func(int arg, char* argv[]) {
 
             free(cmd);
             // 释放内存
-            printf("[CCC]Clean task: %s done\n\n", task_name);
+            printf("[CCC]Clean task: %s done\n", task_name);
             freeTask(&task);
         }
     }  else {

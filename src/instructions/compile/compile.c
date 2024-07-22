@@ -1,7 +1,6 @@
 #include <compile.h>
 // .ccc文件信息
 char ccc_file_path[128];
-char run_path[128];
 
 /**
  * @brief compile的条件函数
@@ -26,16 +25,9 @@ bool cdt_compile(int argc, char** argv) {
  * @param argv 
  */
 void compile_func(int argc, char** argv) {
-    // 获取运行路径
-    getcwd(run_path, sizeof(run_path));
     // 获取ccc文件路径
     hotfix_strcat(ccc_file_path,argv[1]);
     
-    // 获取文件的绝对路径
-    char *ccc_path = (char*)malloc(hotfix_strlen(run_path)+hotfix_strlen(argv[1])+2);
-    hotfix_strcat(ccc_path,run_path);
-    hotfix_strcat(ccc_path,"/");
-    hotfix_strcat(ccc_path,argv[1]);
     // 判断文件是否存在以及是否为.ccc文件
     if (access(ccc_file_path, F_OK)==0 && isFileWithSuffix(ccc_file_path,".ccc")) {
 /****************************************************************************/            
@@ -108,11 +100,16 @@ void isShellTask(section *ccc_section) {
         // 执行Shell任务
         printf("[CCC]Shell task: %s\n", task_name);
         for (int i = 0; i < ccc_section->kvp_num; i++) {
-            printf("%s\n", ccc_section->kvps[i]->key);
+            // 如果key为NULL或null开头，则不输出key
+            if (strlen(ccc_section->kvps[i]->key)>=6 && (strncmp(ccc_section->kvps[i]->key, "(NULL)",6)==0||strncmp(ccc_section->kvps[i]->key, "(null)",6)==0)){
+
+            } else {
+                printf("%s\n", ccc_section->kvps[i]->key);
+            }
             system(ccc_section->kvps[i]->value);
         }
 
-        printf("[CCC]Shell task: %s done\n\n", task_name);
+        printf("[CCC]Shell task: %s done\n", task_name);
     }
 }
 
@@ -136,6 +133,6 @@ void isCompileTask(section *ccc_section) {
 
         // 释放任务
         freeTask(&task);
-        printf("[CCC]Compile task: %s done\n\n", task_name);
+        printf("[CCC]Compile task: %s done\n", task_name);
     }
 }
