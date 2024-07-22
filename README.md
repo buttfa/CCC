@@ -28,7 +28,7 @@ make install
 make clean
 // 或（已经安装CCC的前提下）
 ccc ccc.ccc clean
-```
+``` 
 #### （四）卸载项目
 ```c
 make uninstall
