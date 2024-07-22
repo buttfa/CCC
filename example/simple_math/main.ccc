@@ -1,18 +1,26 @@
-target_type = c
+[<shell>all]
+(NULL)_1 = echo
+first_step = ccc main.ccc my_math.a
+(null)_2 = echo
+seconde_step = ccc main.ccc main
+(null)_3 = echo
 
+[<task>my_math.a]
+target_type = c
+compiler = gcc
+linker = ar
+link_flags = rcs
+source_folder_path = lib/math
+header_folder_path = lib/math
+obj_path = lib/math/obj
+output_path = lib/math
+
+[<task>main]
+target_type = c
 compiler = gcc
 compile_flags = -static
-
 linker = gcc
-link_flags =
-
 source_folder_path = src
-header_folder_path = 
-
 sll_folder_path = lib
-dll_folder_path =
-
 obj_path = build/obj
 output_path = build
-
-library_path = 
