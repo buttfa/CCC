@@ -5,13 +5,18 @@
 #### 作为简单的案例展示CCC的使用方法
 
 ## 编译方法
+#### （一）一步编译文件
 ```c
-// 1. 编译math.a
-// my_math.a为包含函数库的静态库
-ccc my_math.a.ccc
-```
-```c
-// 2. 编译main
-// main为调用my_math.a的测试程序
+// 编译全部文件
 ccc main.ccc
+// 或
+ccc main.ccc all
+```
+#### （二）分步编译文件
+```c
+// 编译my_math.a文件
+ccc main.ccc my_math.a
+
+// 编译主文件
+ccc main.ccc main
 ```

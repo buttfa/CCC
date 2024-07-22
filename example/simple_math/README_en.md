@@ -5,13 +5,18 @@
 #### Show the usage of CCC as a simple case study
 
 ## Compilation method
+#### （1） One step file compilation
 ```c
-// 1.  Compile math. a
-//My_math. a is a static library that contains function libraries
-ccc my_math.a.ccc
-```
-```c
-// 2.  Compile main
-//Main is the test program that calls my_math. a
+//Compile all files
 ccc main.ccc
+//Or
+ccc main.ccc all
+```
+#### （2） Compile files step by step
+```c
+//Compile my_math. a file
+ccc main.ccc my_math.a
+
+//Compile the main file
+ccc main.ccc main
 ```
