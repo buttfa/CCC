@@ -1,5 +1,11 @@
 ### <div align="center">|[简体中文](../../README.md)|[English](README_en.md)|</div>
 
+## <div align="center">Directory</div>
+- [Project Name](#project-name)
+- [Project Introduction](#project-introduction)
+- [Installation and uninstallation methods](#installation-and-uninstallation-methods)
+- [Usage](#usage)
+
 ## Project Name
 #### CCC / C-series compiler coprocessor
 
@@ -30,14 +36,14 @@ make uninstall
 
 ## Usage
 #### （1） Create a. ccc file
-##### Create a \$(ccc_file). ccc file in the root directory of the project. For specific details, please refer to CCC.md under this project
+##### Create an XXX.ccc file. Please refer to the [CCC_en.md](CCC_en.md) under this project for specific content
 #### （2） Edit. ccc file
-##### For specific details, please refer to CCC.md under this project
+##### For specific details, please refer to [CCC_en.md](CCC_en.md) under this project
 #### （3） Run the CCC command
-##### Run the ccc (ccc_file) command to compile multiple source files into target files. (The file name of the target file is (ccc_file), which is stored in the path of (output_path) in the ccc file.)
+##### Run the ccc XXX.ccc command to execute the first task in the ccc file, or the ccc XXX.ccc taskname command to execute the specified task in the ccc file.
 <!--####  （4） Delete intermediate files -->
 <!--#####  Run the ccc $(ccc_file) clean command to delete intermediate files. -->
 
-## About dependencies
+<!--## About dependencies
 #### CCC will create. o files for each. c/. cpp file and establish dependencies for these. o files. The dependent files are the corresponding. c/. cpp and the header files contained in. c/. cpp. Therefore, when you modify the corresponding. c/. cpp file for a certain. o and the header files contained in. c/. cpp, the. o file will be recompiled.
-#### In addition, the final output file depends on all. o files.
+#### In addition, the final output file depends on all. o files.-->
