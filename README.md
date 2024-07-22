@@ -1,3 +1,6 @@
+# <div align="center">CCC</div>
+### <div align="center">![CCC_ICON](img/icon.png)</div>
+
 ### <div align="center">|[简体中文](README.md)|[English](doc/en/README_en.md)|</div>
 
 ## <div align="center">目录</div> 
