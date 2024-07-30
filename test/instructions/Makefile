@@ -1,2 +1,2 @@
 allTest: 
-	make -C compile
+	make -C task
