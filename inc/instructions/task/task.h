@@ -22,7 +22,7 @@ extern char ccc_file_path[128];
  * @return true 
  * @return false 
  */
-bool cdt_compile(int argc, char** argv);
+bool cdt_task(int argc, char** argv);
 
 /**
  * @brief 编译函数
@@ -30,7 +30,7 @@ bool cdt_compile(int argc, char** argv);
  * @param argc 
  * @param argv 
  */
-void compile_func(int argc, char **argv);
+void task_func(int argc, char **argv);
 
 /**
  * @brief 判断是否是shell任务，如果是则执行shell任务

@@ -8,7 +8,7 @@
 #include <help.h>
 
 #include <version.h>
-#include <compile.h>
+#include <task.h>
 #include <clean.h>
 
 /**

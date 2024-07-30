@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <string.h>
 
-#include <compile.h>
+#include <task.h>
 #include <compileTask.h>
 
 typedef struct COMPILE_TASK cleanTask;

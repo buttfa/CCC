@@ -1,4 +1,4 @@
-#include <compile.h>
+#include <task.h>
 // .ccc文件信息
 char ccc_file_path[128];
 
@@ -10,7 +10,7 @@ char ccc_file_path[128];
  * @return true 
  * @return false 
  */
-bool cdt_compile(int argc, char** argv) {
+bool cdt_task(int argc, char** argv) {
     if (argc == 2 || (argc == 3 && strcmp(argv[2], "clean")!=0)) {
         return true;
     } else {
@@ -24,7 +24,7 @@ bool cdt_compile(int argc, char** argv) {
  * @param argc 
  * @param argv 
  */
-void compile_func(int argc, char** argv) {
+void task_func(int argc, char** argv) {
     // 获取ccc文件路径
     hotfix_strcat(ccc_file_path,argv[1]);
     

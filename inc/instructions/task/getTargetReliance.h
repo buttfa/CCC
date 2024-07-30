@@ -3,7 +3,7 @@
 
 #include <ccc.h>
 #include <reliance.h>
-#include <compile.h>
+#include <task.h>
 
 /**
  * @brief 根据reliance_list、sll_list和dll_list创建目标依赖

@@ -5,7 +5,7 @@
 #include <stdbool.h>
 #include <string.h>
 #include <compileTask.h>
-#include <compile.h>
+#include <task.h>
 
 /**
  * @brief 依赖节点

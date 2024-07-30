@@ -2,7 +2,7 @@
 #define __CHECKCCC_H__
 
 #include <ccc.h>
-#include <compile.h>
+#include <task.h>
 
 /**
  * @brief 检查是否缺少必要ccc文件信息

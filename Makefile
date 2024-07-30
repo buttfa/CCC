@@ -5,7 +5,7 @@ C_FLAGS =
 
 # 头文件目录
 C_INCLUDE = -I inc \
--I inc/instructions/compile \
+-I inc/instructions/task \
 -I inc/instructions/help \
 -I inc/instructions/version \
 -I inc/instructions/clean \
@@ -19,8 +19,8 @@ OBJ_PATH = $(BUILD_DIR)/obj
 OUTPUT = $(BUILD_DIR)
  
 
-all: CCC VERSION HELP COMPILE CLEAN EINIP
-	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(COMPILE_OBJ_FILES) $(CLEAN_OBJ_FILES) $(EINIP_OBJ_FILES) -o $(OUTPUT)/ccc
+all: CCC VERSION HELP TASK CLEAN EINIP
+	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(TASK_OBJ_FILES) $(CLEAN_OBJ_FILES) $(EINIP_OBJ_FILES) -o $(OUTPUT)/ccc
 
 ###########################################################################
 # 编译CCC主体文件
@@ -50,11 +50,11 @@ $(HELP_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/help/%.c
 ###########################################################################
 
 ###########################################################################
-# 编译COMPILE指令文件
-COMPILE_FILES = $(wildcard src/instructions/compile/*.c)
-COMPILE_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(COMPILE_FILES)))
-COMPILE: $(COMPILE_OBJ_FILES)
-$(COMPILE_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/compile/%.c
+# 编译TASK指令文件
+TASK_FILES = $(wildcard src/instructions/task/*.c)
+TASK_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(TASK_FILES)))
+TASK: $(TASK_OBJ_FILES)
+$(TASK_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/task/%.c
 	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
 ###########################################################################
 

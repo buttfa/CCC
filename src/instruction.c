@@ -34,15 +34,15 @@ void init_instructions() {
     version->func = printfVersion;
     add_instruction(version);
 /****************************************************************************/
-    // 添加build指令
-    struct instruction* compile = (struct instruction*)malloc(sizeof(struct instruction));
-    memset(compile, 0, sizeof(struct instruction));
-    compile->name = (char*)malloc(strlen("compile") + 1);
-    memset(compile->name, 0, strlen("compile") + 1);
-    strcat(compile->name, "compile");
-    compile->cdt_func = cdt_compile;
-    compile->func = compile_func;
-    add_instruction(compile);
+    // 添加task指令
+    struct instruction* task = (struct instruction*)malloc(sizeof(struct instruction));
+    memset(task, 0, sizeof(struct instruction));
+    task->name = (char*)malloc(strlen("task") + 1);
+    memset(task->name, 0, strlen("task") + 1);
+    strcat(task->name, "task");
+    task->cdt_func = cdt_task;
+    task->func = task_func;
+    add_instruction(task);
 /****************************************************************************/
     // 添加clean指令
     struct instruction* clean = (struct instruction*)malloc(sizeof(struct instruction));

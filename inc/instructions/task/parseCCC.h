@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ccc.h>
-#include <compile.h>
+#include <task.h>
 #include "ini.h"
 
 struct ARG{

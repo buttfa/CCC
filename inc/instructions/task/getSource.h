@@ -8,7 +8,7 @@
 #include <stdbool.h>
 #include <file.h>
 #include <dirent.h>
-#include <compile.h>
+#include <task.h>
 #include <compileTask.h>
 #include <file.h>
 

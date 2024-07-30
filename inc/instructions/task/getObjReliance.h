@@ -2,7 +2,7 @@
 #define __GETOBJRELIANCE_H__
 
 #include <ccc.h>
-#include <compile.h>
+#include <task.h>
 #include <file.h>
 #include <reliance.h>
 #include <compileTask.h>
