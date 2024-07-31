@@ -9,6 +9,7 @@ C_INCLUDE = -I inc \
 -I inc/instructions/help \
 -I inc/instructions/version \
 -I inc/instructions/clean \
+-I inc/instructions/template \
 -I lib/ini 
 
 # 生成文件目录 
@@ -19,8 +20,8 @@ OBJ_PATH = $(BUILD_DIR)/obj
 OUTPUT = $(BUILD_DIR)
  
 
-all: CCC VERSION HELP TASK CLEAN EINIP
-	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(TASK_OBJ_FILES) $(CLEAN_OBJ_FILES) $(EINIP_OBJ_FILES) -o $(OUTPUT)/ccc
+all: CCC VERSION HELP TASK CLEAN TEMPLATE EINIP
+	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(TASK_OBJ_FILES) $(CLEAN_OBJ_FILES) $(TEMPLATE_OBJ_FILES) $(EINIP_OBJ_FILES) -o $(OUTPUT)/ccc
 
 ###########################################################################
 # 编译CCC主体文件
@@ -68,9 +69,19 @@ $(CLEAN_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/clean/%.c
 ###########################################################################
 
 ###########################################################################
+# 编译TEMPLATE指令文件
+TEMPLATE_FILES = $(wildcard src/instructions/template/*.c)
+TEMPLATE_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(TEMPLATE_FILES)))
+TEMPLATE: $(TEMPLATE_OBJ_FILES)
+$(TEMPLATE_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/template/%.c
+	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
+###########################################################################
+
+###########################################################################
 # 编译EINIP库
 EINIP_OBJ_FILES = $(OBJ_PATH)/ini.o
-EINIP:
+EINIP: $(OBJ_PATH)/ini.o
+$(OBJ_PATH)/ini.o: lib/ini/ini.c
 	$(COMPILER) -c lib/ini/ini.c -o $(OBJ_PATH)/ini.o
 ###########################################################################
 
