@@ -53,6 +53,16 @@ void init_instructions() {
     clean->cdt_func = cdt_clean;
     clean->func = clean_func;
     add_instruction(clean);
+/****************************************************************************/
+    // 添加template指令
+    struct instruction* template = (struct instruction*)malloc(sizeof(struct instruction));
+    memset(template, 0, sizeof(struct instruction));
+    template->name = (char*)malloc(strlen("template") + 1);
+    memset(template->name, 0, strlen("template") + 1);
+    strcat(template->name, "template");
+    template->cdt_func = cdt_template;
+    template->func = template_func;
+    add_instruction(template);
 }
 
 /**

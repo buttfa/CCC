@@ -10,6 +10,7 @@
 #include <version.h>
 #include <task.h>
 #include <clean.h>
+#include "template.h"
 
 /**
  * @brief 定义了指令结构体
