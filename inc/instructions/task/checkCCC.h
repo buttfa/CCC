@@ -4,6 +4,8 @@
 #include <ccc.h>
 #include <task.h>
 
+struct COMPILE_TASK;
+
 /**
  * @brief 检查是否缺少必要ccc文件信息
  * 
