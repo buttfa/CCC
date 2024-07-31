@@ -34,16 +34,6 @@ void init_instructions() {
     version->func = printfVersion;
     add_instruction(version);
 /****************************************************************************/
-    // 添加task指令
-    struct instruction* task = (struct instruction*)malloc(sizeof(struct instruction));
-    memset(task, 0, sizeof(struct instruction));
-    task->name = (char*)malloc(strlen("task") + 1);
-    memset(task->name, 0, strlen("task") + 1);
-    strcat(task->name, "task");
-    task->cdt_func = cdt_task;
-    task->func = task_func;
-    add_instruction(task);
-/****************************************************************************/
     // 添加clean指令
     struct instruction* clean = (struct instruction*)malloc(sizeof(struct instruction));
     memset(clean, 0, sizeof(struct instruction));
@@ -63,6 +53,16 @@ void init_instructions() {
     template->cdt_func = cdt_template;
     template->func = template_func;
     add_instruction(template);
+/****************************************************************************/
+    // 添加task指令
+    struct instruction* task = (struct instruction*)malloc(sizeof(struct instruction));
+    memset(task, 0, sizeof(struct instruction));
+    task->name = (char*)malloc(strlen("task") + 1);
+    memset(task->name, 0, strlen("task") + 1);
+    strcat(task->name, "task");
+    task->cdt_func = cdt_task;
+    task->func = task_func;
+    add_instruction(task);
 }
 
 /**

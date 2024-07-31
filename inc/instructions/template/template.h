@@ -2,6 +2,8 @@
 #define __TEMPLATE_H__
 
 #include <stdbool.h>
+#include <string.h>
+#include <stdio.h>
 
 /**
  * @brief template指令的条件函数
