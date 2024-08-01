@@ -5,6 +5,8 @@
 #include <string.h>
 #include <stdio.h>
 
+#include "defaultTemplate.h"
+
 /**
  * @brief template指令的条件函数
  * 
