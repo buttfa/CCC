@@ -8,7 +8,8 @@
 - [Project Introduction](#project-introduction)
 - [Installation and uninstallation methods](#installation-and-uninstallation-methods)
 - [Usage](#usage)
-
+  - [Method 1: Create a C/C++ project using CCC](#method-1-create-a-cc-project-using-ccc)
+  - [Method 2: Create your own. ccc file](#method-2-create-your-own-ccc-file)
 ## Project Name
 #### CCC / C-series compiler coprocessor
 
@@ -38,14 +39,36 @@ make uninstall
 ```
 
 ## Usage
+#### Method 1: Create a C/C++ project using CCC
+##### Create a C/C++ project
+```c
+// Create a C project
+ccc newc project_name
+// Create a C++ project
+ccc newcpp project_name
+```
+##### Compile project
+```c
+// Enter the project directory
+cd project_name
+// Compile only
+ccc project_name.ccc
+// Compile and run
+ccc project_name.ccc run
+// Delete intermediate and target files
+ccc project_name.ccc clean
+```
+
+#### Method 2: Create your own. ccc file
+#### If you have already created a project, you can create a. ccc file by yourself to manage the project.
 #### （1） Create a. ccc file
 ##### Create an XXX.ccc file. Please refer to the [CCC_en.md](CCC_en.md) under this project for specific content
 #### （2） Edit. ccc file
 ##### For specific details, please refer to [CCC_en.md](CCC_en.md) under this project
 #### （3） Run the CCC command
 ##### Run the ccc XXX.ccc command to execute the first task in the ccc file, or the ccc XXX.ccc taskname command to execute the specified task in the ccc file.
-<!--####  （4） Delete intermediate files -->
-<!--#####  Run the ccc $(ccc_file) clean command to delete intermediate files. -->
+####  （4） Delete intermediate files
+#####  Run the ccc XXX.ccc clean command to delete intermediate files.
 
 <!--## About dependencies
 #### CCC will create. o files for each. c/. cpp file and establish dependencies for these. o files. The dependent files are the corresponding. c/. cpp and the header files contained in. c/. cpp. Therefore, when you modify the corresponding. c/. cpp file for a certain. o and the header files contained in. c/. cpp, the. o file will be recompiled.
