@@ -1,11 +1,21 @@
+/**
+ * @file defaultTemplate.c
+ * @author  buttfa (1662332017@qq.com)
+ * @brief 创建默认模板项目的具体实现
+ * @version 0.1
+ * @date 2024-08-23
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include "defaultTemplate.h"
 
 /**
  * @brief 创建文件夹
  * 
- * @param folder_path 
+ * @param folder_path 需要创建的文件夹路径
  */
-void createFolder(char* folder_path) {
+static void createFolder(char* folder_path) {
     // 创建文件夹
     char* cmd = (char*)malloc(strlen("mkdir ")+strlen(folder_path)+1);
     sprintf(cmd, "mkdir %s", folder_path);
@@ -18,10 +28,10 @@ void createFolder(char* folder_path) {
 /**
  * @brief 创建包含指定内容的文件
  * 
- * @param file_path 
- * @param content 
+ * @param file_path 需要写入的文件路径
+ * @param content 需要写入的内容
  */
-void createFileWithSpecifyContent(char* file_path, char* content) {
+static void createFileWithSpecifyContent(char* file_path, char* content) {
     // 创建文件
     FILE* fp = fopen(file_path, "w");
 
@@ -35,7 +45,8 @@ void createFileWithSpecifyContent(char* file_path, char* content) {
 /**
  * @brief 在运行目录下创建一个名为project_name的默认模板项目
  * 
- * @param project_name 
+ * @param project_name 工程名称
+ * @param project_type 工程类型
  */
 void createDefaultTemplateProject(char* project_name, char* project_type) {
     // 创建工程文件夹
