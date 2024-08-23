@@ -1,3 +1,13 @@
+/**
+ * @file instruction.c
+ * @author  buttfa (1662332017@qq.com)
+ * @brief CCC指令框架的实现。如果需要添加新的指令，请在init_instructions函数中添加。
+ * @version 0.1
+ * @date 2024-08-23
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include <instruction.h>
 
 /**

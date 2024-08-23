@@ -1,15 +1,22 @@
 #ifndef __STRUCTION_H__
 #define __STRUCTION_H__
+/**
+ * @file instruction.h
+ * @author  buttfa (1662332017@qq.com)
+ * @brief CCC指令框架的头文件，定义了指令结构体，并使用指令链表统一管理指令。
+ * @version 0.1
+ * @date 2024-08-23
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 
-#include <stdio.h>
-#include <ccc.h>
 #include <string.h>
-#include <stdbool.h>
-#include <help.h>
 
-#include <version.h>
-#include <task.h>
-#include <clean.h>
+#include "help.h"
+#include "version.h"
+#include "task.h"
+#include "clean.h"
 #include "template.h"
 
 /**
@@ -38,7 +45,7 @@ void init_instructions();
 /**
  * @brief 添加指令到指令链表
  * 
- * @param instruction 
+ * @param instruction 需要添加到指令链表的指令结构体
  */
 void add_instruction(struct instruction *instruction);
 
