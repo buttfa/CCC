@@ -1,11 +1,23 @@
+/**
+ * @file clean.c
+ * @author  buttfa (1662332017@qq.com)
+ * @brief clean指令的具体实现
+ * @version 0.1
+ * @date 2024-08-23
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
+
 #include <clean.h>
+
 /**
  * @brief clean指令的条件函数
  * 
- * @param argc 
- * @param argv 
- * @return true 
- * @return false 
+ * @param argc CCC命令行参数个数
+ * @param argv CCC命令行参数
+ * @return true CCC命令行参数符合clean指令的条件
+ * @return false CCC命令行参数不符合clean指令的条件
  */
 bool cdt_clean(int argc, char* argv[]) {
     if (argc == 3 && strcmp(argv[2], "clean") == 0) {
@@ -18,8 +30,8 @@ bool cdt_clean(int argc, char* argv[]) {
 /**
  * @brief 清除编译产生的文件，包含中间文件和目标文件
  * 
- * @param arg 
- * @param argv 
+ * @param arg CCC命令行参数个数
+ * @param argv CCC命令行参数
  */
 void clean_func(int arg, char* argv[]) {
     // 判断ccc文件是否存在，且以.ccc为后缀
