@@ -1,9 +1,19 @@
+/**
+ * @file compileTask.c
+ * @author  buttfa (1662332017@qq.com)
+ * @brief 实现编译任务相关的函数
+ * @version 0.1
+ * @date 2024-08-23
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include <compileTask.h>
 
 /**
  * @brief 处理任务
  * 
- * @param task 
+ * @param task 需要处理的编译任务
  */
 void handTask(struct COMPILE_TASK task) {
 /****************************************************************************/
@@ -198,7 +208,7 @@ void handTask(struct COMPILE_TASK task) {
 /**
  * @brief 释放任务
  * 
- * @param task 
+ * @param task 需要释放的编译任务
  */
 void freeTask(struct COMPILE_TASK* task) {
     free(task->target_name);
