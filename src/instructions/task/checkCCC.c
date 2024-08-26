@@ -1,8 +1,19 @@
+/**
+ * @file checkCCC.c
+ * @author  buttfa (1662332017@qq.com)
+ * @brief 实现了用于检查是否缺少必要ccc文件信息的函数
+ * @version 0.1
+ * @date 2024-08-26
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include <checkCCC.h>
 
 /**
  * @brief 检查是否缺少必要ccc文件信息
  * 
+ * @param task 
  */
 void checkCCC(struct COMPILE_TASK task) {
     int flag = 1;
