@@ -19,7 +19,7 @@
  * @return false 传入的参数不符合version的格式
  */
 bool cdt_version(int argc, char** argv) {
-    if (argc == 2 &&(strcmp(argv[1], "version") == 0 || strcmp(argv[1], "-v") == 0)) {
+    if (argc == 2 && strcmp(argv[1], "--version")==0) {
         return true;
     } else {
         return false;

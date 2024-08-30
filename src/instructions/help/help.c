@@ -17,7 +17,7 @@
  * @return false CCC命令行参数不满足help指令格式
  */
 bool cdt_help(int argc, char** argv) {
-    if (argc == 2 &&(strcmp(argv[1], "-h") == 0 || strcmp(argv[1], "help") == 0)) {
+    if (argc == 2 && strcmp(argv[1], "--help") == 0) {
         return true;
     } else {
         return false;
@@ -31,8 +31,8 @@ bool cdt_help(int argc, char** argv) {
 void printfHelp() {
     printf("Usage: ccc [OPTION]\n");
     printf("Options:-\n");
-    printf("  -h, help      display this help and exit\n");
-    printf("  -v, version   display version information and exit\n");
-    printf("  ccc_file        compile based on ccc_file\n");
+    printf("  --help        display this help and exit\n");
+    printf("  --version     display version information and exit\n");
+    printf("  ccc_file      compile based on ccc_file\n");
     printf("Report bugs to <https://github.com/buttfa/CCC/issues>\n");
 }
