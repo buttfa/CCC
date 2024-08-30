@@ -1,14 +1,24 @@
+/**
+ * @file getDll.c
+ * @author  buttfa (1662332017@qq.com)
+ * @brief 实现了了获取dll_sig_files、dll_folder_path和library_path中dll文件的相关操作
+ * @version 0.1
+ * @date 2024-08-29
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include <getDll.h>
 
 
 /**
- * @brief 检查链表中是否存在特定路径
+ * @brief 查询路径是否已经在dll_list中
  * 
- * @param node 
- * @param path 
- * @return int 
+ * @param node dll_list链表的头结点指针
+ * @param path 需要查询
+ * @return int 返回1 表示在链表中，0表示不在链表中
  */
-int isPathInDllList(const struct file_node* node, const char* path) {
+static int isPathInDllList(const struct file_node* node, const char* path) {
     while (node != NULL) {
         if (strcmp(node->file_path, path) == 0) {
             return 1;
@@ -21,10 +31,10 @@ int isPathInDllList(const struct file_node* node, const char* path) {
 /**
  * @brief 向链表追加节点
  * 
- * @param head 
- * @param path 
+ * @param head dll_list链表的头结点的二级指针
+ * @param path 需要添加的文件路径
  */
-void appendToDllList(struct file_node** head, const char* path) {
+static void appendToDllList(struct file_node** head, const char* path) {
     struct file_node* newNode = (struct file_node*)malloc(sizeof(struct file_node));
     newNode->file_path = strdup(path);
     newNode->next = NULL;
@@ -41,10 +51,11 @@ void appendToDllList(struct file_node** head, const char* path) {
 }
 
 /**
- * @brief 将dll_folder_path文件夹及其子文件夹中的.so文件添加到dll_list中
+ * @brief 将dll_folder_path文件夹及其子文件夹中的.a文件添加到dll_list中
  *        （每次添加前需要检查，避免重复添加）
  * 
- * @param dll_folder_path 
+ * @param dll_folder_path 需要遍历的文件夹路径
+ * @param task 遍历到的.a文件会添加到task->dll_list中
  */
 void addDlllist(const char* dll_folder_path, struct COMPILE_TASK* task) {
     DIR* dir;
@@ -75,7 +86,8 @@ void addDlllist(const char* dll_folder_path, struct COMPILE_TASK* task) {
 /**
  * @brief 将单个文件添加到dll_list中
  * 
- * @param file_path 
+ * @param file_path 需要添加的文件路径
+ * @param task 文件会添加到task->dll_list中
  */
 void addDllfileToList(char* file_path, struct COMPILE_TASK* task) {
     if (!isPathInDllList(task->dll_list, file_path)) {
@@ -86,6 +98,7 @@ void addDllfileToList(char* file_path, struct COMPILE_TASK* task) {
 /**
  * @brief 打印dll_list
  * 
+ * @param task 包含dll_list的task
  */
 void printfDlllist(struct COMPILE_TASK* task) {
     struct file_node* current = task->dll_list;
@@ -98,6 +111,7 @@ void printfDlllist(struct COMPILE_TASK* task) {
 /**
  * @brief 释放dll_list
  * 
+ * @param task 包含需要释放的dll_list的task
  */
 void freeDlllist(struct COMPILE_TASK* task) {
     struct file_node* current = task->dll_list;
@@ -124,6 +138,7 @@ void freeDlllist(struct COMPILE_TASK* task) {
 /**
  * @brief 根据dll_list创建dll_files
  * 
+ * @param task 包含dll_list的task
  */
 void createDllFiles(struct COMPILE_TASK* task) {
     int total_length = 0; // 用于计算总的字符串长度
