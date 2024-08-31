@@ -1,14 +1,24 @@
+/**
+ * @file reliance.c
+ * @author  buttfa (1662332017@qq.com)
+ * @brief 根据依赖关系，判断是否需要重新编译
+ * @version 0.1
+ * @date 2024-08-31
+ * 
+ * @copyright Copyright (c) 2024
+ * 
+ */
 #include <reliance.h>
 
 /**
  * @brief 检查依赖是否需要更新，当target_path比reliant_path新，则返回false，否则返回true
  * 
- * @param target_path 
- * @param reliant_path 
- * @return true 
- * @return false 
+ * @param target_path 目标文件路径
+ * @param reliant_path 对应的依赖文件路径
+ * @return true 需要更新
+ * @return false 不需要更新
  */
-bool checkReliance(char* target_path, char* reliant_path){
+static bool checkReliance(char* target_path, char* reliant_path){
     struct stat target_stat,reliant_stat;
     if (stat(target_path,&target_stat) == -1) {
         return true;
@@ -25,6 +35,7 @@ bool checkReliance(char* target_path, char* reliant_path){
 /**
  * @brief 处理中间依赖组和目标依赖，并实现编译
  * 
+ * @param task 需要处理的编译任务
  */
 void handleReliance(struct COMPILE_TASK* task) {
     int flag = 1;
@@ -35,17 +46,23 @@ void handleReliance(struct COMPILE_TASK* task) {
             if (checkReliance(reliance->file_path,reliance->reliant_file[i])) {
                 flag = 0;
                 char* cmd = (char*)malloc(hotfix_strlen(task->compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(task->header_folders)+1+hotfix_strlen(task->compile_flags)+1);
-                memset(cmd,0,hotfix_strlen(task->compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(task->header_folders)+1+hotfix_strlen(task->compile_flags)+1);
-                hotfix_strcat(cmd,task->compiler);
-                hotfix_strcat(cmd," ");
-                hotfix_strcat(cmd,"-c ");
-                hotfix_strcat(cmd,reliance->reliant_file[0]);
-                hotfix_strcat(cmd," -o ");
-                hotfix_strcat(cmd,reliance->file_path);
-                hotfix_strcat(cmd," ");
-                hotfix_strcat(cmd,task->header_folders);
-                hotfix_strcat(cmd," ");
-                hotfix_strcat(cmd,task->compile_flags);
+                // memset(cmd,0,hotfix_strlen(task->compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(task->header_folders)+1+hotfix_strlen(task->compile_flags)+1);
+                // hotfix_strcat(cmd,task->compiler);
+                // hotfix_strcat(cmd," ");
+                // hotfix_strcat(cmd,"-c ");
+                // hotfix_strcat(cmd,reliance->reliant_file[0]);
+                // hotfix_strcat(cmd," -o ");
+                // hotfix_strcat(cmd,reliance->file_path);
+                // hotfix_strcat(cmd," ");
+                // hotfix_strcat(cmd,task->header_folders);
+                // hotfix_strcat(cmd," ");
+                // hotfix_strcat(cmd,task->compile_flags);
+                sprintf(cmd, "%s -c %s -o %s %s %s",
+                    task->compiler != NULL ? task->compiler : "",
+                    reliance->reliant_file[0] != NULL ? reliance->reliant_file[0] : "",
+                    reliance->file_path != NULL ? reliance->file_path : "",
+                    task->header_folders != NULL ? task->header_folders : "",
+                    task->compile_flags != NULL ? task->compile_flags : "");
 
                 printf("%s\n",cmd);
                 system(cmd);
@@ -62,21 +79,30 @@ void handleReliance(struct COMPILE_TASK* task) {
     //     if (checkReliance(target->file_path,target->reliant_file[i])) {
     //         flag = 0;
             char* cmd = (char*)malloc(hotfix_strlen(task->linker)+1+hotfix_strlen(task->obj_files)+1+hotfix_strlen(task->sll_files)+1+hotfix_strlen(task->dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(task->link_flags)+1);
-            memset(cmd,0,hotfix_strlen(task->linker)+1+hotfix_strlen(task->obj_files)+1+hotfix_strlen(task->sll_files)+1+hotfix_strlen(task->dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(task->link_flags)+1);
-            hotfix_strcat(cmd,task->linker);
-            hotfix_strcat(cmd," ");
-            hotfix_strcat(cmd,task->link_flags);
-            if (strcmp(task->linker,"ar") != 0) {
-                hotfix_strcat(cmd," -o");
-            } 
-            hotfix_strcat(cmd, " ");
-            hotfix_strcat(cmd,target->file_path);
-            hotfix_strcat(cmd," ");
-            hotfix_strcat(cmd,task->obj_files);
-            hotfix_strcat(cmd," ");
-            hotfix_strcat(cmd,task->sll_files);
-            hotfix_strcat(cmd," ");
-            hotfix_strcat(cmd,task->dll_files);
+            // memset(cmd,0,hotfix_strlen(task->linker)+1+hotfix_strlen(task->obj_files)+1+hotfix_strlen(task->sll_files)+1+hotfix_strlen(task->dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(task->link_flags)+1);
+            // hotfix_strcat(cmd,task->linker);
+            // hotfix_strcat(cmd," ");
+            // hotfix_strcat(cmd,task->link_flags);
+            // if (strcmp(task->linker,"ar") != 0) {
+            //     hotfix_strcat(cmd," -o");
+            // } 
+            // hotfix_strcat(cmd, " ");
+            // hotfix_strcat(cmd,target->file_path);
+            // hotfix_strcat(cmd," ");
+            // hotfix_strcat(cmd,task->obj_files);
+            // hotfix_strcat(cmd," ");
+            // hotfix_strcat(cmd,task->sll_files);
+            // hotfix_strcat(cmd," ");
+            // hotfix_strcat(cmd,task->dll_files);
+            sprintf(cmd, "%s %s %s %s %s %s %s",
+                task->linker != NULL ? task->linker : "",
+                task->link_flags != NULL ? task->link_flags : "",
+                strcmp(task->linker,"ar") != 0 ? "-o" : "",
+                target->file_path != NULL ? target->file_path : "",
+                task->obj_files != NULL ? task->obj_files : "",
+                task->sll_files != NULL ? task->sll_files : "",
+                task->dll_files != NULL ? task->dll_files : ""
+            );
 
 
             printf("%s\n",cmd);
