@@ -9,4 +9,7 @@ output_path = build
 library_path = lib
 
 [<shell>Hello_World]
-printf = echo "Hello World!" 
+(null)printf = echo "Hello World!" 
+
+[<shell>clean]
+rm -rf build/obj/*.o build/ccc=rm -rf build/obj/*.o build/ccc

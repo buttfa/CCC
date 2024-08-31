@@ -21,7 +21,7 @@ char ccc_file_path[128];
  * @return false 参数不符合task格式
  */
 bool cdt_task(int argc, char** argv) {
-    if (argc == 2 || (argc == 3 && strcmp(argv[2], "clean")!=0)) {
+    if (argc == 2 || argc == 3) {
         return true;
     } else {
         return false;

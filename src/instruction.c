@@ -44,15 +44,15 @@ void init_instructions() {
     version->func = printfVersion;
     add_instruction(version);
 /****************************************************************************/
-    // 添加clean指令
-    struct instruction* clean = (struct instruction*)malloc(sizeof(struct instruction));
-    memset(clean, 0, sizeof(struct instruction));
-    clean->name = (char*)malloc(strlen("clean") + 1);
-    memset(clean->name, 0, strlen("clean") + 1);
-    strcat(clean->name, "clean");
-    clean->cdt_func = cdt_clean;
-    clean->func = clean_func;
-    add_instruction(clean);
+    // // 添加clean指令
+    // struct instruction* clean = (struct instruction*)malloc(sizeof(struct instruction));
+    // memset(clean, 0, sizeof(struct instruction));
+    // clean->name = (char*)malloc(strlen("clean") + 1);
+    // memset(clean->name, 0, strlen("clean") + 1);
+    // strcat(clean->name, "clean");
+    // clean->cdt_func = cdt_clean;
+    // clean->func = clean_func;
+    // add_instruction(clean);
 /****************************************************************************/
     // 添加template指令
     struct instruction* template = (struct instruction*)malloc(sizeof(struct instruction));
