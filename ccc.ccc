@@ -6,7 +6,7 @@ source_folder_path = src
 header_folder_path = inc
 obj_path = build/obj
 output_path = build
-library_path = third_party/EIniP/lib/ini
+library_path = third_party/EIniP/einip
 
 [<shell>Hello_World]
 (null)printf = echo "Hello World!" 

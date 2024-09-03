@@ -10,7 +10,7 @@ C_INCLUDE = -I inc \
 -I inc/instructions/version \
 -I inc/instructions/clean \
 -I inc/instructions/template \
--I third_party/EIniP/lib/ini
+-I third_party/EIniP/einip
 
 # 生成文件目录 
 BUILD_DIR = build
@@ -81,8 +81,8 @@ $(TEMPLATE_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/template/%.c
 # 编译EINIP库
 EINIP_OBJ_FILES = $(OBJ_PATH)/ini.o
 EINIP: $(OBJ_PATH)/ini.o
-$(OBJ_PATH)/ini.o: third_party/EIniP/lib/ini/ini.c
-	$(COMPILER) -c third_party/EIniP/lib/ini/ini.c -I third_party/EIniP/lib/ini -o $(OBJ_PATH)/ini.o
+$(OBJ_PATH)/ini.o: third_party/EIniP/einip/ini.c
+	$(COMPILER) -c third_party/EIniP/einip/ini.c -I third_party/EIniP/einip -o $(OBJ_PATH)/ini.o
 ###########################################################################
 
 ###########################################################################
