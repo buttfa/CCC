@@ -24,7 +24,6 @@
  * 
  */
 struct instruction {
-    char *name;
     bool (*cdt_func)(int argc, char** argv);
     void (*func)(int argc, char** argv);
     struct instruction *next;
@@ -43,11 +42,14 @@ extern struct instruction* instructions;
 void init_instructions();
 
 /**
- * @brief 添加指令到指令链表
+ * @brief 在指令链表末尾添加指令
  * 
- * @param instruction 需要添加到指令链表的指令结构体
+ * @param cdt_func 指令执行的条件函数
+ * @param func 指令运行的函数
+ * @return true 追加成功
+ * @return false 追加失败
  */
-void add_instruction(struct instruction *instruction);
+bool append_instruction(bool (*cdt_func)(int argc, char** argv), void (*func)(int argc, char** argv));
 
 /**
  * @brief 释放指令链表

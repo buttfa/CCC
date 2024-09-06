@@ -21,75 +21,50 @@ struct instruction* instructions = NULL;
  * 
  */
 void init_instructions() {
-    // struct instruction
-    // add_instruction(instruction_help_version);
 /****************************************************************************/    
     // 添加help指令
-    struct instruction* help = (struct instruction*)malloc(sizeof(struct instruction));
-    memset(help, 0, sizeof(struct instruction));
-    help->name = (char*)malloc(strlen("help") + 1);
-    memset(help->name, 0, strlen("help") + 1);
-    strcat(help->name, "help");
-    help->cdt_func = cdt_help;
-    help->func = printfHelp;
-    add_instruction(help);
+    append_instruction(cdt_help, printfHelp);
 /****************************************************************************/
     // 添加version指令
-    struct instruction* version = (struct instruction*)malloc(sizeof(struct instruction));
-    memset(version, 0, sizeof(struct instruction));
-    version->name = (char*)malloc(strlen("version") + 1);
-    memset(version->name, 0, strlen("version") + 1);
-    strcat(version->name, "version");
-    version->cdt_func = cdt_version;
-    version->func = printfVersion;
-    add_instruction(version);
-/****************************************************************************/
-    // // 添加clean指令
-    // struct instruction* clean = (struct instruction*)malloc(sizeof(struct instruction));
-    // memset(clean, 0, sizeof(struct instruction));
-    // clean->name = (char*)malloc(strlen("clean") + 1);
-    // memset(clean->name, 0, strlen("clean") + 1);
-    // strcat(clean->name, "clean");
-    // clean->cdt_func = cdt_clean;
-    // clean->func = clean_func;
-    // add_instruction(clean);
+    append_instruction(cdt_version, printfVersion);
 /****************************************************************************/
     // 添加template指令
-    struct instruction* template = (struct instruction*)malloc(sizeof(struct instruction));
-    memset(template, 0, sizeof(struct instruction));
-    template->name = (char*)malloc(strlen("template") + 1);
-    memset(template->name, 0, strlen("template") + 1);
-    strcat(template->name, "template");
-    template->cdt_func = cdt_template;
-    template->func = template_func;
-    add_instruction(template);
+    append_instruction(cdt_template, template_func);
 /****************************************************************************/
     // 添加task指令
-    struct instruction* task = (struct instruction*)malloc(sizeof(struct instruction));
-    memset(task, 0, sizeof(struct instruction));
-    task->name = (char*)malloc(strlen("task") + 1);
-    memset(task->name, 0, strlen("task") + 1);
-    strcat(task->name, "task");
-    task->cdt_func = cdt_task;
-    task->func = task_func;
-    add_instruction(task);
+    append_instruction(cdt_task, task_func);
 }
 
 /**
- * @brief 添加指令到指令链表
+ * @brief 在指令链表末尾添加指令
  * 
- * @param instruction 
+ * @param cdt_func 指令执行的条件函数
+ * @param func 指令运行的函数
+ * @return true 追加成功
+ * @return false 追加失败，一般是因为传入的参数中包含空指针。
  */
-void add_instruction(struct instruction *instruction) {
+bool append_instruction(bool (*cdt_func)(int argc, char** argv), void (*func)(int argc, char** argv)) {
+    // 检查参数是否合法
+    if (cdt_func == NULL || func == NULL)
+        return false;
+
+    // 创建新的指令结构体
+    struct instruction *new_instruction = (struct instruction*)malloc(sizeof(struct instruction));
+    new_instruction->cdt_func = cdt_func;
+    new_instruction->func = func;
+    new_instruction->next = NULL;
+
+    // 将新指令添加到指令链表末尾
     if (instructions == NULL) {
-        instructions = instruction;
-    } else {
-        struct instruction *tmp = instructions;
-        while (tmp->next != NULL) {
-            tmp = tmp->next;
-        }
-        tmp->next = instruction;
+        instructions = new_instruction;
     }
+    else {
+        struct instruction *tmp = instructions;
+        while (tmp->next != NULL)
+            tmp = tmp->next;
+        tmp->next = new_instruction;
+    }
+    return true;
 }
 
 /**
@@ -104,7 +79,6 @@ void free_instructions(void)
     while (current != NULL)
     {
         next = current->next;
-        free(current->name); // 释放 name 字段
         free(current);       // 释放当前指令结构体
         current = next;
     }
