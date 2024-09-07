@@ -16,7 +16,6 @@
 #include "help.h"
 #include "version.h"
 #include "task.h"
-#include "clean.h"
 #include "template.h"
 
 /**

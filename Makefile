@@ -8,7 +8,6 @@ C_INCLUDE = -I inc \
 -I inc/instructions/task \
 -I inc/instructions/help \
 -I inc/instructions/version \
--I inc/instructions/clean \
 -I inc/instructions/template \
 -I third_party/EIniP/einip
 
@@ -20,8 +19,8 @@ OBJ_PATH = $(BUILD_DIR)/obj
 OUTPUT = $(BUILD_DIR)
  
 
-all: CCC VERSION HELP TASK CLEAN TEMPLATE EINIP
-	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(TASK_OBJ_FILES) $(CLEAN_OBJ_FILES) $(TEMPLATE_OBJ_FILES) $(EINIP_OBJ_FILES) -o $(OUTPUT)/ccc
+all: CCC VERSION HELP TASK TEMPLATE EINIP
+	$(COMPILER) $(CCC_OBJ_FILES) $(VERSION_OBJ_FILES) $(HELP_OBJ_FILES) $(TASK_OBJ_FILES) $(TEMPLATE_OBJ_FILES) $(EINIP_OBJ_FILES) -o $(OUTPUT)/ccc
 
 ###########################################################################
 # 编译CCC主体文件
@@ -56,15 +55,6 @@ TASK_FILES = $(wildcard src/instructions/task/*.c)
 TASK_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(TASK_FILES)))
 TASK: $(TASK_OBJ_FILES)
 $(TASK_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/task/%.c
-	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
-###########################################################################
-
-###########################################################################
-# 编译CLEAN指令文件
-CLEAN_FILES = $(wildcard src/instructions/clean/*.c)
-CLEAN_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(CLEAN_FILES)))
-CLEAN: $(CLEAN_OBJ_FILES)
-$(CLEAN_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/clean/%.c
 	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
 ###########################################################################
 
