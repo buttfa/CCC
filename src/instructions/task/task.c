@@ -75,7 +75,7 @@ static void isCompileTask(section *ccc_section) {
         handTask(task);
 
         // 释放任务
-        freeTask(&task);
+        // freeTask(&task);
         // printf("[CCC]Compile task: %s done\n", task_name);
     }
 }

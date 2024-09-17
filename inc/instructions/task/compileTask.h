@@ -39,7 +39,6 @@ typedef struct COMPILE_TASK{
     char* source_sig_files;
     char* source_folder_path;
     struct file_node* source_list;
-    char* obj_files;
 
     char* header_sig_files;
     char* header_folder_path;
@@ -57,6 +56,7 @@ typedef struct COMPILE_TASK{
     char* dll_files;
 
     char* obj_path;
+    char* obj_files;
     char* output_path;
 
     char* library_path;
