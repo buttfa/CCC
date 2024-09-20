@@ -3,7 +3,7 @@
 /**
  * @file task.h
  * @author  buttfa (1662332017@qq.com)
- * @brief CCC编译器任务模块
+ * @brief CCC compiler task module
  * @version 0.1
  * @date 2024-08-23
  * 
@@ -14,31 +14,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
 #include "file.h"
 #include "compileTask.h"
 #include "ini.h"
 
-// .ccc文件信息
+// ccc file path
 extern char ccc_file_path[128];
 
 
 /**
- * @brief compile的条件函数
+ * @brief The conditional function of the task
  * 
- * @param argc CCC的参数个数
- * @param argv CCC的参数
- * @return true 参数符合task格式
- * @return false 参数不符合task格式
+ * @param argc Number of parameters passed to CCC
+ * @param argv Parameters passed to CCC
+ * @return true The parameters conform to the task format
+ * @return false The parameters do not conform to the task format
  */
 bool cdt_task(int argc, char** argv);
 
 /**
- * @brief 编译函数
+ * @brief task function
  * 
- * @param argc CCC的参数个数
- * @param argv CCC的参数
+ * @param argc Number of parameters passed to CCC
+ * @param argv Parameters passed to CCC
  */
 void task_func(int argc, char **argv);
 #endif

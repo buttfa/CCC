@@ -1,7 +1,7 @@
 /**
  * @file task.c
  * @author  buttfa (1662332017@qq.com)
- * @brief CCC编译器任务模块实现
+ * @brief CCC compiler task module
  * @version 0.1
  * @date 2024-08-23
  * 
@@ -9,16 +9,16 @@
  * 
  */
 #include <task.h>
-// .ccc文件信息
+// ccc file path
 char ccc_file_path[128];
 
 /**
- * @brief compile的条件函数
+ * @brief The conditional function of the task
  * 
- * @param argc CCC的参数个数
- * @param argv CCC的参数
- * @return true 参数符合task格式
- * @return false 参数不符合task格式
+ * @param argc Number of parameters passed to CCC
+ * @param argv Parameters passed to CCC
+ * @return true The parameters conform to the task format
+ * @return false The parameters do not conform to the task format
  */
 bool cdt_task(int argc, char** argv) {
     if (argc == 2 || argc == 3) {
@@ -29,21 +29,21 @@ bool cdt_task(int argc, char** argv) {
 }
 
 /**
- * @brief 判断是否是shell任务，如果是则执行shell任务
+ * @brief Determine whether it is a shell task, 
+ *        and if so, execute the shell task.
  * 
- * @param ccc_section 需要判断的section
+ * @param ccc_section Sections that need to be judged
  */
 static void isShellTask(section *ccc_section) {
     if (strlen(ccc_section->name) > 7 && strncmp(ccc_section->name, "<shell>", 7) == 0) {
-        // 修改section的名称
+        // Change the name of the section
         char* task_name = strdup(ccc_section->name+7);
         free(ccc_section->name);
         ccc_section->name = task_name;
 
-        // 执行Shell任务
-        // printf("[CCC]Shell task: %s\n", task_name);
+        // Execute shell tasks
         for (int i = 0; i < ccc_section->kvp_num; i++) {
-            // 如果key为NULL或null开头，则不输出key
+            // If the key is NULL or starts with null, no key is output
             if (strlen(ccc_section->kvps[i]->key)>=6 && (strncmp(ccc_section->kvps[i]->key, "(NULL)",6)==0||strncmp(ccc_section->kvps[i]->key, "(null)",6)==0)){
 
             } else {
@@ -51,98 +51,94 @@ static void isShellTask(section *ccc_section) {
             }
             system(ccc_section->kvps[i]->value);
         }
-
-        // printf("[CCC]Shell task: %s done\n", task_name);
     }
 }
 
 /**
- * @brief 判断是否是编译任务，如果是则执行编译任务
+ * @brief Determine whether it is a compilation task, 
+ *        and if so, execute the compilation task.
  * 
- * @param ccc_section 需要判断的section
+ * @param ccc_section Sections that need to be judged
  */
 static void isCompileTask(section *ccc_section) {
     struct COMPILE_TASK task;
     if (strlen(ccc_section->name)>6 && strncmp(ccc_section->name, "<task>", 6) == 0) {
-        // 修改section的名称
+        // Change the name of the section
         char* task_name = strdup(ccc_section->name+6);
         free(ccc_section->name);
         ccc_section->name = task_name;
 
-        // 执行编译任务
-        // printf("[CCC]Compile task: %s\n", task_name);
-        task = parseCCCIni(ccc_section);
-        handTask(task);
-
-        // 释放任务
-        // freeTask(&task);
-        // printf("[CCC]Compile task: %s done\n", task_name);
+        // Execute compilation tasks
+        task = parseCCCIni(ccc_section); // This function will generate a compileTask variable based on the information in the section 
+                                         // and allocate memory for the pointers within it
+        handTask(task); // This function executes the compilation task and releases the memory pointed 
+                        // to by the pointer in the compileTask variable after completion.
     }
 }
 
 /**
- * @brief 编译函数
+ * @brief task function
  * 
- * @param argc CCC的参数个数
- * @param argv CCC的参数
+ * @param argc Number of parameters passed to CCC
+ * @param argv Parameters passed to CCC
  */
 void task_func(int argc, char** argv) {
-    // 获取ccc文件路径
-    hotfix_strcat(ccc_file_path,argv[1]);
-    
-    // 判断文件是否存在以及是否为.ccc文件
-    if (access(ccc_file_path, F_OK)==0 && isFileWithSuffix(ccc_file_path,".ccc")) {
-/****************************************************************************/            
-        // 解析.ccc文件
-        compileTask task; 
-        ini* ccc_ini = iniParseFile(ccc_file_path);
+    // Obtain the path of the .ccc file
+    strcpy(ccc_file_path,argv[1]);
 
-        // 如果argc==3，则说明是指定任务
-        if (argc == 3) {
-            // 获取任务名称
-            char* target_task_name = argv[2];
-            
-            // 遍历ccc_ini中的section
-            for (int i = 0; i < ccc_ini->section_num; i++) {
-                section* ccc_section = ccc_ini->sections[i];
-                
-                // 获取任务名称
-                char* task_name = strstr(ccc_section->name, ">")+1;
-                if (strstr(ccc_section->name, ">") != NULL && strcmp(target_task_name, task_name)==0) {
-                    // 判断是否是编译任务
-                    isCompileTask(ccc_section);
-
-                    // 判断是否是Shell任务
-                    isShellTask(ccc_section);
-
-                    iniFree(ccc_ini);
-                    exit(0);
-                }
-            }
-
-            printf("[CCC]The target task does not exist\n");
-            iniFree(ccc_ini);
-            exit(0);
-        }
-
-        // 如果argc==2，则说明只执行第一个任务
-        if (argc == 2 && ccc_ini->section_num > 0) {
-            section* ccc_section = ccc_ini->sections[0];
-            if (strstr(ccc_section->name, ">")==NULL || strlen(strstr(ccc_section->name, ">")+1)==0) {
-                printf("[CCC]The target task does not exist\n");
-                iniFree(ccc_ini);
-                exit(0);
-            }
-
-            // 判断是否是编译任务
-            isCompileTask(ccc_section);
-
-            // 判断是否是Shell任务
-            isShellTask(ccc_section);
-            iniFree(ccc_ini);
-            exit(0);
-        }
-    } else {
+    // If the file does not exist or is not a .ccc file
+    if (access(ccc_file_path, F_OK)!=0 || !isFileWithSuffix(ccc_file_path,".ccc")) {
         printf("[CCC]The target file does not exist or does not have a. ccc suffix\n");
+        goto end;
     }
+
+    // Parse the .ccc file
+    ini* ccc_ini = iniParseFile(ccc_file_path);
+/* Dynamic Memory ccc_ini --^*/
+    if (ccc_ini == NULL) {
+        printf("[CCC]Failed to parse the .ccc file\n");
+        goto end;
+    }
+    if (ccc_ini->section_num == 0) {
+        printf("[CCC]The .ccc file does not contain any tasks\n");
+        goto ini_release;
+    }
+
+    section* target_section = NULL;
+    // Get target_section
+    if (argc == 2 &&  (
+            (strlen(ccc_ini->sections[0]->name)>6 && strncmp(ccc_ini->sections[0]->name, "<task>", 6)==0)
+            || (strlen(ccc_ini->sections[0]->name)>7 && strncmp(ccc_ini->sections[0]->name, "<shell>", 7)==0)
+        )
+    ) {
+        target_section = ccc_ini->sections[0];
+    }
+        
+
+    if (argc == 3) {
+        for (int i = 0; i < ccc_ini->section_num; i++) {
+            if ((strlen(ccc_ini->sections[i]->name)>6 && strncmp(ccc_ini->sections[i]->name, "<task>", 6)==0 && strcmp(argv[2], ccc_ini->sections[i]->name+6)==0)
+            || (strlen(ccc_ini->sections[i]->name)>7 && strncmp(ccc_ini->sections[i]->name, "<shell>", 7)==0 && strcmp(argv[2], ccc_ini->sections[i]->name+7)==0)) {
+                target_section = ccc_ini->sections[i];
+                break;
+            }
+        }
+    }
+
+    if (target_section == NULL) {
+        printf("[CCC]The target task does not exist\n");
+        goto ini_release;
+    }
+
+    // Justify whether it is a compilation task, if so, execute the compilation task
+    isCompileTask(target_section);
+
+    // Justify whether it is a shell task, if so, execute the shell task
+    isShellTask(target_section);
+
+ini_release:
+    iniFree(ccc_ini);
+/* Release memory ccc_ini --^ */
+end:
+    return;
 }
