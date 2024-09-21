@@ -2,6 +2,18 @@
 COMPILER = gcc
 # 编译选项
 C_FLAGS = 
+# 编译模式选择
+COMPILE_MODE = debug
+
+ifeq ($(COMPILE_MODE), debug)
+	C_FLAGS += -g -Og -W -Wall
+else ifeq ($(COMPILE_MODE), release)
+	C_FLAGS += -O3 -W -Wall
+else
+compile_mode_error:
+	$(error Unknown compile mode: $(COMPILE_MODE))
+endif
+
 
 # 头文件目录
 C_INCLUDE = -I inc \
@@ -72,7 +84,7 @@ $(TEMPLATE_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/template/%.c
 EINIP_OBJ_FILES = $(OBJ_PATH)/ini.o
 EINIP: $(OBJ_PATH)/ini.o
 $(OBJ_PATH)/ini.o: third_party/EIniP/einip/ini.c
-	$(COMPILER) -c third_party/EIniP/einip/ini.c -I third_party/EIniP/einip -o $(OBJ_PATH)/ini.o
+	$(COMPILER) -c third_party/EIniP/einip/ini.c -o $(OBJ_PATH)/ini.o -I third_party/EIniP/einip $(C_FLAGS)
 ###########################################################################
 
 ###########################################################################

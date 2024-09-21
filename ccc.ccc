@@ -1,15 +1,53 @@
-[<task>ccc]
-target_type  = c
+###########################################################################
+# Compile CCC project in debug mode
+[<shell>debug]
+(null)= echo "Compile CCC project in debug mode"
+(null)= ccc ccc.ccc ccc_debug
+(null)= mv build/ccc_debug build/ccc
+
+# Debug mode: Generate debugging information. The GNU debugger can utilize this information.
+[<task>ccc_debug]
+target_type = c
 compiler = gcc
+compile_flags = -g -Og -W -Wall
 linker = gcc
 source_folder_path = src
 header_folder_path = inc
 obj_path = build/obj
 output_path = build
 library_path = third_party/EIniP/einip
+###########################################################################
 
+
+###########################################################################
+# Compile CCC project in release mode
+[<shell>release]
+(null)= echo "Compile CCC project in release mode"
+(null)= ccc ccc.ccc ccc_release
+(null)= mv build/ccc_release build/ccc
+
+# Release mode: Enable O3 optimization and display most warning messages.
+[<task>ccc_release]
+target_type = c
+compiler = gcc
+compile_flags = -O3 -W -Wall
+linker = gcc
+source_folder_path = src
+header_folder_path = inc
+obj_path = build/obj
+output_path = build
+library_path = third_party/EIniP/einip
+###########################################################################
+
+
+###########################################################################
 [<shell>Hello_World]
-(null)printf = echo "Hello World!" 
+(null) = echo "Hello World! 你好，世界！" 
+###########################################################################
 
+
+###########################################################################
+# Clear compilation target and intermediate files
 [<shell>clean]
 rm -rf build/obj/*.o build/ccc=rm -rf build/obj/*.o build/ccc
+###########################################################################
