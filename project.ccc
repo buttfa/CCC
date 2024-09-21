@@ -2,7 +2,7 @@
 # Compile CCC project in debug mode
 [<shell>debug]
 (null)= echo "Compile CCC project in debug mode"
-(null)= ccc ccc.ccc ccc_debug
+(null)= ccc ccc_debug
 (null)= mv build/ccc_debug build/ccc
 
 # Debug mode: Generate debugging information. The GNU debugger can utilize this information.
@@ -23,7 +23,7 @@ library_path = third_party/EIniP/einip
 # Compile CCC project in release mode
 [<shell>release]
 (null)= echo "Compile CCC project in release mode"
-(null)= ccc ccc.ccc ccc_release
+(null)= ccc ccc_release
 (null)= mv build/ccc_release build/ccc
 
 # Release mode: Enable O3 optimization and display most warning messages.
