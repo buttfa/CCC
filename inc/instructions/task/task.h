@@ -19,9 +19,6 @@
 #include "compileTask.h"
 #include "ini.h"
 
-// ccc file path
-extern char ccc_file_path[128];
-
 
 /**
  * @brief The conditional function of the task

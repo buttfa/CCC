@@ -9,8 +9,7 @@
  * 
  */
 #include <task.h>
-// ccc file path
-char ccc_file_path[128];
+
 
 /**
  * @brief The conditional function of the task
@@ -21,7 +20,7 @@ char ccc_file_path[128];
  * @return false The parameters do not conform to the task format
  */
 bool cdt_task(int argc, char** argv) {
-    if (argc == 2 || argc == 3) {
+    if (argc == 1 || argc == 2 || argc == 3) {
         return true;
     } else {
         return false;
@@ -83,8 +82,23 @@ static void isCompileTask(section *ccc_section) {
  * @param argv Parameters passed to CCC
  */
 void task_func(int argc, char** argv) {
+    char* ccc_file_path = "project.ccc";
+    char* target_section_name = NULL;
+
     // Obtain the path of the .ccc file
-    strcpy(ccc_file_path,argv[1]);
+    if (argc == 3) {
+        ccc_file_path = argv[1];
+        target_section_name = argv[2];
+    }
+    else if (argc == 2) {
+        if (isFileWithSuffix(argv[1],".ccc"))
+            ccc_file_path = argv[1];
+        else
+            target_section_name = argv[1];
+    }
+    else if (argc == 1) {
+        
+    }
 
     // If the file does not exist or is not a .ccc file
     if (access(ccc_file_path, F_OK)!=0 || !isFileWithSuffix(ccc_file_path,".ccc")) {
@@ -104,9 +118,10 @@ void task_func(int argc, char** argv) {
         goto ini_release;
     }
 
-    section* target_section = NULL;
+
     // Get target_section
-    if (argc == 2 &&  (
+    section* target_section = NULL;
+    if (target_section_name == NULL &&  (
             (strlen(ccc_ini->sections[0]->name)>6 && strncmp(ccc_ini->sections[0]->name, "<task>", 6)==0)
             || (strlen(ccc_ini->sections[0]->name)>7 && strncmp(ccc_ini->sections[0]->name, "<shell>", 7)==0)
         )
@@ -115,10 +130,10 @@ void task_func(int argc, char** argv) {
     }
         
 
-    if (argc == 3) {
+    if (target_section_name != NULL ) {
         for (int i = 0; i < ccc_ini->section_num; i++) {
-            if ((strlen(ccc_ini->sections[i]->name)>6 && strncmp(ccc_ini->sections[i]->name, "<task>", 6)==0 && strcmp(argv[2], ccc_ini->sections[i]->name+6)==0)
-            || (strlen(ccc_ini->sections[i]->name)>7 && strncmp(ccc_ini->sections[i]->name, "<shell>", 7)==0 && strcmp(argv[2], ccc_ini->sections[i]->name+7)==0)) {
+            if ((strlen(ccc_ini->sections[i]->name)>6 && strncmp(ccc_ini->sections[i]->name, "<task>", 6)==0 && strcmp(target_section_name, ccc_ini->sections[i]->name+6)==0)
+            || (strlen(ccc_ini->sections[i]->name)>7 && strncmp(ccc_ini->sections[i]->name, "<shell>", 7)==0 && strcmp(target_section_name, ccc_ini->sections[i]->name+7)==0)) {
                 target_section = ccc_ini->sections[i];
                 break;
             }
