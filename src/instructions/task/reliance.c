@@ -38,25 +38,12 @@ static bool checkReliance(char* target_path, char* reliant_path){
  * @param task 需要处理的编译任务
  */
 void handleReliance(struct COMPILE_TASK* task) {
-    int flag = 1;
     // 处理中间依赖组
     struct reliance* reliance = task->reliance_list;
     while (reliance != NULL) {
         for (int i = 0; i < reliance->reliance_num; i++) {
             if (checkReliance(reliance->file_path,reliance->reliant_file[i])) {
-                flag = 0;
                 char* cmd = (char*)malloc(hotfix_strlen(task->compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(task->header_folders)+1+hotfix_strlen(task->compile_flags)+1);
-                // memset(cmd,0,hotfix_strlen(task->compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(task->header_folders)+1+hotfix_strlen(task->compile_flags)+1);
-                // hotfix_strcat(cmd,task->compiler);
-                // hotfix_strcat(cmd," ");
-                // hotfix_strcat(cmd,"-c ");
-                // hotfix_strcat(cmd,reliance->reliant_file[0]);
-                // hotfix_strcat(cmd," -o ");
-                // hotfix_strcat(cmd,reliance->file_path);
-                // hotfix_strcat(cmd," ");
-                // hotfix_strcat(cmd,task->header_folders);
-                // hotfix_strcat(cmd," ");
-                // hotfix_strcat(cmd,task->compile_flags);
                 sprintf(cmd, "%s -c %s -o %s %s %s",
                     task->compiler != NULL ? task->compiler : "",
                     reliance->reliant_file[0] != NULL ? reliance->reliant_file[0] : "",
@@ -75,45 +62,20 @@ void handleReliance(struct COMPILE_TASK* task) {
 
     // 处理目标依赖
     struct reliance* target = task->target_reliance;
-    // for (int i = 0; i < target->reliance_num; i++) {
-    //     if (checkReliance(target->file_path,target->reliant_file[i])) {
-    //         flag = 0;
-            char* cmd = (char*)malloc(hotfix_strlen(task->linker)+1+hotfix_strlen(task->obj_files)+1+hotfix_strlen(task->sll_files)+1+hotfix_strlen(task->dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(task->link_flags)+1);
-            // memset(cmd,0,hotfix_strlen(task->linker)+1+hotfix_strlen(task->obj_files)+1+hotfix_strlen(task->sll_files)+1+hotfix_strlen(task->dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(task->link_flags)+1);
-            // hotfix_strcat(cmd,task->linker);
-            // hotfix_strcat(cmd," ");
-            // hotfix_strcat(cmd,task->link_flags);
-            // if (strcmp(task->linker,"ar") != 0) {
-            //     hotfix_strcat(cmd," -o");
-            // } 
-            // hotfix_strcat(cmd, " ");
-            // hotfix_strcat(cmd,target->file_path);
-            // hotfix_strcat(cmd," ");
-            // hotfix_strcat(cmd,task->obj_files);
-            // hotfix_strcat(cmd," ");
-            // hotfix_strcat(cmd,task->sll_files);
-            // hotfix_strcat(cmd," ");
-            // hotfix_strcat(cmd,task->dll_files);
-            sprintf(cmd, "%s %s %s %s %s %s %s",
-                task->linker != NULL ? task->linker : "",
-                task->link_flags != NULL ? task->link_flags : "",
-                strcmp(task->linker,"ar") != 0 ? "-o" : "",
-                target->file_path != NULL ? target->file_path : "",
-                task->obj_files != NULL ? task->obj_files : "",
-                task->sll_files != NULL ? task->sll_files : "",
-                task->dll_files != NULL ? task->dll_files : ""
-            );
+    char* cmd = (char*)malloc(hotfix_strlen(task->linker)+1+hotfix_strlen(task->obj_files)+1+hotfix_strlen(task->sll_files)+1+hotfix_strlen(task->dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(task->link_flags)+1);
+    sprintf(cmd, "%s %s %s %s %s %s %s",
+        task->linker != NULL ? task->linker : "",
+        task->link_flags != NULL ? task->link_flags : "",
+        strcmp(task->linker,"ar") != 0 ? "-o" : "",
+        target->file_path != NULL ? target->file_path : "",
+        task->obj_files != NULL ? task->obj_files : "",
+        task->sll_files != NULL ? task->sll_files : "",
+        task->dll_files != NULL ? task->dll_files : ""
+    );
 
 
-            printf("%s\n",cmd);
-            system(cmd);
+    printf("%s\n",cmd);
+    system(cmd);
 
-            free(cmd);
-    //         break;
-    //     }
-    // }
-
-    // if(flag == 1) {
-    //     printf("[%s]All files have been compiled.\n",ccc_file_path);
-    // }
+    free(cmd);
 }
