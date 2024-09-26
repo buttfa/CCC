@@ -1,11 +1,11 @@
 #include <getObjReliance.h>
 
 /**
- * @brief 将reliance节点追加到reliance_list中
+ * @brief Append reliance to reliance list.
  * 
  * @param reliance 
  */
-void appendToRelianceList(struct reliance* reliance, struct COMPILE_TASK* task) {
+static void appendToRelianceList(struct reliance* reliance, struct COMPILE_TASK* task) {
     if (task->reliance_list == NULL) {
         task->reliance_list = reliance;
     } else {
@@ -18,90 +18,56 @@ void appendToRelianceList(struct reliance* reliance, struct COMPILE_TASK* task) 
 }
 
 /**
- * @brief 为传入的.c/.cpp文件对应的.o文件创建依赖
+ * @brief Create dependencies for the .o files corresponding to the incoming .c/.cpp files
  * 
- * @param source_file_path 
+ * @param source_file_path .c/.cpp file path
+ * @param task Task variables that require information to be filled in.
  */
 void addRelianceList(char* source_file_path, struct COMPILE_TASK* task) {
-    // 获取对应的.o文件及路径
-    // char* file_name = getFileName(source_file_path);
-    // char* obj_file = (char*)malloc(hotfix_strlen(run_path)+1+hotfix_strlen(obj_path)+1+hotfix_strlen(file_name)+1+hotfix_strlen(".o\0")+1);
-    // memset(obj_file, 0, hotfix_strlen(run_path)+1+hotfix_strlen(obj_path)+1+hotfix_strlen(file_name)+1+hotfix_strlen(".o\0")+1);
-    // hotfix_strcat(obj_file, run_path);
-    // hotfix_strcat(obj_file, "/");
-    // hotfix_strcat(obj_file, obj_path);
-    // hotfix_strcat(obj_file, "/");
-    // hotfix_strcat(obj_file, file_name);
-    // hotfix_strcat(obj_file, ".o\0");
+    char buf[4096];
+    // Get the target obj file path
     char* file_name = getFileName(source_file_path);
-    char* obj_file = (char*)malloc(hotfix_strlen(task->obj_path)+1+hotfix_strlen(file_name)+1+hotfix_strlen(".o\0")+1);
-    memset(obj_file, 0, hotfix_strlen(task->obj_path)+1+hotfix_strlen(file_name)+1+hotfix_strlen(".o\0")+1);
-    hotfix_strcat(obj_file, task->obj_path);
-    hotfix_strcat(obj_file, "/");
-    hotfix_strcat(obj_file, file_name);
-    hotfix_strcat(obj_file, ".o\0");
+    char* obj_file = (char*)malloc(hotfix_strlen(task->obj_path)+1+hotfix_strlen(file_name)+hotfix_strlen(".o")+1);
+    sprintf(obj_file, "%s/%s.o", 
+                    task->obj_path!=NULL ? task->obj_path : "", 
+                    file_name!=NULL ? file_name : "");
+    free(file_name);
 
-    // 创建依赖节点并写入中间文件
+    // Create obj reliance struct
     struct reliance *reliance = (struct reliance*)malloc(sizeof(struct reliance));
     memset(reliance, 0, sizeof(struct reliance));
     reliance->file_path = obj_file;
-    // .o文件必定依赖对应的.c/.cpp文件，因此reliance_num初始值为1
-    reliance->reliance_num = 1;
+    reliance->reliance_num = 0;
 
-    // 使用system()获取源文件依赖的头文件
-    char* cmd = (char*)malloc(hotfix_strlen("gcc -MM ")+hotfix_strlen(source_file_path)+1+hotfix_strlen(task->header_folders)+hotfix_strlen(" > tmp\0")+1);
-    memset(cmd, 0, hotfix_strlen("gcc -MM ")+hotfix_strlen(source_file_path)+1+hotfix_strlen(task->header_folders)+hotfix_strlen(" > tmp\0")+1);
-    hotfix_strcat(cmd, "gcc -MM ");
-    hotfix_strcat(cmd, source_file_path);
-    hotfix_strcat(cmd, " ");
-    hotfix_strcat(cmd, task->header_folders);
-    hotfix_strcat(cmd, " > tmp\0");
-    system(cmd);
+    // Excute command to get the obj file's reliance
+    char* cmd = (char*)malloc(hotfix_strlen("gcc -MM")+1+hotfix_strlen(source_file_path)+1+hotfix_strlen(task->header_folders)+1);
+    sprintf(cmd, "gcc -MM %s %s", 
+                    source_file_path!=NULL ? source_file_path : "", 
+                    task->header_folders!=NULL ? task->header_folders : "");
+    FILE* pipe = popen(cmd, "r");
 
-    // 遍历tmp文件，确定依赖文件数量
-    FILE* fp = fopen("tmp", "r"); char buf[1024];
-    // 跳过tmp文件前两个无关字符串
-    fscanf(fp, "%s", buf);
-    fscanf(fp, "%s", buf);
-    while (fscanf(fp, "%s", buf) != EOF) {
+    
+    // Get reliance file path
+    if (fscanf(pipe, "%s", buf) == EOF)
+        return;
+    while (fscanf(pipe, "%s", buf) != EOF) {
         if (buf[0] != '\\') {
-            // printf("%s\n", buf);
             reliance->reliance_num++;
-        }     
+            reliance->reliant_file = (char**)realloc(reliance->reliant_file, sizeof(char**)*reliance->reliance_num);
+            reliance->reliant_file[reliance->reliance_num-1] = (char*)malloc(hotfix_strlen(buf)+1);
+            sprintf(reliance->reliant_file[reliance->reliance_num-1], "%s", buf);
+        }
     }
-    fclose(fp);
 
-    // 写入依赖文件路径
-    reliance->reliant_file = (char**)malloc(sizeof(char*)*reliance->reliance_num);
-    // 写入对应的.c/.cpp文件
-    reliance->reliant_file[0] = (char*)malloc(hotfix_strlen(source_file_path)+1);
-    memset(reliance->reliant_file[0], 0, hotfix_strlen(source_file_path)+1);
-    hotfix_strcat(reliance->reliant_file[0], source_file_path);
-    // 读取tmp文件，写入依赖的头文件
-    fp = fopen("tmp", "r"); 
-    // 跳过tmp文件前两个无关字符串
-    fscanf(fp, "%s", buf);
-    fscanf(fp, "%s", buf);
-    int index = 1;
-    while (fscanf(fp, "%s", buf) != EOF) {
-        if (buf[0] != '\\') {
-            reliance->reliant_file[index] = (char*)malloc(hotfix_strlen(buf)+1);
-            memset(reliance->reliant_file[index], 0, hotfix_strlen(buf)+1);
-            hotfix_strcat(reliance->reliant_file[index], buf);
-            index++;
-        }     
-    }
-    fclose(fp);
+    // Close pipe
+    pclose(pipe);
 
-    // 删除临时文件
-    remove("tmp");
-
-    // 将依赖节点添加到依赖列表中
+    // Add reliance node to reliance list
     appendToRelianceList(reliance, task);
 }
 
 /**
- * @brief 打印依赖列表
+ * @brief Printf the reliance list.
  * 
  */
 void printfRelianceList(struct COMPILE_TASK* task) {
@@ -116,7 +82,7 @@ void printfRelianceList(struct COMPILE_TASK* task) {
 }
 
 /**
- * @brief 释放依赖列表内存 
+ * @brief Free reliance list.
  * 
  */
 void freeRelianceList(struct COMPILE_TASK* task) {
@@ -136,7 +102,7 @@ void freeRelianceList(struct COMPILE_TASK* task) {
 }
 
 /**
- * @brief 根据reliance_list创建中间文件组
+ * @brief Create an obj_files based on relience list.
  * 
  */
 void createObjFiles(struct COMPILE_TASK* task) {

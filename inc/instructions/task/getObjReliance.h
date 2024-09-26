@@ -1,33 +1,33 @@
 #ifndef __GETOBJRELIANCE_H__
 #define __GETOBJRELIANCE_H__
 
-#include <ccc.h>
-#include <task.h>
-#include <file.h>
-#include <reliance.h>
-#include <compileTask.h>
+#include "task.h"
+#include "file.h"
+#include "reliance.h"
+#include "compileTask.h"
 
 /**
- * @brief 为传入的.c/.cpp文件对应的.o文件创建依赖
+ * @brief Create dependencies for the .o files corresponding to the incoming .c/.cpp files
  * 
- * @param source_file_path 
+ * @param source_file_path .c/.cpp file path
+ * @param task Task variables that require information to be filled in.
  */
 void addRelianceList(char* source_file_path, struct COMPILE_TASK* task);
 
 /**
- * @brief 打印依赖列表
+ * @brief Printf the reliance list.
  * 
  */
 void printfRelianceList(struct COMPILE_TASK* task);
 
 /**
- * @brief 释放依赖列表内存 
+ * @brief Free reliance list.
  * 
  */
 void freeRelianceList(struct COMPILE_TASK* task);
 
 /**
- * @brief 根据reliance_list创建中间文件组
+ * @brief Create an obj_files based on relience list.
  * 
  */
 void createObjFiles(struct COMPILE_TASK* task);
