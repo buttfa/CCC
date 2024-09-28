@@ -13,7 +13,8 @@ TEST(testDel, test0) {
     // 运行结果
     FILE* stream = fmemopen(str, strlen(str), "r");
     ini* ini_t = NULL;
-    iniParseStat p_stat = iniParse(stream, (ini**)&ini_t);
+    iniParseStat* p_stat = iniParse(stream, (ini**)&ini_t);
+    iniDestroyStat((iniParseStat**)&p_stat);
     // 删除
     iniDelSection(ini_t, (char*)"section1");
 
@@ -31,7 +32,8 @@ TEST(testDel, test1) {
     // 运行结果
     FILE* stream = fmemopen(str, strlen(str), "r");
     ini* ini_t = NULL;
-    iniParseStat p_stat = iniParse(stream, (ini**)&ini_t);
+    iniParseStat* p_stat = iniParse(stream, (ini**)&ini_t);
+    iniDestroyStat((iniParseStat**)&p_stat);
     // 删除
     iniDelKvp(iniGetSection(ini_t, (char*)"section1"), (char*)"key1");
 
@@ -48,7 +50,8 @@ TEST(testDel, test2) {
     // 运行结果
     FILE* stream = fmemopen(str, strlen(str), "r");
     ini* ini_t = NULL;
-    iniParseStat p_stat = iniParse(stream, (ini**)&ini_t);
+    iniParseStat* p_stat = iniParse(stream, (ini**)&ini_t);
+    iniDestroyStat((iniParseStat**)&p_stat);
     // 删除
     iniDelKvp(iniGetSection(ini_t, (char*)"section1"), (char*)"key1");
     iniDelKvp(iniGetSection(ini_t, (char*)"section1"), (char*)"key2");
@@ -70,15 +73,16 @@ TEST(testDel, test3) {
                         [section1]\n      \
                         key2 = Change";
     char* expections[] = {(char*)"section1",
-                     "key2", "value2",
-                     "key2", "Change", 
+                     (char*)"key2", (char*)"value2",
+                     (char*)"key2", (char*)"Change", 
                      
-                     "section2"};
+                     (char*)"section2"};
     
     // 运行结果
     FILE* stream = fmemopen(str, strlen(str), "r");
     ini* ini_t = NULL;
-    iniParseStat p_stat = iniParse(stream, (ini**)&ini_t);
+    iniParseStat* p_stat = iniParse(stream, (ini**)&ini_t);
+    iniDestroyStat((iniParseStat**)&p_stat);
     // 删除
     iniDelKvp(iniGetSection(ini_t, (char*)"section1"), (char*)"key1");
     iniDelKvp(iniGetSection(ini_t, (char*)"section2"), (char*)"test1");
@@ -99,7 +103,8 @@ TEST(testDel, test4) {
     // 运行结果
     FILE* stream = fmemopen(str, strlen(str), "r");
     ini* ini_t = NULL;
-    iniParseStat p_stat = iniParse(stream, (ini**)&ini_t);
+    iniParseStat* p_stat = iniParse(stream, (ini**)&ini_t);
+    iniDestroyStat((iniParseStat**)&p_stat);
     // 删除
     EXPECT_EQ(iniDelKvp(iniGetSection(ini_t, (char*)"section1"), (char*)"key1"),INI_OK);
     EXPECT_EQ(iniDelKvp(iniGetSection(ini_t, (char*)"section1"), (char*)"key3"), INI_ERR_KEY_NOT_FOUND);
