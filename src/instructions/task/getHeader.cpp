@@ -224,12 +224,12 @@ void createHeaderFolders(struct COMPILE_TASK* task) {
     // 再次遍历链表，拼接路径到字符串
     current = task->header_folder_list;
     while (current != NULL) {
-        hotfix_strcat(task->header_folders, "-I ");
+        hotfix_strcat(task->header_folders, (char*)"-I ");
         hotfix_strcat(task->header_folders, current->folder_path);
         
         // 可以根据需要添加分隔符
         if (current->next != NULL) {
-            hotfix_strcat(task->header_folders, " ");
+            hotfix_strcat(task->header_folders, (char*)" ");
         }
         
         current = current->next;

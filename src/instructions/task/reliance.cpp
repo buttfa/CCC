@@ -43,7 +43,7 @@ void handleReliance(struct COMPILE_TASK* task) {
     while (reliance != NULL) {
         for (int i = 0; i < reliance->reliance_num; i++) {
             if (checkReliance(reliance->file_path,reliance->reliant_file[i])) {
-                char* cmd = (char*)malloc(hotfix_strlen(task->compiler)+1+hotfix_strlen("-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen("-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(task->header_folders)+1+hotfix_strlen(task->compile_flags)+1);
+                char* cmd = (char*)malloc(hotfix_strlen(task->compiler)+1+hotfix_strlen((char*)"-c")+1+hotfix_strlen(reliance->reliant_file[0])+1+hotfix_strlen((char*)"-o")+1+hotfix_strlen(reliance->file_path)+1+hotfix_strlen(task->header_folders)+1+hotfix_strlen(task->compile_flags)+1);
                 sprintf(cmd, "%s -c %s -o %s %s %s",
                     task->compiler != NULL ? task->compiler : "",
                     reliance->reliant_file[0] != NULL ? reliance->reliant_file[0] : "",
@@ -52,7 +52,10 @@ void handleReliance(struct COMPILE_TASK* task) {
                     task->compile_flags != NULL ? task->compile_flags : "");
 
                 printf("%s\n",cmd);
-                system(cmd);
+                int result = system(cmd);
+                if (result == -1)
+                    // Handle failure
+                    std::cout << "Failed to execute command: " << cmd << std::endl;
                 free(cmd);
                 break;
             }
@@ -62,7 +65,7 @@ void handleReliance(struct COMPILE_TASK* task) {
 
     // 处理目标依赖
     struct reliance* target = task->target_reliance;
-    char* cmd = (char*)malloc(hotfix_strlen(task->linker)+1+hotfix_strlen(task->obj_files)+1+hotfix_strlen(task->sll_files)+1+hotfix_strlen(task->dll_files)+1+hotfix_strlen("-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(task->link_flags)+1);
+    char* cmd = (char*)malloc(hotfix_strlen(task->linker)+1+hotfix_strlen(task->obj_files)+1+hotfix_strlen(task->sll_files)+1+hotfix_strlen(task->dll_files)+1+hotfix_strlen((char*)"-o")+1+hotfix_strlen(target->file_path)+1+hotfix_strlen(task->link_flags)+1);
     sprintf(cmd, "%s %s %s %s %s %s %s",
         task->linker != NULL ? task->linker : "",
         task->link_flags != NULL ? task->link_flags : "",
@@ -75,7 +78,10 @@ void handleReliance(struct COMPILE_TASK* task) {
 
 
     printf("%s\n",cmd);
-    system(cmd);
+    int result = system(cmd);
+    if (result == -1)
+        // Handle failure
+        std::cout << "Failed to execute command: " << cmd << std::endl;
 
     free(cmd);
 }

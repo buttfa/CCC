@@ -30,7 +30,7 @@ void handTask(struct COMPILE_TASK task) {
         char** header_sig_files_split = splitStringBySpace(task.header_sig_files, &header_sig_files_num);
 /* Dynamic Memory 1 --^*/
         for (int i = 0; i < header_sig_files_num; i++)
-            if (access(header_sig_files_split[i], F_OK)==0&&isFileWithSuffix(header_sig_files_split[i],".h"))
+            if (access(header_sig_files_split[i], F_OK)==0&&isFileWithSuffix(header_sig_files_split[i],(char*)".h"))
               addSigHeaderFolderList(header_sig_files_split[i], &task);
 /* Dynamic Memory 4 --^*/
         
@@ -72,7 +72,7 @@ void handTask(struct COMPILE_TASK task) {
 /* Dynamic Memory 5 --^ */
         // Add the .a file from the sll_sig_files_split[i] folder to the sll_list.
         for(int i = 0; i < sll_sig_files_num; i++)
-            if (access(sll_sig_files_split[i], F_OK)==0&&isFileWithSuffix(sll_sig_files_split[i], ".a"))
+            if (access(sll_sig_files_split[i], F_OK)==0&&isFileWithSuffix(sll_sig_files_split[i], (char*)".a"))
                 addSllfileToList(sll_sig_files_split[i], &task);
 /* Dynamic Memory 8 --^ */
 
@@ -109,7 +109,7 @@ void handTask(struct COMPILE_TASK task) {
 /* Dynamic Memory 9 --^*/
         // Add the .so file from the dll_sig_files_split[i] folder to the dll_list.
         for(int i = 0; i < dll_sig_files_num; i++) 
-            if (access(dll_sig_files_split[i], F_OK)==0&&isFileWithSuffix(dll_sig_files_split[i], ".so"))
+            if (access(dll_sig_files_split[i], F_OK)==0&&isFileWithSuffix(dll_sig_files_split[i], (char*)".so"))
                 addDllfileToList(dll_sig_files_split[i], &task);
 /* Dynamic Memory 12 --^*/
 

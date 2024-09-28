@@ -31,6 +31,9 @@ bool cdt_version(int argc, char** argv) {
  * 
  */
 void printfVersion(int argc, char** argv) {
+    if (!cdt_version(argc, argv))
+        return;
+
     printf("CCC version:");
     printf(CCC_VERSION);
     printf("\n");

@@ -20,7 +20,7 @@
  * @return false The parameters do not conform to the task format
  */
 bool cdt_task(int argc, char** argv) {
-    if (argc == 1 || argc == 2 || argc == 3) {
+    if ((argc == 1 || argc == 2 || argc == 3) && strlen(argv[0])!=0) {
         return true;
     } else {
         return false;
@@ -48,7 +48,10 @@ static void isShellTask(section *ccc_section) {
             } else {
                 printf("%s\n", ccc_section->kvps[i]->key);
             }
-            system(ccc_section->kvps[i]->value);
+            int result = system(ccc_section->kvps[i]->value);
+            if (result == -1)
+                // Handle failure
+                std::cout << "Failed to execute command: " << ccc_section->kvps[i]->value << std::endl;
         }
     }
 }
@@ -61,7 +64,7 @@ static void isShellTask(section *ccc_section) {
  */
 static void isCompileTask(section *ccc_section) {
     struct COMPILE_TASK task;
-    if (strlen(ccc_section->name)>6 && strncmp(ccc_section->name, "<task>", 6) == 0) {
+    if (strlen(ccc_section->name)>6 && strncmp(ccc_section->name, (char*)"<task>", 6) == 0) {
         // Change the name of the section
         char* task_name = strdup(ccc_section->name+6);
         free(ccc_section->name);
@@ -82,7 +85,7 @@ static void isCompileTask(section *ccc_section) {
  * @param argv Parameters passed to CCC
  */
 void task_func(int argc, char** argv) {
-    char* ccc_file_path = "project.ccc";
+    char* ccc_file_path = (char*)"project.ccc";
     char* target_section_name = NULL;
 
     // Obtain the path of the .ccc file
@@ -91,7 +94,7 @@ void task_func(int argc, char** argv) {
         target_section_name = argv[2];
     }
     else if (argc == 2) {
-        if (isFileWithSuffix(argv[1],".ccc"))
+        if (isFileWithSuffix(argv[1],(char*)".ccc"))
             ccc_file_path = argv[1];
         else
             target_section_name = argv[1];
@@ -101,7 +104,7 @@ void task_func(int argc, char** argv) {
     }
 
     // If the file does not exist or is not a .ccc file
-    if (access(ccc_file_path, F_OK)!=0 || !isFileWithSuffix(ccc_file_path,".ccc")) {
+    if (access(ccc_file_path, F_OK)!=0 || !isFileWithSuffix(ccc_file_path,(char*)".ccc")) {
         printf("[CCC]The target file does not exist or does not have a. ccc suffix\n");
         return;
     }

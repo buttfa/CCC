@@ -19,7 +19,10 @@ static void createFolder(char* folder_path) {
     // 创建文件夹
     char* cmd = (char*)malloc(strlen("mkdir ")+strlen(folder_path)+1);
     sprintf(cmd, "mkdir %s", folder_path);
-    system(cmd); 
+    int result = system(cmd);
+    if (result == -1)
+        // Handle failure
+        std::cout << "Failed to execute command: " << cmd << std::endl;
 
     // 释放内存
     free(cmd);

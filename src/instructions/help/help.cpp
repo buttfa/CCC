@@ -29,6 +29,9 @@ bool cdt_help(int argc, char** argv) {
  * 
  */
 void printfHelp(int argc, char** argv) {
+    if (!cdt_help(argc, argv))
+        return;
+
     printf("Usage: ccc [OPTION]\n");
     printf("Options:-\n");
     printf("  --help        display this help and exit\n");

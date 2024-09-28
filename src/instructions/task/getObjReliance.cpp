@@ -27,7 +27,7 @@ void addRelianceList(char* source_file_path, struct COMPILE_TASK* task) {
     char buf[4096];
     // Get the target obj file path
     char* file_name = getFileName(source_file_path);
-    char* obj_file = (char*)malloc(hotfix_strlen(task->obj_path)+1+hotfix_strlen(file_name)+hotfix_strlen(".o")+1);
+    char* obj_file = (char*)malloc(hotfix_strlen(task->obj_path)+1+hotfix_strlen(file_name)+hotfix_strlen((char*)".o")+1);
     sprintf(obj_file, "%s/%s.o", 
                     task->obj_path!=NULL ? task->obj_path : "", 
                     file_name!=NULL ? file_name : "");
@@ -40,7 +40,7 @@ void addRelianceList(char* source_file_path, struct COMPILE_TASK* task) {
     reliance->reliance_num = 0;
 
     // Excute command to get the obj file's reliance
-    char* cmd = (char*)malloc(hotfix_strlen("gcc -MM")+1+hotfix_strlen(source_file_path)+1+hotfix_strlen(task->header_folders)+1);
+    char* cmd = (char*)malloc(hotfix_strlen((char*)"gcc -MM")+1+hotfix_strlen(source_file_path)+1+hotfix_strlen(task->header_folders)+1);
     sprintf(cmd, "gcc -MM %s %s", 
                     source_file_path!=NULL ? source_file_path : "", 
                     task->header_folders!=NULL ? task->header_folders : "");
@@ -119,7 +119,7 @@ void createObjFiles(struct COMPILE_TASK* task) {
     temp = task->reliance_list;
     while (temp != NULL) {
         hotfix_strcat(task->obj_files, temp->file_path);
-        hotfix_strcat(task->obj_files, " ");
+        hotfix_strcat(task->obj_files, (char*)" ");
         temp = temp->next;
     }
 }

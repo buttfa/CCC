@@ -150,7 +150,7 @@ void createSllFiles(struct COMPILE_TASK* task) {
     // 再次遍历链表，复制文件路径到sll_files中
     while (current != NULL) {
         strcpy(position, current->file_path);
-        hotfix_strcat(position, " ");
+        hotfix_strcat(position, (char*)" ");
         position += hotfix_strlen(current->file_path) + 1; // 移动到下一个路径开始的位置
         current = current->next;
     }
