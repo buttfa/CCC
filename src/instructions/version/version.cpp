@@ -30,7 +30,7 @@ bool cdt_version(int argc, char** argv) {
  * @brief 打印版本信息
  * 
  */
-void printfVersion() {
+void printfVersion(int argc, char** argv) {
     printf("CCC version:");
     printf(CCC_VERSION);
     printf("\n");

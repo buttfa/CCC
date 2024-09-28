@@ -1,14 +1,14 @@
 # 编译器
-COMPILER = gcc
+COMPILER = g++
 # 编译选项
 C_FLAGS = 
 # 编译模式选择
 COMPILE_MODE = debug
 
 ifeq ($(COMPILE_MODE), debug)
-	C_FLAGS += -g -Og -W -Wall
+	C_FLAGS += -g -Og -W -Wall -std=c++17
 else ifeq ($(COMPILE_MODE), release)
-	C_FLAGS += -O3 -W -Wall
+	C_FLAGS += -O3 -W -Wall -std=c++17
 else
 compile_mode_error:
 	$(error Unknown compile mode: $(COMPILE_MODE))
@@ -36,46 +36,46 @@ all: CCC VERSION HELP TASK TEMPLATE EINIP
 
 ###########################################################################
 # 编译CCC主体文件
-CCC_FILES = $(wildcard src/*.c)
-CCC_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(CCC_FILES)))
+CCC_FILES = $(wildcard src/*.cpp)
+CCC_OBJ_FILES = $(patsubst %.cpp, $(OBJ_PATH)/%.o, $(notdir $(CCC_FILES)))
 CCC: $(CCC_OBJ_FILES)
-$(CCC_OBJ_FILES):  $(OBJ_PATH)/%.o: src/%.c
+$(CCC_OBJ_FILES):  $(OBJ_PATH)/%.o: src/%.cpp
 	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
 ###########################################################################
 
 ###########################################################################
 # 编译VERSION指令文件
-VERSION_FILES = $(wildcard src/instructions/version/*.c)
-VERSION_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(VERSION_FILES)))
+VERSION_FILES = $(wildcard src/instructions/version/*.cpp)
+VERSION_OBJ_FILES = $(patsubst %.cpp, $(OBJ_PATH)/%.o, $(notdir $(VERSION_FILES)))
 VERSION: $(VERSION_OBJ_FILES)
-$(VERSION_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/version/%.c
+$(VERSION_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/version/%.cpp
 	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
 ###########################################################################
 
 ###########################################################################
 # 编译HELP指令文件
-HELP_FILES = $(wildcard src/instructions/help/*.c)
-HELP_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(HELP_FILES)))
+HELP_FILES = $(wildcard src/instructions/help/*.cpp)
+HELP_OBJ_FILES = $(patsubst %.cpp, $(OBJ_PATH)/%.o, $(notdir $(HELP_FILES)))
 HELP: $(HELP_OBJ_FILES)
-$(HELP_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/help/%.c
+$(HELP_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/help/%.cpp
 	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
 ###########################################################################
 
 ###########################################################################
 # 编译TASK指令文件
-TASK_FILES = $(wildcard src/instructions/task/*.c)
-TASK_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(TASK_FILES)))
+TASK_FILES = $(wildcard src/instructions/task/*.cpp)
+TASK_OBJ_FILES = $(patsubst %.cpp, $(OBJ_PATH)/%.o, $(notdir $(TASK_FILES)))
 TASK: $(TASK_OBJ_FILES)
-$(TASK_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/task/%.c
+$(TASK_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/task/%.cpp
 	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
 ###########################################################################
 
 ###########################################################################
 # 编译TEMPLATE指令文件
-TEMPLATE_FILES = $(wildcard src/instructions/template/*.c)
-TEMPLATE_OBJ_FILES = $(patsubst %.c, $(OBJ_PATH)/%.o, $(notdir $(TEMPLATE_FILES)))
+TEMPLATE_FILES = $(wildcard src/instructions/template/*.cpp)
+TEMPLATE_OBJ_FILES = $(patsubst %.cpp, $(OBJ_PATH)/%.o, $(notdir $(TEMPLATE_FILES)))
 TEMPLATE: $(TEMPLATE_OBJ_FILES)
-$(TEMPLATE_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/template/%.c
+$(TEMPLATE_OBJ_FILES):  $(OBJ_PATH)/%.o: src/instructions/template/%.cpp
 	$(COMPILER) -c $^ -o $@ $(C_INCLUDE) $(C_FLAGS)
 ###########################################################################
 

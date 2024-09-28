@@ -34,6 +34,6 @@ bool cdt_version(int argc, char** argv);
  * @brief 打印版本信息
  * 
  */
-void printfVersion();
+void printfVersion(int argc, char** argv);
 
 #endif 

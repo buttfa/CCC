@@ -28,7 +28,7 @@ bool cdt_help(int argc, char** argv) {
  * @brief 打印帮助信息
  * 
  */
-void printfHelp() {
+void printfHelp(int argc, char** argv) {
     printf("Usage: ccc [OPTION]\n");
     printf("Options:-\n");
     printf("  --help        display this help and exit\n");

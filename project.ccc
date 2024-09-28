@@ -7,10 +7,10 @@
 
 # Debug mode: Generate debugging information. The GNU debugger can utilize this information.
 [<task>ccc_debug]
-target_type = c
-compiler = gcc
-compile_flags = -g -Og -W -Wall
-linker = gcc
+target_type = c++
+compiler = g++
+compile_flags = -g -Og -W -Wall -std=c++17
+linker = g++
 source_folder_path = src
 header_folder_path = inc
 obj_path = build/obj
@@ -28,10 +28,10 @@ library_path = third_party/EIniP/einip
 
 # Release mode: Enable O3 optimization and display most warning messages.
 [<task>ccc_release]
-target_type = c
-compiler = gcc
-compile_flags = -O3 -W -Wall
-linker = gcc
+target_type = c++
+compiler = g++
+compile_flags = -O3 -W -Wall -std=c++17
+linker = g++
 source_folder_path = src
 header_folder_path = inc
 obj_path = build/obj

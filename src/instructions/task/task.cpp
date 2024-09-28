@@ -103,7 +103,7 @@ void task_func(int argc, char** argv) {
     // If the file does not exist or is not a .ccc file
     if (access(ccc_file_path, F_OK)!=0 || !isFileWithSuffix(ccc_file_path,".ccc")) {
         printf("[CCC]The target file does not exist or does not have a. ccc suffix\n");
-        goto end;
+        return;
     }
 
     // Parse the .ccc file
@@ -111,11 +111,12 @@ void task_func(int argc, char** argv) {
 /* Dynamic Memory ccc_ini --^*/
     if (ccc_ini == NULL) {
         printf("[CCC]Failed to parse the .ccc file\n");
-        goto end;
+        return;
     }
     if (ccc_ini->section_num == 0) {
         printf("[CCC]The .ccc file does not contain any tasks\n");
-        goto ini_release;
+        iniFree(ccc_ini);
+        return;
     }
 
 
@@ -142,7 +143,8 @@ void task_func(int argc, char** argv) {
 
     if (target_section == NULL) {
         printf("[CCC]The target task does not exist\n");
-        goto ini_release;
+        iniFree(ccc_ini);
+        return;
     }
 
     // Justify whether it is a compilation task, if so, execute the compilation task
@@ -150,10 +152,4 @@ void task_func(int argc, char** argv) {
 
     // Justify whether it is a shell task, if so, execute the shell task
     isShellTask(target_section);
-
-ini_release:
-    iniFree(ccc_ini);
-/* Release memory ccc_ini --^ */
-end:
-    return;
 }
