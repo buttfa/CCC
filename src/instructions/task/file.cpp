@@ -129,14 +129,18 @@ char* getFileName(char* filePath) {
     }
     
     if (point == -1) {
-        char* fileName = (char*)malloc(hotfix_strlen(filePath+index+1)+1); 
-        memset(fileName, 0, hotfix_strlen(filePath+index+1)+1);
-        strncat(fileName, filePath+index+1, hotfix_strlen(filePath+index+1));
+        int size = hotfix_strlen(filePath+index+1)+1;
+        char* fileName = (char*)malloc(sizeof(char)*size); 
+        for (int i = 0; i < size-1; i++)
+            fileName[i] = filePath[index+1+i];
+        fileName[size-1] = '\0';
         return fileName;
     } else {
-        char* fileName = (char*)malloc(point-index);
-        memset(fileName, 0, point-index);
-        strncat(fileName, filePath+index+1, point-index-1);
+        int size = point-index;
+        char* fileName = (char*)malloc(size);
+        for (int i = 0; i < size-1; i++)
+            fileName[i] = filePath[index+1+i];
+        fileName[size-1] = '\0';
         return fileName;
     }
 
