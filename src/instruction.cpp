@@ -28,8 +28,8 @@ void init_instructions() {
     // 添加version指令
     append_instruction(cdt_version, printfVersion);
 /****************************************************************************/
-    // 添加template指令
-    append_instruction(cdt_template, template_func);
+    // // 添加template指令
+    // append_instruction(cdt_template, template_func);
 /****************************************************************************/
     // 添加task指令
     append_instruction(cdt_task, task_func);
