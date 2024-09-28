@@ -32,10 +32,9 @@ void printfHelp(int argc, char** argv) {
     if (!cdt_help(argc, argv))
         return;
 
-    printf("Usage: ccc [OPTION]\n");
-    printf("Options:-\n");
-    printf("  --help        display this help and exit\n");
-    printf("  --version     display version information and exit\n");
-    printf("  ccc_file      compile based on ccc_file\n");
-    printf("Report bugs to <https://github.com/buttfa/CCC/issues>\n");
+    printf("Usage:\n\n");
+    printf("  ccc --help                     Display this help.\n");
+    printf("  ccc --version                  Display version information.\n");
+    printf("  ccc [ccc_file] [task_name]     Execute the specified task in the CCC file.\n\n");
+    printf("Report bugs to <https://github.com/buttfa/CCC/issues>\n\n");
 }
