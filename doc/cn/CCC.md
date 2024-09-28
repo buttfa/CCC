@@ -15,8 +15,8 @@ first = echo "hello world"
 (null)seconde = echo "Hello world!"
 ```
 
-#### 2. Task任务
-#### 要求secion_name以\<task>开头，该section的键值对视为编译任务所需的变量，详情请看[Task任务变量](#task任务变量)、[Task任务必要变量](#task任务必要变量)和[Task任务非必要变量](#task任务非必要变量)。其中编译的最终目标为section_name中除去\<task>的部分。例如，以下示例将编译出ccc文件作为最终目标：
+#### 2. Compile任务
+#### 要求section_name以\<task>开头，该section的键值对视为编译任务所需的变量，详情请看[Task任务变量](#task任务变量)、[Task任务必要变量](#task任务必要变量)和[Task任务非必要变量](#task任务非必要变量)。其中编译的最终目标为section_name中除去\<task>的部分。例如，以下示例将编译出ccc文件作为最终目标：
 ```c
 [<task>ccc]
 target_type  = c
@@ -68,7 +68,7 @@ library_path =
 |变量名称|值|解释|
 |-|-|-|
 |compile_flags||编译器编译选项|
-|linker||链接器链接选项|
+|linke_flags||链接器链接选项|
 |source_sig_files||源文件组|
 |header_sig_files||头文件组|
 |header_folder_path||头文件文件夹路径|

@@ -1,77 +1,72 @@
 # <div align="center">CCC</div>
 ### <div align="center">![CCC_ICON](img/icon.png)</div>
 
-### <div align="center">|[简体中文](README.md)|[English](doc/en/README_en.md)|</div>
+### <div align="center">|[简体中文](doc/cn/README.md)|[English](README.md)|</div>
 
-## <div align="center">目录</div> 
-- [项目名称](#项目名称)
-- [项目简介](#项目简介)
-- [安装以及卸载方式](#安装以及卸载方式)
-- [使用方法](#使用方法)
-  - [方法一：使用CCC创建C/C++工程](#方法一使用ccc创建cc工程)
-  - [方法二：自行创建CCC文件](#方法二自行创建ccc文件)
-## 项目名称 
+## <div align="center">Directory</div>
+- [Project Name](#project-name)
+- [Project Introduction](#project-introduction)
+- [Installation and uninstallation methods](#installation-and-uninstallation-methods)
+- [Usage](#usage)
+  - [Method 1: Create your own. ccc file](#method-1-create-your-own-ccc-file)
+## Project Name
 #### CCC / C-series compiler coprocessor
- 
-## 项目简介
-#### 本项目旨在提供一个Linux下简单的构建工具，用于将多个c/c++源文件编译成目标文件。
-  
-## 安装以及卸载方式
-#### （一）编译项目  
+
+## Project Introduction
+#### This project aims to provide a simple build tool for Linux, which is used to compile multiple c/c++ source files into target files.
+
+## Installation and uninstallation methods
+#### （1） Compile project
 ```c
-make 
-// 或（已经安装CCC的前提下）
-ccc ccc.ccc
+make COMPILE_MODE=release
+// Or (provided that CCC has been installed)
+ccc release
 ```
-#### （二）安装项目
+#### （2） Installation project
 ```c
 make install
 ```
-#### （三）删除中间文件
+#### （3） Delete intermediate files and target
 ```c
 make clean
-// 或（已经安装CCC的前提下）
-ccc ccc.ccc clean
+// Or (provided that CCC has been installed)
+ccc clean
 ``` 
-#### （四）卸载项目
+#### （4） Uninstall Project
 ```c
 make uninstall
-``` 
+```
 
-
-## 使用方法
-#### 方法一：使用CCC创建C/C++工程
-##### 创建C/C++工程
+## Usage
+<!-- #### Method 1: Create a C/C++ project using CCC
+##### Create a C/C++ project
 ```c
-// 创建C工程
+// Create a C project
 ccc newc project_name
-// 创建C++工程
+// Create a C++ project
 ccc newcpp project_name
 ```
-##### 编译工程
+##### Compile project
 ```c
-// 进入工程目录
+// Enter the project directory
 cd project_name
-// 仅编译
-ccc project_name.ccc 
-// 编译并运行
+// Compile only
+ccc project_name.ccc
+// Compile and run
 ccc project_name.ccc run
-// 删除中间和目标文件
+// Delete intermediate and target files
 ccc project_name.ccc clean
-```
+``` -->
 
-#### 方法二：自行创建.ccc文件
-#### 如果您已经创建好工程，可以通过自行创建.ccc文件的方式，来实现CCC管理工程。
-#### （一）创建.ccc文件
-##### 创建XXX.ccc文件。其中的具体内容，请参考如下本项目下的[CCC.md](doc/cn/CCC.md)
-#### （二）编辑.ccc文件  
-##### 其中的具体内容，请参考如下本项目下的[CCC.md](doc/cn/CCC.md)
-#### （三）运行ccc命令
-##### 运行ccc XXX.ccc命令执行ccc文件中的第一个任务，或ccc XXX.ccc task_name命令执行ccc文件中的指定任务。
-#### （四）删除中间文件
-##### 运行ccc XXX.ccc clean命令，即可删除中间文件。
+#### Method 1: Create your own. ccc file
+#### If you have already created a project, you can create a .ccc file by yourself to manage the project.
+#### （1） Create a .ccc file
+##### Create an XXX.ccc file(Recommended to be named project.ccc). Please refer to the [CCC_en.md](doc/en/CCC_en.md) under this project for specific content.
+#### （2） Edit .ccc file
+##### For specific details, please refer to [CCC_en.md](doc/en/CCC_en.md) under this project
+#### （3） Run the CCC command
+##### Run the ```ccc XXX.ccc``` command to execute the first task in the ccc file, or the ```ccc XXX.ccc task_name``` command to execute the specified task in the ccc file.(If the .ccc file name is project.ccc, then XXX.ccc can be omitted)
 
-
-<!--## 关于依赖
-#### CCC会为每个.c/.cpp文件创建.o文件，并为这些.o文件建立依赖，依赖的文件为对应的.c/.cpp以及.c/.cpp包含的头文件。因此，当你修改某个.o的对应的.c/.cpp文件以及.c/.cpp包含的头文件时，这个.o文件会重新编译。
-#### 此外，最终的输出文件依赖于所有的.o文件。-->
+<!--## About dependencies
+#### CCC will create. o files for each. c/. cpp file and establish dependencies for these. o files. The dependent files are the corresponding. c/. cpp and the header files contained in. c/. cpp. Therefore, when you modify the corresponding. c/. cpp file for a certain. o and the header files contained in. c/. cpp, the. o file will be recompiled.
+#### In addition, the final output file depends on all. o files.-->

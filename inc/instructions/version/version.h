@@ -18,7 +18,7 @@
  * @brief CCC版本
  * 
  */
-#define CCC_VERSION "0.0.1"
+#define CCC_VERSION "0.1.1"
 
 /**
  * @brief version的条件函数
