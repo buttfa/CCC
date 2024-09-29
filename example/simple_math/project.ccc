@@ -1,0 +1,40 @@
+[<shell>all]
+(null) = ccc lib
+(null) = ccc main
+
+[<shell>run]
+(null) = ccc all
+(null) = ./build/main
+
+[<shell>lib]
+(null) = mkdir -p lib/my_math/obj
+[lib]Compile my_math.a static link library = ccc my_math.a
+
+[<shell>main]
+(null) = mkdir -p build/obj
+[main]Compile the main program = ccc main_app
+(null) = mv build/main_app build/main
+
+[<task>my_math.a]
+target_type = c
+compiler = gcc
+linker = ar
+link_flags = rcs
+source_folder_path = third_party/my_math
+header_folder_path = third_party/my_math
+obj_path = lib/my_math/obj
+output_path = lib/my_math
+
+[<task>main_app]
+target_type = c
+compiler = gcc
+compile_flags = -static
+linker = gcc
+source_folder_path = src
+header_folder_path = third_party/my_math
+sll_folder_path = lib
+obj_path = build/obj
+output_path = build
+
+[<shell>clean]
+rm -rf build lib = rm -rf build lib

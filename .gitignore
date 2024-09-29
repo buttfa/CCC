@@ -1,0 +1,7 @@
+# The compilation product of CCC project.
+build
+lib
+
+# The compilation product of CCC example project.
+example/*/build
+example/*/lib

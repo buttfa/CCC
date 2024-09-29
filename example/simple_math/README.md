@@ -8,15 +8,23 @@
 #### （一）一步编译文件
 ```c
 // 编译全部文件
-ccc main.ccc
-// 或
-ccc main.ccc all
+ccc all
 ```
-#### （二）分步编译文件
+#### （二）一步编译并运行
+```c
+// 编译全部文件并运行
+ccc run
+```
+#### （三）分步编译文件
 ```c
 // 编译my_math.a文件
-ccc main.ccc my_math.a
+ccc lib
 
 // 编译主文件
-ccc main.ccc main
+ccc main
+```
+#### （四）清除编译产物
+```c
+// 清除全部编译产物
+ccc clean
 ```

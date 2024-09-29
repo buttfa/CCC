@@ -5,18 +5,26 @@
 #### Show the usage of CCC as a simple case study
 
 ## Compilation method
-#### （1） One step file compilation
+#### （1） Compile all files in one step
 ```c
-//Compile all files
-ccc main.ccc
-//Or
-ccc main.ccc all
+// Compile all files
+ccc all
 ```
-#### （2） Compile files step by step
+####  (2) Compile all files in one step and run
 ```c
-//Compile my_math. a file
-ccc main.ccc my_math.a
+// Compile all files and run
+ccc run
+```
+#### （3） Compile files step by step
+```c
+// Compile my_math.a file
+ccc lib
 
-//Compile the main file
-ccc main.ccc main
+// Compile the main file
+ccc main
+```
+#### （4） Clear compilation products
+```c
+// Clear all compilation products
+ccc clean
 ```
