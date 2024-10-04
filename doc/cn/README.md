@@ -25,7 +25,7 @@ ccc release
 ```
 #### （二）安装项目
 ```c
-make install
+sudo make install
 ```
 #### （三）删除中间文件
 ```c
@@ -35,7 +35,7 @@ ccc clean
 ``` 
 #### （四）卸载项目
 ```c
-make uninstall
+sudo make uninstall
 ``` 
 
 

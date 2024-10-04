@@ -92,13 +92,13 @@ $(OBJ_PATH)/ini.o: third_party/EIniP/einip/ini.c
 
 ###########################################################################
 install:
-	@sudo cp build/ccc /usr/local/bin
+	@cp build/ccc /usr/local/bin
 	@echo "Successfully installed CCC."
 ###########################################################################
  
 ###########################################################################
 uninstall:
-	@sudo rm -rf /usr/local/bin/ccc
+	@rm -rf /usr/local/bin/ccc
 	@echo "Successfully uninstalled CCC."
 ###########################################################################
 

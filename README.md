@@ -24,7 +24,7 @@ ccc release
 ```
 #### （2） Installation project
 ```c
-make install
+sudo make install
 ```
 #### （3） Delete intermediate files and target
 ```c
@@ -34,7 +34,7 @@ ccc clean
 ``` 
 #### （4） Uninstall Project
 ```c
-make uninstall
+sudo make uninstall
 ```
 
 ## Usage
